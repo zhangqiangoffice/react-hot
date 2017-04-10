@@ -28,7 +28,7 @@ const OutPut = ({ justRead, contactPeople, contactCertiType, contactCertiNo, con
     </BlankLi>
     <BlankLi item="联系邮箱">
       {justRead ? contactEmail :
-      <InputBox val={contactEmail} onChangeVal={onChangeContactEmail}/>
+      <input type="text" placeholder="用于接收接收电子保单" value={contactEmail} onChange={e => onChangeContactEmail((e.target.value).trim()) } />
       }
     </BlankLi>
     

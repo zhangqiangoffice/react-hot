@@ -21,22 +21,21 @@ module.exports = {
             {
                 test: /\.json$/,
                 loader: "json"
-            },
-            {
+            },{
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel'
-            },
-            {
+            },{
                 test: /\.(png|jpg)$/,
                 loader: 'url?limit=40000'
-            },
-            { test: /\.(svg)$/i, loader: 'svg-sprite', include: [
-                require.resolve('antd-mobile').replace(/warn\.js$/, '')]
             },{ 
-                test: /\.css$/, loader: 'style!css' 
-            } // 把css处理成内联style，动态插入到页面
-
+                test: /\.(svg)$/i, 
+                loader: 'svg-sprite', 
+                include: [require.resolve('antd-mobile').replace(/warn\.js$/, '')]
+            },{ 
+                test: /\.css$/, 
+                loader: 'style!css' 
+            } 
         ]
     },
 

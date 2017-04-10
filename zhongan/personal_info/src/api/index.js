@@ -1,5 +1,6 @@
 import zAJAX from 'z-ajax'
 import data from '../reducers/data.json'
+import { Toast } from 'antd-mobile';
 
 
 //获取钱包账户余额
@@ -97,7 +98,7 @@ export const checkData = (str, text) => {
   if (text === '') {
     
     //非空验证
-    alert(`${str} 不得为空！`)
+    Toast.info(`${str} 不得为空！`, 2);
     return false
   } else {
     
@@ -132,7 +133,7 @@ export const checkData = (str, text) => {
         break
     }
     if (!reg.test(text)) {
-      alert(`${str} 格式不正确！`);
+      Toast.info(`${str} 格式不正确！`, 2);
       return false;
     } 
     return true;

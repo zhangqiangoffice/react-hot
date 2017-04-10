@@ -4,7 +4,7 @@ import AppActionCreators from '../actions/AppActionCreators';
 import AppStore from '../stores/AppStore';
 import InsuranceStore from '../stores/InsuranceStore';
 import InsuranceActionCreators from '../actions/InsuranceActionCreators';
-import APIUtils from './APIUtils';
+import APIUtils from './APIUtils'
 
 export default class TitleBar extends Component {
     constructor(props) {

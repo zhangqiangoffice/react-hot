@@ -1,5 +1,6 @@
 import zAJAX from 'z-ajax'
 import data from '../reducers/data.json'
+import { Toast } from 'antd-mobile';
 
 //根据车型和使用性质，获取但份保费
 export const getTotalFee = (carType, usingType, applyNum) => {
@@ -154,6 +155,7 @@ export const getCountiesDate = (state, cb) => {
 //如果是编辑页面，初始化编辑数据
 export const getEditDate = (state, id, cb) => {
   zAJAX(`${ctx}/appZhongan/detail`, {id: id}, cb)
+
 }
 
 //校验数据有效性
@@ -206,7 +208,7 @@ export const checkData = (str, text) => {
         break
     }
     if (!reg.test(text)) {
-      alert(`${str} 格式不正确！`);
+      Toast.info(`${str} 格式不正确！`, 2);
       return false;
     } 
     return true;
@@ -217,7 +219,7 @@ export const checkData = (str, text) => {
 //校验数据非空
 export const checkNotEmpty = (str, text) => {
   if (text === '') {
-    alert(`${str} 不得为空！`)
+    Toast.info(`${str} 不得为空！`, 2);
     return false
   } else {
     return true;

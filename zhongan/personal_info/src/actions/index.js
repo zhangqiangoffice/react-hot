@@ -106,7 +106,7 @@ export const changeHolderEmail = (val) => ({
 //检查投保人数据有效性
 export const checkHolder = () => (dispatch, getState) => {
   let state = getState();
-  if(api.checkData('投保人姓名', state.holderName) && api.checkData('投保人证件号码', state.holderCertiNo) && api.checkData('投保人出生日期', state.holderBirthday) && api.checkData('投保人电话', state.holderPhone)) {
+  if(api.checkData('投保人姓名', state.holderName) && api.checkData('投保人证件号码', state.holderCertiNo) && api.checkData('投保人出生日期', state.holderBirthday) && api.checkData('投保人电话', state.holderPhone) && (state.holderEmail === '' ||  api.checkData('投保人邮箱', state.holderEmail))) {
     dispatch(goToStep(2));
     window.location.href = '#/step2';
   }

@@ -155,6 +155,9 @@ const insurantName = (state = '', action) => {
       return action.val
     case act.INIT_EDIT_DATA:
       return action.entity.insurantList[0].insurantName
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+
+      return ''
     default:
       return state
   }
@@ -173,6 +176,9 @@ const insurantCertiType = (state = 0, action) => {
         }
       });
       return index
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+
+      return 0
     default:
       return state
   }
@@ -185,6 +191,9 @@ const insurantCertiNo = (state = '', action) => {
       return action.val
     case act.INIT_EDIT_DATA:
       return action.entity.insurantList[0].insurantCertiNo
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+
+      return ''
     default:
       return state
   }
@@ -203,6 +212,9 @@ const insurantGender = (state = 0, action) => {
         }
       });
       return index
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+
+      return 0
     default:
       return state
   }
@@ -215,6 +227,9 @@ const insurantBirthday = (state = '', action) => {
       return action.val
     case act.INIT_EDIT_DATA:
       return action.entity.insurantList[0].insurantBirthday
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+
+      return ''
     default:
       return state
   }
@@ -227,6 +242,8 @@ const insurantPhone = (state = '', action) => {
       return action.val
     case act.INIT_EDIT_DATA:
       return action.entity.insurantList[0].insurantPhone
+    case act.CHANGE_INSURED_RELA_TO_HOLDER:
+      return ''
     default:
       return state
   }
@@ -257,6 +274,7 @@ let i_occupation = {
 const occupation = (state = i_occupation, action) => {
   switch (action.type) {
     case act.CHANGE_OCCUPATION_SHOW:
+      // console.log(state.isShow);
       return { ...state, isShow: !state.isShow}
     case act.CHOICE_IND:
       return { ...state, step: 1, indIndex: action.index}

@@ -296,7 +296,7 @@ const companyName = (state = '', action) => {
 }
 
 //投保公司证件类型
-const companyCertiType = (state = '', action) => {
+const companyCertiType = (state = 0, action) => {
   switch (action.type) {
     case act.CHANGE_COMPANY_CERTI_TYPE:
       return action.index

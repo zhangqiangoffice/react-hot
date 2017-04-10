@@ -1,14 +1,16 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
-    // 车险
-    entry: "./src/main",
+    // 众安驾乘意外险
+    entry: "./src/index",
     output: {
-        path: "/Workspaces2018/mstps/WebRoot/static/js/carInf/mobile",
+        path: "/Workspaces2018/mstps/WebRoot/static/js/mobile/zhongan/personal_info",
         filename: "bundle.js"
     },
+
     resolve: {
         modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
         extensions: ['', '.web.js', '.jsx', '.js', '.json'],
@@ -33,7 +35,7 @@ module.exports = {
             },{ 
                 test: /\.css$/, 
                 loader: 'style!css' 
-            }
+            } 
         ]
     },
 

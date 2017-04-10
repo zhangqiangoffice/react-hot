@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import * as act from '../actions'
 import TitleBar from '../components/TitleBar'
+import { Toast } from 'antd-mobile';
 
 const mapStateToProps = (state) => ({
   title: '卡单详情',
@@ -13,7 +14,7 @@ const mapDispatchToProps = (dispatch, state) => ({
     if (isEdit) {
       window.location.href = `./app_order_list?staffId=${staffId}`
     } else if (!window.minsheng) {
-      alert('请使用手机的返回键');
+      Toast.info('请使用手机的返回键！', 3);
     } else {
       window.minsheng.clickOnAndroid();
     }

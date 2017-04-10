@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeEngineNumber(val.toUpperCase()))
   },
   onChangePlateNumber: (val) => {
-    if (val.length >2) {
+    if (val.length >= 7) {
       val = val.toUpperCase();
     }
     dispatch(changePlateNumber(val))
