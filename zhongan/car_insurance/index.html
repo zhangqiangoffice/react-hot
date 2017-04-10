@@ -1,0 +1,29 @@
+<!doctype html>
+<html style="font-size: 20px;">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>Sample App</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/ms-console/static/css/document/mobile_initial.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/ms-console/static/css/zhongan/car_insurance/index.css">
+  </head>
+  <body>
+    <div id='app'></div>
+    <script>
+        var ctx = 'http://localhost:8080/ms-console';
+        //点击手机的回退按钮，将调用以下函数，模拟单页回退的效果
+        function backFromjs() {
+          var btn = document.getElementById("go_back");
+          if (btn) {
+            document.getElementById("go_back").click();
+          } else {
+            window.minsheng.clickOnAndroid();
+          }
+        }
+    </script>
+    <script src="http://localhost:8080/ms-console/static/js/plugins/mobiscroll/js/jquery-1.9.1.min.js"></script>
+    <link href="http://localhost:8080/ms-console/static/js/plugins/mobiscroll/css/mobiscroll.custom-2.5.0.min.css" rel="stylesheet" type="text/css" />
+    <script src="http://localhost:8080/ms-console/static/js/plugins/mobiscroll/js/mobiscroll.custom-2.5.0.min.js" type="text/javascript"></script>
+    <script src="/static/bundle.js"></script>
+  </body>
+</html>

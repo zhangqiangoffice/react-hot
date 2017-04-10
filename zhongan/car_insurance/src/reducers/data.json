@@ -1,0 +1,17 @@
+{
+  "HolderCertiType" : ["身份证"],
+  "HolderCertiTypeValue" : ["I"],
+  "HolderType" : ["个人", "企业"],
+  "HolderTypeValue" : [1, 2],
+  "HolderGender" : ["男", "女"],
+  "HolderGenderValue" : ["M", "F"],
+  "ContactCertiType" : ["身份证"],
+  "ContactCertiTypeValue" : ["I"],
+  "CompanyCertiType" : ["税务登记证", "营业执照", "组织机构代码", "统一社会信用代码"],
+  "CompanyCertiTypeValue" : ["T", "L", "Z", "TY"],
+  "CarType" : ["5座及以下客车", "6-9座客车", "2吨及以下货车", "2吨以上~10吨货车", "10吨以上货车", "特车二或三(专用车)", "特种车一(罐装车)", "特种车四或其他"],
+  "UsingType" : ["营运", "非营运"],
+  "UsingTypeValue" : ["Y", "N"],
+  "ApprovedSeats" : [2, 3, 4, 5, 6, 7, 8, 9],
+  "ApplyNum" : [1, 2, 5, 10]
+}

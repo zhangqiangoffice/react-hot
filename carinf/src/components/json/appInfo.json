@@ -1,0 +1,542 @@
+{
+    "componies": [
+    {
+        "id":1, 
+        "name": "太平洋", 
+        "product": "太平洋车险", 
+        "info": "太平洋车险是国内优质的品牌车辆保险，在传统产品的基础上，提供更低的价格、更好的服务",
+        "spell": "tpy"
+    },
+    {
+        "id":2, 
+        "name": "太平", 
+        "product": "太平车险", 
+        "info": "太平车险属于太平保险有限公司，无投保年龄限制，缴费方式为一年一缴。",
+        "spell": "tp"
+    },
+    {
+        "id":3, 
+        "name": "中华", 
+        "product": "中华车险", 
+        "info": "简称中华保险，始建于1986年7月15日，是新中国之后我国成立的第二家国有独资保险公司。",
+        "spell": "zh"
+    },
+    {
+        "id":4, 
+        "name": "人保", 
+        "product": "中国人保车险", 
+        "info": "简称人保车险，有1小时通知赔付、异地出险，就地理赔、故障车辆免费救援、事故车托管等人保车险专属服务。",
+        "spell": "rb"
+    }],
+    "titles": ["车险", "快速报价", "投保车辆信息", "选择车型", "选择险种", "报价结果", "投保确认", "订单结果"],
+    "provinces": ["京", "津", "冀", "晋", "蒙", "辽", "吉", "黑", "沪", "苏", "浙", "皖", "闽", "赣", "鲁", "豫", "鄂", "湘", "粤", "桂", "琼", "川", "贵", "云", "渝", "藏", "陕", "甘", "青", "宁", "新"],
+    "example": {
+        "insuranceCom": 3,
+        "isHome": 1,
+        "plateNo": "皖AV1270",
+        "city": "340100",
+        "name": "任路路",
+        "idCard": "340222199504273538"
+    },
+    "insuranceList": [
+    {
+        "code": "CS01",
+        "item": "-1@0",
+        "name": "车辆损失险"
+    },
+    {
+        "code": "CS02",
+        "item": "-1@0",
+        "name": "车辆损失险(不计免赔)"
+    },
+    {
+        "code": "SZ01",
+        "item": "-1@50000@100000@150000@200000@300000@500000@1000000",
+        "name": "第三者责任险"
+    },
+    {
+        "code": "SZ02",
+        "item": "-1@0",
+        "name": "第三者责任险(不计免赔)"
+    },
+    {
+        "code": "DQ01",
+        "item": "-1@0",
+        "name": "全车盗抢险"
+    },
+    {
+        "code": "DQ02",
+        "item": "-1@0",
+        "name": "全车盗抢险(不计免赔)"
+    },
+    {
+        "code": "SJ01",
+        "item": "-1@10000@20000@30000@40000@50000@100000@200000@500000",
+        "name": "车上人员(司机)"
+    },
+
+    {
+        "code": "SJ02",
+        "item": "-1@0",
+        "name": "车上人员(司机)(不计免赔)"
+    },
+    {
+        "code": "CK01",
+        "item": "-1@10000@20000@30000@40000@50000@100000@200000@500000",
+        "name": "车上人员(乘客)"
+    },
+    {
+        "code": "CK02",
+        "item": "-1@0",
+        "name": "车上人员(乘客)(不计免赔)"
+    },
+
+    {
+        "code": "BL01",
+        "item": "-1@国产@进口",
+        "name": "玻璃单独破碎险"
+    },
+    {
+        "code": "ZR01",
+        "item": "-1@0",
+        "name": "自燃损失险"
+    },
+    {
+        "code": "ZR02",
+        "item": "-1@0",
+        "name": "自燃损失险(不计免赔)"
+    },
+    {
+        "code": "HH01",
+        "item": "-1@2000@5000@10000@20000",
+        "name": "划痕损失险"
+    },
+    {
+        "code": "HH02",
+        "item": "-1@0",
+        "name": "划痕损失险(不计免赔)"
+    },
+    {
+        "code": "SS01",
+        "item": "-1@0",
+        "name": "发动机涉水损失险"
+    },
+    {
+        "code": "SS02",
+        "item": "-1@0",
+        "name": "发动机涉水损失险(不计免赔)"
+    },
+    {
+        "code": "SF01",
+        "item": "-1@0",
+        "name": "无法找到第三方特约"
+    },
+    {
+        "code": "XL01",
+        "item": "-1@0",
+        "name": "指定修理厂险"
+    }
+    ],
+    "threeSchemeNameList": ["全面保护", "新车套餐", "自定义"],
+    "threeSchemeList": [
+    [
+    {
+        "code": "CS01",
+        "choice": 0,
+        "name": "车辆损失险"
+    },
+    {
+        "code": "CS02",
+        "choice": 0,
+        "name": "车辆损失险(不计免赔)"
+    },
+    {
+        "code": "SZ01",
+        "choice": 50000,
+        "name": "第三者责任险"
+    },
+    {
+        "code": "SZ02",
+        "choice": 0,
+        "name": "第三者责任险(不计免赔)"
+    },
+    {
+        "code": "DQ01",
+        "choice": 0,
+        "name": "全车盗抢险"
+    },
+    {
+        "code": "DQ02",
+        "choice": 0,
+        "name": "全车盗抢险(不计免赔)"
+    },
+    {
+        "code": "SJ01",
+        "choice": 10000,
+        "name": "车上人员(司机)"
+    },
+
+    {
+        "code": "SJ02",
+        "choice": 0,
+        "name": "车上人员(司机)(不计免赔)"
+    },
+    {
+        "code": "CK01",
+        "choice": 10000,
+        "name": "车上人员(乘客)"
+    },
+    {
+        "code": "CK02",
+        "choice": 0,
+        "name": "车上人员(乘客)(不计免赔)"
+    },
+
+    {
+        "code": "BL01",
+        "choice": "国产",
+        "name": "玻璃单独破碎险"
+    },
+    {
+        "code": "ZR01",
+        "choice": 0,
+        "name": "自燃损失险"
+    },
+    {
+        "code": "ZR02",
+        "choice": 0,
+        "name": "自燃损失险(不计免赔)"
+    },
+    {
+        "code": "HH01",
+        "choice": 2000,
+        "name": "划痕损失险"
+    },
+    {
+        "code": "HH02",
+        "choice": 0,
+        "name": "划痕损失险(不计免赔)"
+    },
+    {
+        "code": "SS01",
+        "choice": 0,
+        "name": "发动机涉水损失险"
+    },
+    {
+        "code": "SS02",
+        "choice": 0,
+        "name": "发动机涉水损失险(不计免赔)"
+    },
+    {
+        "code": "SF01",
+        "choice": 0,
+        "name": "无法找到第三方特约"
+    },
+    {
+        "code": "XL01",
+        "choice": 0,
+        "name": "指定修理厂险"
+    }
+    ],
+    [
+    {
+        "code": "CS01",
+        "choice": 0,
+        "name": "车辆损失险"
+    },
+    {
+        "code": "CS02",
+        "choice": 0,
+        "name": "车辆损失险(不计免赔)"
+    },
+    {
+        "code": "SZ01",
+        "choice": 50000,
+        "name": "第三者责任险"
+    },
+    {
+        "code": "SZ02",
+        "choice": 0,
+        "name": "第三者责任险(不计免赔)"
+    },
+    {
+        "code": "DQ01",
+        "choice": 0,
+        "name": "全车盗抢险"
+    },
+    {
+        "code": "DQ02",
+        "choice": 0,
+        "name": "全车盗抢险(不计免赔)"
+    },
+    {
+        "code": "SJ01",
+        "choice": 10000,
+        "name": "车上人员(司机)"
+    },
+
+    {
+        "code": "SJ02",
+        "choice": 0,
+        "name": "车上人员(司机)(不计免赔)"
+    },
+    {
+        "code": "CK01",
+        "choice": 10000,
+        "name": "车上人员(乘客)"
+    },
+    {
+        "code": "CK02",
+        "choice": 0,
+        "name": "车上人员(乘客)(不计免赔)"
+    },
+
+    {
+        "code": "BL01",
+        "choice": "国产",
+        "name": "玻璃单独破碎险"
+    },
+    {
+        "code": "ZR01",
+        "choice": 0,
+        "name": "自燃损失险"
+    },
+    {
+        "code": "ZR02",
+        "choice": 0,
+        "name": "自燃损失险(不计免赔)"
+    },
+    {
+        "code": "HH01",
+        "choice": -1,
+        "name": "划痕损失险"
+    },
+    {
+        "code": "HH02",
+        "choice": -1,
+        "name": "划痕损失险(不计免赔)"
+    },
+    {
+        "code": "SS01",
+        "choice": -1,
+        "name": "发动机涉水损失险"
+    },
+    {
+        "code": "SS02",
+        "choice": -1,
+        "name": "发动机涉水损失险(不计免赔)"
+    },
+    {
+        "code": "SF01",
+        "choice": -1,
+        "name": "无法找到第三方特约"
+    },
+    {
+        "code": "XL01",
+        "choice": -1,
+        "name": "指定修理厂险"
+    }
+    ],
+    [
+    {
+        "code": "CS01",
+        "choice": -1,
+        "name": "车辆损失险"
+    },
+    {
+        "code": "CS02",
+        "choice": -1,
+        "name": "车辆损失险(不计免赔)"
+    },
+    {
+        "code": "SZ01",
+        "choice": -1,
+        "name": "第三者责任险"
+    },
+    {
+        "code": "SZ02",
+        "choice": -1,
+        "name": "第三者责任险(不计免赔)"
+    },
+    {
+        "code": "DQ01",
+        "choice": -1,
+        "name": "全车盗抢险"
+    },
+    {
+        "code": "DQ02",
+        "choice": -1,
+        "name": "全车盗抢险(不计免赔)"
+    },
+    {
+        "code": "SJ01",
+        "choice": -1,
+        "name": "车上人员(司机)"
+    },
+
+    {
+        "code": "SJ02",
+        "choice": -1,
+        "name": "车上人员(司机)(不计免赔)"
+    },
+    {
+        "code": "CK01",
+        "choice": -1,
+        "name": "车上人员(乘客)"
+    },
+    {
+        "code": "CK02",
+        "choice": -1,
+        "name": "车上人员(乘客)(不计免赔)"
+    },
+
+    {
+        "code": "BL01",
+        "choice": -1,
+        "name": "玻璃单独破碎险"
+    },
+    {
+        "code": "ZR01",
+        "choice": -1,
+        "name": "自燃损失险"
+    },
+    {
+        "code": "ZR02",
+        "choice": -1,
+        "name": "自燃损失险(不计免赔)"
+    },
+    {
+        "code": "HH01",
+        "choice": -1,
+        "name": "划痕损失险"
+    },
+    {
+        "code": "HH02",
+        "choice": -1,
+        "name": "划痕损失险(不计免赔)"
+    },
+    {
+        "code": "SS01",
+        "choice": -1,
+        "name": "发动机涉水损失险"
+    },
+    {
+        "code": "SS02",
+        "choice": -1,
+        "name": "发动机涉水损失险(不计免赔)"
+    },
+    {
+        "code": "SF01",
+        "choice": -1,
+        "name": "无法找到第三方特约"
+    },
+    {
+        "code": "XL01",
+        "choice": -1,
+        "name": "指定修理厂险"
+    }
+    ]
+    ],
+
+    "vehicleType": {
+        "status": true,
+        "message": "数据查询成功。",
+        "data": [
+            {
+                "Code": "01",
+                "Name": "大型汽车",
+                "IsDefault": false
+            },
+
+            {
+                "Code": "13",
+                "Name": "农用运输车",
+                "IsDefault": false
+            },
+
+            {
+                "Code": "15",
+                "Name": "挂车",
+                "IsDefault": false
+            },
+            {
+                "Code": "99",
+                "Name": "其他",
+                "IsDefault": false
+            }
+        ]
+    },
+    "useCharacter": {
+        "status": true,
+        "message": "数据查询成功。",
+        "data": [
+                {
+                    "Code": "02",
+                    "Name": "非营业企业",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "03",
+                    "Name": "非营业党政机关、事业团体",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "04",
+                    "Name": "非营业货车",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "05",
+                    "Name": "其他非营业",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "11",
+                    "Name": "营业出租租赁",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "12",
+                    "Name": "营业城市公交",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "13",
+                    "Name": "营业公路客运",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "14",
+                    "Name": "营业货车",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "15",
+                    "Name": "其他营业",
+                    "IsDefault": false
+                },
+                {
+                    "Code": "21",
+                    "Name": "自卸车",
+                    "IsDefault": null
+                },
+                {
+                    "Code": "22",
+                    "Name": "一类特种车",
+                    "IsDefault": null
+                },
+                {
+                    "Code": "23",
+                    "Name": "二类特种车",
+                    "IsDefault": null
+                },
+                {
+                    "Code": "99",
+                    "Name": "其他",
+                    "IsDefault": false
+                }
+                ]
+    },
+    "deliveryTypes": ["快递", "自取"]
+
+}
