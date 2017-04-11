@@ -10,7 +10,8 @@ export default class Out extends Component {
 
     render() {
         return (
-            <li>7座以下私家车
+            <li className="li">
+                <label className="item_name">7座以下私家车</label>
                 <span className="selections"  onClick={this.switchIsHome}>
                     <label className='selected'>是</label>
                     <label>否</label>

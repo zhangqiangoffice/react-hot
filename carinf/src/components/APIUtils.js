@@ -7,6 +7,7 @@ import AppActionCreators from '../actions/AppActionCreators';
 
 import zAJAX from 'z-ajax'
 
+
 module.exports = {
     
     //页面一打开即获取url中的参数，并判断下一步去哪里
@@ -140,12 +141,10 @@ module.exports = {
                 } else {
                     CarActionCreators.clearLincence();
                 }
-                AppActionCreators.stepNext();
+                window.location = '#/Car'
             } else {
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
         zAJAX(`${ctx}/carInf/cardInfo`, datas, cb)
@@ -514,5 +513,10 @@ module.exports = {
         //返回参数值  
         if (r!== null) return unescape(r[2]);  
         return null;  
+    },
+
+    //获取城市列表
+    getCitiesList(no, cb) {
+        zAJAX(`${ctx}/webService/region`, {id: no}, cb)
     }
 }

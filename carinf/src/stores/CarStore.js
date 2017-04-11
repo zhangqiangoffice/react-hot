@@ -8,9 +8,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var plateNo = '';       //车牌号
-var provinceShort = '皖';        //省简称
-var plateNum = '';      //车牌后六位AV1270
+var plateNo = '皖';       //车牌号
 var name = '';       // 车主名 任路路
 var idCard = '';        //证件号 340222199504273538
 var city = '340100';        //城市代码
@@ -31,10 +29,14 @@ var styleIndex;     //车型选择的索引
 
 //修改车牌号第一位省简称
 function updateProvinceShort(short) {
-    provinceShort = short;
+
     //更新车牌号
-    plateNo = provinceShort + plateNum;
-    if (plateNum.length === 6) {
+    if (plateNo.length <= 1) {
+        plateNo = short
+    } else if (plateNo.length <= 6) {
+        plateNo = short + plateNo.substr(1)
+    } else if (plateNo.length === 7) {
+        plateNo = short + plateNo.substr(1)
         getCityCode();
     }
 }
@@ -43,9 +45,9 @@ function updateProvinceShort(short) {
 function updatePlateNum(event) {
     let val = event.target.value.trim().toUpperCase();
     if (val.length < 7) {
-        plateNum = val || '';
+        let num = val || '';
         //更新车牌号
-        plateNo = provinceShort + plateNum;
+        plateNo = plateNo.substr(0, 1) + num;
 
         if (val.length === 6) {
             emitChange();
@@ -63,6 +65,7 @@ function getCityCode() {
 
     let cityObj = false;
     let citysArr = citys.insureCity;
+    let provinceShort = plateNo.substr(1);
     switch (provinceShort) {
         case '京':
         case '沪':
@@ -230,8 +233,6 @@ function updateStyleIndex(index) {
 //恢复初始设定的数据
 function reset() {
     plateNo = '';       //车牌号
-    provinceShort = '皖';        //省简称
-    plateNum = '';      //车牌后六位
     city = '340100';        //城市代码
     vehicleType = "02";     //康特，车辆类型
     vehicleTypeName = "小型汽车";       //
@@ -275,24 +276,23 @@ function changeIssueDate(text) {
 
 //根据投保城市修改默认的车牌号
 function changeDefaultPlate(no) {
-    if (!plateNum) {
-        let citysArr = citys.insureCity;
-        let license = ''
-        citysArr.map((ele, index) => {
-            if (ele.cityCode === no) {
-                license = ele.license
-            }
-        })
-        provinceShort = license.substr(0, 1);
-        plateNum = license.substr(-1);
+    
+    let citysArr = citys.insureCity;
+    let license = ''
+    citysArr.map((ele, index) => {
+        if (ele.cityCode === no) {
+            license = ele.license
+        }
+    })
+
+    if (plateNo.length < 3) {
+        plateNo = license
     }
 }
 
 //从最近投保车辆中选择了一辆车
 function updateFromRecent(obj) {
     plateNo = obj.plateNo;       //车牌号
-    provinceShort = obj.plateNo.substr(0, 1);        //省简称
-    plateNum = obj.plateNo.substr(1, 6);      //车牌后六位AV1270
     name = obj.name;       // 车主名 任路路
     idCard = obj.idCard;        //证件号 340222199504273538
     city = obj.city;        //城市代码
@@ -312,14 +312,6 @@ var CarStore = assign({}, EventEmitter.prototype, {
 
     removeChangeListener: function (callback) {
         this.removeListener(CHANGE_EVENT, callback);
-    },
-
-    getProvinceShort: function () {
-        return provinceShort;
-    },
-
-    getPlateNum: function() {
-        return plateNum;
     },
 
     getPlateNo: function() {
