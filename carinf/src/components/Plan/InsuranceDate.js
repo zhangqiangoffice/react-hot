@@ -139,7 +139,7 @@ export default class Plan extends Component {
                     <label style={{verticalAlign: 'top'}}>商业险起保日期</label>
                     {/*<input type="text" id="date_picker3" placeholder="请选择" defaultValue={(this.state.beginDate).slice(0, 10)} />*/}
                     <div style={{display: 'inline-block'}}>
-                        <DatePic title="商业险起保日期" theDate={(this.state.beginDate).slice(0, 10)} minDate={new Date()} onChangeDate={this.changeBeginDate}
+                        <DatePic title="商业险起保日期" theDate={(this.state.beginDate).slice(0, 10)} minDate={(this.state.beginDate).slice(0, 10)} onChangeDate={this.changeBeginDate}
                         />
                     </div>
                 </li>
@@ -151,7 +151,7 @@ export default class Plan extends Component {
                     <label style={{verticalAlign: 'top'}}>交强险起保日期</label>
                     {/*<input type="text" id="date_picker4" placeholder="请选择" defaultValue={(this.state.traBeginDate).slice(0, 10)} />*/}
                     <div style={{display: 'inline-block'}}>
-                        <DatePic title="交强险起保日期" theDate={(this.state.traBeginDate).slice(0, 10)} minDate={new Date()} onChangeDate={this.changeTraBeginDate}
+                        <DatePic title="交强险起保日期" theDate={(this.state.traBeginDate).slice(0, 10)} minDate={(this.state.traBeginDate).slice(0, 10)} onChangeDate={this.changeTraBeginDate}
                         />
                     </div>
                 </li>

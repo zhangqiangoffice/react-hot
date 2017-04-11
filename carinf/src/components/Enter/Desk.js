@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Home from './Home';
+import Place from './Place';
 import ProvinceSelector from '../ProvinceSelector';
 import LiSelector from '../LiSelector';
 import APIUtils from '../APIUtils';
@@ -288,12 +289,8 @@ export default class IndexDesk extends Component {
             <div className="index_desk" style={m0}>
                 <ul className="index_ul">
                     <Home />
-                    <li>投保地区
-                        <span className="selections">
-                            <input className="select_toubao" placeholder="请选择省" readOnly="readOnly" value={this.state.tbPlace.province.name} />
-                            <input className="select_toubao" placeholder="请选择市" readOnly="readonly" value={this.state.tbPlace.city.name} onClick={this.clickTbCity}/>
-                        </span>
-                    </li>
+                    <Place province={this.state.tbPlace.province.name} city={this.state.tbPlace.city.name}/>
+                    
                     <li>
                         <label className="item_name">车&nbsp;&nbsp;牌</label>
                         <input type="text" placeholder="省份" readOnly="readonly" className="select_province" value={this.state.provinceShort} onClick={this.switchSelector}></input>

@@ -48,7 +48,7 @@ module.exports = {
                     
                     CarActionCreators.initCarEditData(msg);
                     InsuranceActionCreators.initInsuranceEditData(insuranceCom, serial, msg);
-
+                    window.location = '#/confirm'
                 } else {
                     alert(msg.message);
                 }
@@ -391,12 +391,12 @@ module.exports = {
             bbrName: stakeholder.bbrName,                     //被保人姓名
             bbrNo: stakeholder.bbrNo,                     //被保人证件号
             bbrPhone: stakeholder.bbrPhone,                      //被保人电话
-            bbrEmail: stakeholder.bbrEmail,                  //被保人电子邮箱
+            // bbrEmail: stakeholder.bbrEmail,                  //被保人电子邮箱
 
             tbrName: stakeholder.tbrName,                        //投保人姓名
             tbrNo: stakeholder.tbrNo,                          //投保人证件号
             tbrPhone: stakeholder.tbrPhone,                       //投保人电话
-            tbrEmail: stakeholder.tbrEmail,                       //投保人电子邮箱
+            // tbrEmail: stakeholder.tbrEmail,                       //投保人电子邮箱
 
             deliveryType: InsuranceStore.getDeliveryType(),                  //配送类型：0快递 1自取
             collectName: stakeholder.collectName,                    //收件人姓名
@@ -412,7 +412,7 @@ module.exports = {
             datas.tbrName = datas.bbrName;
             datas.tbrNo = datas.bbrNo;
             datas.tbrPhone = datas.bbrPhone;
-            datas.tbrEmail = datas.bbrEmail;
+            // datas.tbrEmail = datas.bbrEmail;
         }
 
         let cb = msg => {

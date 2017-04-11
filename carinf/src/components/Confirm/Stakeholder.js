@@ -151,10 +151,6 @@ export default class Stakeholder extends Component {
                             <input type="text" placeholder="请输入" value={this.state.stakeholder.bbrNo} onChange={(event, type) => {InsuranceActionCreators.handleChange(event, 'bbrNo')}}/>
                         </li>
                         <li>
-                            <label>电子邮箱</label>
-                            <input type="text" placeholder="请输入" value={this.state.stakeholder.bbrEmail} onChange={(event, type) => {InsuranceActionCreators.handleChange(event, 'bbrEmail')}}/>
-                        </li>
-                        <li>
                             <label>手机号</label>
                             <input type="number" placeholder="请输入" value={this.state.stakeholder.bbrPhone} onChange={(event, type) => {InsuranceActionCreators.handleChange(event, 'bbrPhone')}}/>
                         </li>
@@ -173,10 +169,6 @@ export default class Stakeholder extends Component {
                         <li>
                             <label>身份证号</label>
                             <input type="text" placeholder="请输入" value={this.state.stakeholder.tbrNo} onChange={(event, type) => {InsuranceActionCreators.handleChange(event, 'tbrNo')}}/>
-                        </li>
-                        <li>
-                            <label>电子邮箱</label>
-                            <input type="text" placeholder="请输入" value={this.state.stakeholder.tbrEmail} onChange={(event, type) => {InsuranceActionCreators.handleChange(event, 'tbrEmail')}}/>
                         </li>
                         <li>
                             <label>手机号</label>
