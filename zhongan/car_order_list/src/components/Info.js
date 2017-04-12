@@ -47,9 +47,8 @@ const Output = ({entity, onGetPolicyUrl}) => {
           </tr>
         </tbody>
       </table>
-      <div className="sub_title">投保人信息</div>
-
-      {entity.type === "0" && entity.customerInfo ? 
+      {entity.type === "0" && entity.holderType === '1' && entity.customerInfo ? <div className="sub_title">投保人信息</div> : null }
+      {entity.type === "0" && entity.holderType === '1' && entity.customerInfo ? 
       <table>
         <tbody>
           <tr>
@@ -67,6 +66,50 @@ const Output = ({entity, onGetPolicyUrl}) => {
           <tr>
             <td>证件号码</td>
             <td>{entity.customerInfo.holderCertiNo}</td>
+          </tr>
+          <tr>
+            <td>电话</td>
+            <td>{entity.customerInfo.contactPhone}</td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td>{entity.customerInfo.contactEmail}</td>
+          </tr>
+        </tbody>
+      </table>
+      : null }
+
+      {entity.type === "0" && entity.holderType === '2' && entity.customerInfo ? <div className="sub_title">投保企业信息</div> : null }
+      {entity.type === "0" && entity.holderType === '2' && entity.customerInfo ? 
+      <table>
+        <tbody>
+          <tr>
+            <td>企业名称</td>
+            <td>{entity.customerInfo.holderName}</td>
+          </tr>
+          <tr>
+            <td>证件类型</td>
+            <td>{entity.customerInfo.holderCertiTypeName}</td>
+          </tr>
+          <tr>
+            <td>证件号码</td>
+            <td>{entity.customerInfo.holderCertiNo}</td>
+          </tr>
+          <tr>
+            <td>所在省份</td>
+            <td>{entity.customerInfo.contactProvinceName}</td>
+          </tr>
+          <tr>
+            <td>所在城市</td>
+            <td>{entity.customerInfo.contactRegionName}</td>
+          </tr>
+          <tr>
+            <td>所在区县</td>
+            <td>{entity.customerInfo.contactCountyName}</td>
+          </tr>
+          <tr>
+            <td>详细地址</td>
+            <td>{entity.customerInfo.contactAddress}</td>
           </tr>
         </tbody>
       </table>
@@ -135,14 +178,14 @@ const Output = ({entity, onGetPolicyUrl}) => {
       : null }
 
       {entity.type === "0" && entity.customerInfo && entity.customerInfo.holderType === '2' ?
-      <div className="sub_title">投保企业信息</div>
+      <div className="sub_title">企业联系人信息</div>
       : null }
 
       {entity.type === "0" && entity.customerInfo && entity.customerInfo.holderType === '2' ?
       <table>
         <tbody>
           <tr>
-            <td>企业联系人</td>
+            <td>联系人</td>
             <td>{entity.customerInfo.contactPeople}</td>
           </tr>
           <tr>
@@ -152,22 +195,6 @@ const Output = ({entity, onGetPolicyUrl}) => {
           <tr>
             <td>证件号码</td>
             <td>{entity.customerInfo.contactCertiNo}</td>
-          </tr>
-          <tr>
-            <td>所在省份</td>
-            <td>{entity.customerInfo.contactProvinceName}</td>
-          </tr>
-          <tr>
-            <td>所在城市</td>
-            <td>{entity.customerInfo.contactRegionName}</td>
-          </tr>
-          <tr>
-            <td>所在区县</td>
-            <td>{entity.customerInfo.contactCountyName}</td>
-          </tr>
-          <tr>
-            <td>详细地址</td>
-            <td>{entity.customerInfo.contactAddress}</td>
           </tr>
           <tr>
             <td>联系电话</td>
@@ -180,7 +207,6 @@ const Output = ({entity, onGetPolicyUrl}) => {
         </tbody>
       </table>
       : null }
-
       
       {entity.type === "0" && entity.customerInfo ?
       <div className="sub_title">驾乘车辆信息</div>

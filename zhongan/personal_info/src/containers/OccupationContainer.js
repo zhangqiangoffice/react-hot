@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeOccupationShow, choiceInd, goBackStep, clickJob } from '../actions'
+import { changeOccupationShow, choiceInd, goBackStep, clickJob, closeOccupationShow } from '../actions'
 import Occupation from '../components/Occupation'
 import data from '../reducers/data.json'
 
@@ -29,6 +29,9 @@ const mapDispatchToProps = (dispatch, state) => ({
     dispatch(changeOccupationShow())
     dispatch(clickJob(occuName, occuClass))
   },
+  onClose: () => {
+    dispatch(closeOccupationShow())
+  }
 })
   
 const OutPut = connect(

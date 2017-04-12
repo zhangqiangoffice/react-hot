@@ -276,6 +276,8 @@ const occupation = (state = i_occupation, action) => {
     case act.CHANGE_OCCUPATION_SHOW:
       // console.log(state.isShow);
       return { ...state, isShow: !state.isShow}
+    case act.CLOSE_OCCUPATION_SHOW:
+      return { ...state, isShow: false}
     case act.CHOICE_IND:
       return { ...state, step: 1, indIndex: action.index}
     case act.GO_BACK_STEP:
@@ -496,13 +498,14 @@ const balance = (state = 0.00, action) => {
   }
 }
 
-
 //打开遮罩层
 const isLoading = (state = false, action) => {
   switch (action.type) {
     case act.CHANGE_IS_LOADING:
     case act.CHANGE_OCCUPATION_SHOW:
       return !state
+    case act.CLOSE_OCCUPATION_SHOW:
+      return false
     default:
       return state
   }

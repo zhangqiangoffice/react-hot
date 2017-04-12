@@ -46,6 +46,7 @@ export const CHANGE_OCCUPATION_SHOW = 'CHANGE_OCCUPATION_SHOW'
 export const GO_BACK_STEP = 'GO_BACK_STEP'
 export const CHOICE_IND = 'CHOICE_IND'
 export const CLICK_JOB = 'CLICK_JOB'
+export const CLOSE_OCCUPATION_SHOW = 'CLOSE_OCCUPATION_SHOW'
 
 
 
@@ -380,6 +381,11 @@ export const submitCards = () => (dispatch, getState) => {
 //显示职业类别选择器
 export const changeOccupationShow = () => ({
   type: CHANGE_OCCUPATION_SHOW,
+})
+
+//显示职业类别选择器
+export const closeOccupationShow = () => ({
+  type: CLOSE_OCCUPATION_SHOW,
 })
 
 //返回选择行业

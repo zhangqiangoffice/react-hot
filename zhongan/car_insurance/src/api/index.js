@@ -83,8 +83,8 @@ export const sendDate = (state, cb) => {
     staffId : state.staffId,// 业务员
     effectiveDate : state.effectiveDate, // 保单起期
     expiryDate : state.expiryDate,// 保单止期
-    // sumPremium : getTotalFee(state.carType, state.usingType, state.applyNum),// 总保费
-    sumPremium: 99.00 * data.ApplyNum[state.applyNum],
+    sumPremium : getTotalFee(state.carType, state.usingType, state.applyNum),// 总保费
+    // sumPremium: 99.00 * data.ApplyNum[state.applyNum],
     applyNum : data.ApplyNum[state.applyNum],// 份数 1 2 5 10
     policyHolder,
     carInfo : {

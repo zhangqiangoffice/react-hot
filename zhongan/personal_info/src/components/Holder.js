@@ -43,7 +43,7 @@ export default class OutPut extends Component {
         </BlankLi>
         <BlankLi item="投保人邮箱">
           {this.props.justRead ? this.props.holderEmail :
-          <InputBox val={this.props.holderEmail} onChangeVal={this.props.onChangeHolderEmail}/>
+          <InputBox val={this.props.holderEmail} onChangeVal={this.props.onChangeHolderEmail} tip="用于接收电子保单"/>
           }
         </BlankLi>
       </ul>
