@@ -14,7 +14,6 @@ export default class DatePic extends Component {
     };
 
     add() {
-      console.log('add');
       let p = this.state.percent + 1;
       if (this.state.percent >= 100) {
         p = 100;
@@ -38,8 +37,6 @@ export default class DatePic extends Component {
       let tip = null
       if (this.props.isFinished) {
         tip = <p></p>
-      } else if (this.state.percent === 100) {
-        tip = <p>请求超时，请稍后重试！</p>
       } else if (this.props.message) {
         tip = <p>{this.props.message}</p>
       } else {
