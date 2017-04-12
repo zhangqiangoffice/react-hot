@@ -50,10 +50,23 @@ export default class Lists extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', function scrollHandler() {
-            if ($('#anchor').length) {
-                var top = $(document).scrollTop();
-                var distance = $('#anchor').offset().top - $(window).height() - 50;
-                if (top > distance) {
+            let $anchor = document.getElementById('anchor');
+            if ($anchor) {
+                function getOffset(Node, offsetTop) {
+                    if (!offsetTop) {
+                        offsetTop = 0;
+                    }
+                    if (Node == document.body) {//当该节点为body节点时，结束递归
+                        return offsetTop;
+                    }
+                    offsetTop += Node.offsetTop;
+                    return getOffset(Node.offsetParent, offsetTop);//向上累加offset里的值
+                }
+                let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+                let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+                let top = getOffset($anchor)
+                let distance = top - height - 50
+                if (scrollTop > distance) {
                     let activedListIndex = AppStore.getActivedListIndex();
                     if (!activedListIndex) {
                         let isAskingMore = AppStore.getIsAskingMore1();

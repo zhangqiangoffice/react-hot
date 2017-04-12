@@ -17,22 +17,21 @@ export default class ChoiceApplyType extends Component {
     //显示新增申请
     showBlankForm(event) {
         let index = Number.parseInt(event.target.dataset.index);
+        let text = event.target.innerHTML;
         AppActionCreators.updateApplyType(index);
         switch (index) {
-            case 3:
-                AppActionCreators.showLoading();
-                window.location.href = ctx + '/document_mobile/develop/add_new_document?staffId=' + AppStore.getStaffid();
-                break;
-            case 4:
+            case 0:
                 AppActionCreators.showComponent('NewBusinessTravel');
                 break;
-            case 5:
+            case 1:
                 AppActionCreators.showComponent('NewOffWork');
                 break;
-            case 6:
+            case 2:
                 AppActionCreators.showComponent('NewWorkOvertime');
                 break;
             default:
+                AppActionCreators.showLoading();
+                window.location.href = `${ctx}/document_mobile/develop/add_new_document?staffId=${AppStore.getStaffid()}&category=${text}`;
                 break;
         }
         this.props.closeApplyType();
@@ -43,10 +42,17 @@ export default class ChoiceApplyType extends Component {
             return null
         }
 
+        let btnStyle = {
+            width: '44%',
+            overflow: 'hidden',
+            float: 'left',
+            margin: '0 3% 1rem',
+        }
+
         let listShows = AppStore.getCanNewApply().map((name, index) => {
             if (!!name) {
                 return (
-                    <li key={index}><button data-index={index} type="button" onClick={this.showBlankForm}>{name}</button></li>
+                    <li key={index}><button data-index={index} type="button" onClick={this.showBlankForm} style={btnStyle}>{name}</button></li>
                 ); 
             } 
         });

@@ -51,8 +51,8 @@ module.exports = {
     addNewBlankForm: function(index, obj) {
         var action = {
             type: 'addNewBlankForm',
-            obj: obj,
-            index: index
+            obj,
+            index,
         };
         AppDispatcher.dispatch(action);
     },
@@ -171,6 +171,14 @@ module.exports = {
     showApplyment: function() {
         var action = {
             type: 'showApplyment',
+        };
+        AppDispatcher.dispatch(action);
+    },
+
+    extendCanNewApply: function(list) {
+        var action = {
+            type: 'extendCanNewApply',
+            list,
         };
         AppDispatcher.dispatch(action);
     },

@@ -22,8 +22,8 @@ let showController = {      //组件显隐控制器
     isDocument: false,
 };
 let applyFormArr = [];      //申请空白表格数组
-let canNewApply = [false, false, false, '签报申请', '公出申请', '请假申请', '加班申请'];       //可新增的申请类型
-let applyType = '';      //当前激活的申请类型，0:转正申请;1:离职申请;2:人事异动申请;3:签报申请;4:公出申请;5:请假申请;6:加班申请
+let canNewApply = ['公出申请', '请假申请', '加班申请'];       //可新增的申请类型
+let applyType = '';      //0:公出申请;1:请假申请;2:加班申请
 let activedApplyId = '';        //当前激活申请id
 let applyDetailList = [{}, {}, {}];     //详情集合,0:我提交的,1提交给我的:,2归档:
 // let applyDealList = {};     //提交给我的列表详情集合
@@ -184,6 +184,11 @@ function showApplyment() {
         default:
             break;
     }
+}
+
+//扩展新增申请的类别
+function extendCanNewApply(list) {
+    canNewApply = canNewApply.concat(list);
 }
 
 function emitChange() {
@@ -370,6 +375,10 @@ function handleAction(action) {
             break;
         case 'showApplyment':
             showApplyment();
+            emitChange();
+            break;
+        case 'extendCanNewApply':
+            extendCanNewApply(action.list);
             emitChange();
             break;
         default: // ... do nothing

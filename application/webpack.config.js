@@ -5,7 +5,7 @@ module.exports = {
 
     entry: "./src/main",
     output: {
-        path: "/Workspaces2018/mstps/WebRoot/static/js/carInf/mobile",
+        path: "/Workspaces2018/mstps/WebRoot/static/js/application/mobile",
         filename: "bundle.js"
     },
     resolve: {
