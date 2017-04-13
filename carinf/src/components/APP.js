@@ -6,6 +6,8 @@ import AlertProgress from './public/AlertProgress'
 import AppStore from '../stores/AppStore';
 import RadioSelector from './RadioSelector';
 import APIUtils from './APIUtils';
+import style from './asset/css/index.less'
+import initial from './asset/css/mobile_initial.css'
 
 
 export default class App extends Component {

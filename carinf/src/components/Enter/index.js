@@ -15,7 +15,7 @@ export default class App extends Component {
         return (
             <div>
                 <TitleBar title="快速报价" />
-                <img style={imgStyle} src={`${ctx}/static/img/carInf/banner.png`} />
+                <img style={imgStyle} src={require('../asset/img/banner.png')} />
                 <Desk />
             </div>
         )

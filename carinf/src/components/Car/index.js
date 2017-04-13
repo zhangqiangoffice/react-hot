@@ -4,13 +4,7 @@ import TitleBar from '../public/TitleBar';
 import TopTip from '../public/TopTip';
 import CarInfo from './CarInfo';
 
-import zAJAX from 'z-ajax'
-
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-
-    };
 
     render() {
 

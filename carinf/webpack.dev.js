@@ -34,7 +34,13 @@ module.exports = {
     },{ 
       test: /\.css$/, 
       loader: 'style!css' 
-    } // 把css处理成内联style，动态插入到页面
+    },{ 
+      test: /\.less$/, 
+      loader: "style!css!less" 
+    },{
+      test: /\.(png|jpg)$/,
+      loader: 'url?limit=40000'
+    }
     ]
   }
 };

@@ -103,7 +103,7 @@ export default class Company extends Component {
                 <div style={divStyle}>{this.props.address.name} <span style={fr}>{this.props.address.phone}</span></div>
                 <div style={divStyle}>{this.props.address.provinceName}{this.props.address.regionName}{this.props.address.countyName}{this.props.address.address}</div>
                 <div  style={lastDivStyle} >
-                    <img style={imgStyle} src={ctx + '/static/img/carInf/radio_' + (this.props.address.isDefault === '1' ? 'on' : 'off') + '.png'} />
+                    <img style={imgStyle} src={require(`../asset/img/radio_${this.props.address.isDefault === '1' ? 'on' : 'off'}.png`)} />
                     &nbsp;&nbsp;默认地址 
                     <div style={fr}>
                         <button type="button" style={buttonStyle} onClick={this.toEdit}>编辑</button>

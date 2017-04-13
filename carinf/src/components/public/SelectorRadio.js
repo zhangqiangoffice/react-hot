@@ -18,7 +18,7 @@ export default class RadioSelector extends Component {
         let listShows = this.props.options.map((option, index) => {
             let onOrOff = (option === this.props.selectedOption) ? 'on' : 'off';
             return (
-                <li key={index} data-index={index} onClick={this.handleClick}><img data-index={index} src={ctx + '/static/img/carInf/radio_' + onOrOff + '.png'} />{option}</li>
+                <li key={index} data-index={index} onClick={this.handleClick}><img data-index={index} src={require('../asset/img/radio_' + onOrOff + '.png')} />{option}</li>
             )
                 
         });

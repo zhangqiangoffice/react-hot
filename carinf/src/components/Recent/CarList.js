@@ -4,7 +4,6 @@ import AppActionCreators from '../../actions/AppActionCreators';
 import Car from './Car';
 import Loading from '../public/Loading';
 import APIUtils from '../APIUtils';
-import zAJAX from 'z-ajax'
 
 export default class CarList extends Component {
     constructor(props) {
@@ -21,24 +20,25 @@ export default class CarList extends Component {
 
     //获取最近投保车辆列表
     getList() {
-        AppActionCreators.changeLoading();
+        AppActionCreators.startAlertProgress();
         
         let data = {
             workNum: APIUtils.getUrlParam('workNum'),
         };
 
         let cb = msg => {
-            AppActionCreators.changeLoading();
             if (msg.result === 1) {
+                AppActionCreators.finishAlertProgress();
                 this.setState({
                     carList: [ ...msg.list]
                 })
             } else {
-                alert(msg.message);
+                AppActionCreators.messageAlertProgress(msg.message);
             }
         } 
 
-        zAJAX(`${ctx}/carInf/queryOfferCar`, data, cb)
+        APIUtils.queryOfferCar(cb)
+
     };
 
     render() {

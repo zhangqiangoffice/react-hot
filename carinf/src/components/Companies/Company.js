@@ -33,11 +33,11 @@ export default class Company extends Component {
         let company = this.props.company;
         return (
             <li onClick={this.handleClick}>
-                <img src={`${ctx}/static/img/carInf/pic_${company.spell}.png`} />
+                <img src={require(`../asset/img/pic_${company.spell}.png`)} />
                 <section>
                     <p className="title">{company.product}</p>
                     <p className="content">{company.info}</p> 
-                    <img src={`${ctx}/static/img/carInf/logo_${company.spell}.png`} />
+                    <img src={require(`../asset/img/logo_${company.spell}.png`)} />
                 </section>
                 <i className="clear"></i>
             </li>

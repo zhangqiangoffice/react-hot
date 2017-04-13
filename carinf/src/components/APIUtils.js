@@ -518,5 +518,10 @@ module.exports = {
     //获取城市列表
     getCitiesList(no, cb) {
         zAJAX(`${ctx}/webService/region`, {id: no}, cb)
+    },
+
+    //获取最近使用的车辆信息
+    queryOfferCar(cb) {
+        zAJAX(`${ctx}/carInf/queryOfferCar`, {workNum: AppStore.getWorkNum()}, cb)
     }
 }
