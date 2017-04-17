@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SelectorInLine from './SelectorInLine';
-import Provinces from '../json/provinces'
+import Provinces from '../asset/json/provinces'
 
 export default class Loading extends Component {
     constructor(props) {

@@ -1,25 +1,15 @@
 import React, {Component} from 'react';
 
-export default class Loading extends Component {
-    constructor(props){
-        super(props);
-
-        this.clickHandle = this.clickHandle.bind(this);
-    };
-
-    //点击事件
-    clickHandle(str, index) {
-        this.props.onSelect({text: str, index,});
-    }
+export default class Out extends Component {
 
     render() {
         if (!this.props.isShow) {
             return null;
         }
 
-        let listShows = this.props.options.map((str, index)=> {
+        let listShows = this.props.options.map((text, index)=> {
             return (
-                <li key={index} className={str === this.props.selected ? 'selected' : ''} onClick={e => this.clickHandle(str, index)}>{str}</li>
+                <li key={index} className={text === this.props.selected ? 'selected' : ''} onClick={e => this.props.onSelect({text, index,})}>{text}</li>
             );
         });
 

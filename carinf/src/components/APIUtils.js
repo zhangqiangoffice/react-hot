@@ -4,15 +4,16 @@ import InsuranceStore from '../stores/InsuranceStore';
 import CarActionCreators from '../actions/CarActionCreators';
 import InsuranceActionCreators from '../actions/InsuranceActionCreators';
 import AppActionCreators from '../actions/AppActionCreators';
+import  * as mock from './asset/mock/index';
 
 import zAJAX from 'z-ajax'
 
+const isMock = true;
 
 module.exports = {
     
     //页面一打开即获取url中的参数，并判断下一步去哪里
     getDataFromUrl: function() {
-
         //获取url参数 方法
         let getUrlParam = function(name){  
             //构造一个含有目标参数的正则表达式对象  
@@ -110,19 +111,25 @@ module.exports = {
         let cb = msg => {
             if (msg.result === 1 && msg.idCard) {
                 CarActionCreators.updateOwner(msg.name, msg.idCard);
+                InsuranceActionCreators.updateUsedTimes(msg.tpCount, msg.zhCount)
             }
         }
 
+        if (isMock) {
+            cb(mock.MgetOwnerInfo)
+        } else {
+
         zAJAX(`${ctx}/carInf/getOwner`, datas, cb)
+        }
+
     },
 
 
 
     //获取行驶证信息
     cardInfo: function() {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
-        let datas = {
+        let data = {
             insuranceCom: 700 + (InsuranceStore.getInsuranceCom() - 0),
             isHome: CarStore.getIsHome(),
             plateNo: CarStore.getPlateNo(),
@@ -141,19 +148,22 @@ module.exports = {
                 } else {
                     CarActionCreators.clearLincence();
                 }
-                window.location = '#/Car'
+                window.location = '#/car'
             } else {
                 AppActionCreators.messageAlertProgress(msg.message);
             }
         } 
 
-        zAJAX(`${ctx}/carInf/cardInfo`, datas, cb)
+        if (isMock) {
+            cb(mock.McardInfo)
+        } else {
+        zAJAX(`${ctx}/carInf/cardInfo`, data, cb)
 
+        }
     },
 
     //获取车型信息
     carModel: function() {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
         let datas = {
             insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
@@ -177,16 +187,19 @@ module.exports = {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
                 CarActionCreators.updateStyleList(msg.list);
-                AppActionCreators.stepNext();
                 window.location = '#/model'
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
-        zAJAX(`${ctx}/carInf/carModel`, datas, cb)
+        if (isMock) {
+            cb(mock.McarModel)
+        } else {
+            zAJAX(`${ctx}/carInf/carModel`, datas, cb)
+
+        }
+
 
     },
 
@@ -216,28 +229,27 @@ module.exports = {
                 AppActionCreators.finishAlertProgress();
                 InsuranceActionCreators.changeTwoBeginDate(msg.LAST_TRA_END, msg.LAST_BUS_END);
                 AppActionCreators.saveTempOrderNo(msg.orderNo, msg.csPrice);
-                AppActionCreators.stepNext();
                 window.location = '#/plan'
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
         } 
 
-        zAJAX(`${ctx}/carInf/queryInsuranceDate`, datas, cb)
+        if (isMock) {
+            cb(mock.MqueryInsuranceDate)
+        } else {
+            zAJAX(`${ctx}/carInf/queryInsuranceDate`, datas, cb)
+
+        }
 
     },
 
     //获取报价
     quote: function() {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
-
         let style = CarStore.getStyleList()[CarStore.getStyleIndex()];
-
         let insuranceItems = '';
         InsuranceStore.getThreeSchemeList()[InsuranceStore.getSchemeIndex()].map((value, index) => {
-            
             let choice;
             //国产玻璃为0，进口玻璃为1
             if (value.choice === '国产') {
@@ -294,17 +306,20 @@ module.exports = {
                 window.location = '#/results'
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
-        zAJAX(`${ctx}/carInf/quote`, datas, cb)
+        if (isMock) {
+            cb(mock.Mquote)
+        } else {
+            zAJAX(`${ctx}/carInf/quote`, datas, cb)
+
+        }
+
     },
 
     //获取报价
     quote2: function() {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
         let style = CarStore.getStyleList()[CarStore.getStyleIndex()];
 
@@ -362,15 +377,17 @@ module.exports = {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
                 InsuranceActionCreators.changeOffers(msg);
-                // AppActionCreators.stepNext();
             }else{
-                // alert(msg.message);
                 AppActionCreators.messageAlertProgress(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
-        zAJAX(`${ctx}/carInf/quote`, datas, cb)
+        if (isMock) {
+            cb(mock.Mquote)
+        } else {
+            zAJAX(`${ctx}/carInf/quote`, datas, cb)
+        }
+
     },
 
 
@@ -426,7 +443,12 @@ module.exports = {
             // AppActionCreators.hideLoading();
         } 
 
-        zAJAX(`${ctx}/carInf/orderOperation`, datas, cb)
+        if (isMock) {
+            cb(mock.MorderOperation)
+        } else {
+            zAJAX(`${ctx}/carInf/orderOperation`, datas, cb)
+        }
+
 
     },
 
@@ -480,7 +502,12 @@ module.exports = {
             // AppActionCreators.hideLoading();
         } 
 
-        zAJAX(`${ctx}/carInf/queryAddress`, datas, cb)
+        if (isMock) {
+            cb(mock.MqueryAddress)
+        } else {
+            zAJAX(`${ctx}/carInf/queryAddress`, datas, cb)
+        }
+
     },
 
     //删除邮寄地址
@@ -517,11 +544,56 @@ module.exports = {
 
     //获取城市列表
     getCitiesList(no, cb) {
-        zAJAX(`${ctx}/webService/region`, {id: no}, cb)
+        if (isMock) {
+            cb(mock.Mregion)
+        } else {
+            zAJAX(`${ctx}/webService/region`, {id: no}, cb)
+        }
+
+    },
+
+    //获取区县列表
+    getCountiesList(no, cb) {
+        if (isMock) {
+            cb(mock.Mcounty)
+        } else {
+            zAJAX(`${ctx}/webService/county`, {id: no}, cb)
+        }
     },
 
     //获取最近使用的车辆信息
     queryOfferCar(cb) {
-        zAJAX(`${ctx}/carInf/queryOfferCar`, {workNum: AppStore.getWorkNum()}, cb)
-    }
+        if (isMock) {
+            cb(mock.MqueryOfferCar)
+        } else {
+            zAJAX(`${ctx}/carInf/queryOfferCar`, {workNum: AppStore.getWorkNum()}, cb)
+        }
+    },
+
+    //获取邮寄地址列表
+    queryAddress (cb) {
+        if (isMock) {
+            cb(mock.MqueryAddress)
+        } else {
+            zAJAX(`${ctx}/carInf/queryAddress`, {workNum: AppStore.getWorkNum()}, cb)
+        }
+    },
+
+    //通知后台设定默认地址
+    carAddressDefault(data, cb) {
+        if (isMock) {
+            cb(mock.MoperationCarAddress)
+        } else {
+            zAJAX(`${ctx}/carInf/carAddressDefault`, data, cb)
+        }
+    },
+
+    //删除地址
+    carAddressDelete() {
+        if (isMock) {
+            cb(mock.MoperationCarAddress)
+        } else {
+            zAJAX(`${ctx}/carInf/carAddressDelete`, data, cb)
+        }
+    },
 }

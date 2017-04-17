@@ -1,32 +1,38 @@
 import React, {Component} from 'react';
-
 import TitleBar from '../public/TitleBar';
 import List from './List';
 import ButtonBottom from '../public/ButtonBottom';
-import Loading from '../public/Loading';
-
-import zAJAX from 'z-ajax'
-
-
+import TopTip from '../public/TopTip'
+import AppActionCreators from '../../actions/AppActionCreators';
+import APIUtils from '../APIUtils';
 
 export default class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isLoading: false,        //显示加载中遮罩层
-            
+           addList: [],
         };
-
-        this.changeIsLoading = this.changeIsLoading.bind(this);
-        this.addNewAddress = this.addNewAddress.bind(this);
-
     };
 
-    changeIsLoading() {
-        this.setState(prevState => ({
-          isLoading: !prevState.isLoading
-        }));
+    componentDidMount() {      
+        this.quoteAddress();
+    };
+
+    //获取邮寄地址列表
+    quoteAddress () {
+        AppActionCreators.startAlertProgress();
+        let cb = msg => {
+            if (msg.result === 1) {
+                AppActionCreators.finishAlertProgress();
+                this.setState({
+                    addList : [ ...msg.list]
+                })
+            }else{
+                AppActionCreators.messageAlertProgress(msg.message);
+            }
+        } 
+        APIUtils.queryAddress(cb);
     };
 
     addNewAddress() {
@@ -37,13 +43,9 @@ export default class App extends Component {
         return (
             <div>
                 <TitleBar title="管理配送方式" />
-                <List 
-                    changeIsLoading={this.changeIsLoading}
-                     />
-                <Loading isLoading={this.state.isLoading}/>
-
+                <TopTip tip={this.state.addList.length ? '下列是您最近使用的地址' : '可点击下方按钮新增地址'} />
+                {this.state.addList.length ? <List list={this.state.addList}/> : null}
                 <ButtonBottom text='添加新地址' onClickHandle={this.addNewAddress}/>
-                
             </div>
         )
     };

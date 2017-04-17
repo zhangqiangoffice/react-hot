@@ -10,34 +10,34 @@ export default class Out extends Component {
         super(props);
 
         this.state = {
-            options: ['正在加载城市列表'],
+            options: ['正在加载区县列表'],
         };
 
         this.onSelect = this.onSelect.bind(this)
-        this.getCityString = this.getCityString.bind(this)
+        this.getCountyString = this.getCountyString.bind(this)
 
     };
 
     componentWillReceiveProps(nextProps) {
       if (nextProps.isShow) {
-        let cityData = InsuranceStore.getStakeholder().cityDatas[nextProps.pro]
-        if (!cityData) {
+        let date = InsuranceStore.getStakeholder().countyDatas[nextProps.city]
+        if (!date) {
             let cb = (msg) => {
-                InsuranceActionCreators.updateCityDatas(nextProps.pro, msg);
-                this.getCityString(msg);
+                InsuranceActionCreators.updatecountyDatas(nextProps.city, msg);
+                this.getCountyString(msg);
                 Toast.hide();
             }
             Toast.loading('加载中...', 0);
-            APIUtils.getCitiesList(nextProps.pro, cb);
+            APIUtils.getCountiesList(nextProps.city, cb);
         } else {
-            this.getCityString(cityData)
+            this.getCountyString(date)
         }
       }
     }
 
-    getCityString(list) {
+    getCountyString(list) {
         let arr = list.map((ele, index) => {
-            return ele.regionName
+            return ele.countyName
         })
         this.setState({
             options: arr,
@@ -45,10 +45,10 @@ export default class Out extends Component {
     }
 
     onSelect(obj) {
-        let city = InsuranceStore.getStakeholder().cityDatas[this.props.pro][obj.index];
+        let county = InsuranceStore.getStakeholder().countyDatas[this.props.city][obj.index];
         let result = {
-            name: city.regionName,
-            no: city.regionNo
+            name: county.countyName,
+            no: county.countyNo
         }
         this.props.onSelect(result)
     }

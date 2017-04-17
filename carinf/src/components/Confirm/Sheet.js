@@ -1,24 +1,23 @@
 import React, {Component} from 'react';
 import InsuranceStore from '../../stores/InsuranceStore';
-import appInfo from '../json/appInfo.json';
+import { componies } from '../asset/json/appInfo.json';
 
 
 export default class out extends Component {
-    constructor(props){
-        super(props);
-    };
-
     render() {
-
-        const result = InsuranceStore.getOffers()[InsuranceStore.getInsuranceCom()]
-        console.log(result);
         const insuranceCom = InsuranceStore.getInsuranceCom()
+        const result = InsuranceStore.getOffers()[insuranceCom]
 
-        let listShow2 = null;
+        //交强险合计
+        let total2 = (parseFloat(result.traffRealPrm) || 0) + (parseFloat(result.taxRealPrm) || 0)
+          
+
+        //商业险合计
         let total = 0;
-
+        //商业险列表
+        let listShow = null;
         if (result && result.list) {
-            listShow2 = result.list.map((insure, index) => {
+            listShow = result.list.map((insure, index) => {
                 //累计商业险合计
                 total += (insure.prm - 0);
                 return (
@@ -30,11 +29,11 @@ export default class out extends Component {
                 )
             })
         }
-          
+
         return (
             <div className="sheet">
-                <div className="total">￥<span>{((parseFloat(result.traffRealPrm) || 0) + (parseFloat(result.taxRealPrm) || 0) + total).toFixed(2)}</span></div>
-                <div className="company_name">{appInfo.componies[insuranceCom - 1].product}</div>
+                <div className="total">￥<span>{(total2 + total).toFixed(2)}</span></div>
+                <div className="company_name">{componies[insuranceCom - 1].product}</div>
                 <ul>
                     <li>
                         <label>交强险</label>
@@ -45,11 +44,11 @@ export default class out extends Component {
                         <span className="right">￥{(parseFloat(result.taxRealPrm) || 0).toFixed(2)}</span>
                     </li>
                 </ul>
-                <div className="sum">强制险合计<span>￥{((parseFloat(result.traffRealPrm) || 0) + (parseFloat(result.taxRealPrm) || 0) ).toFixed(2)}</span></div>
+                <div className="sum">强制险合计<span>￥{(total2).toFixed(2)}</span></div>
                 <ul className="list2">
-                    {listShow2}
+                    {listShow}
                 </ul>
-                <div className="sum">商业险合计<span>￥{(total || 0).toFixed(2)}</span></div>
+                <div className="sum">商业险合计<span>￥{total.toFixed(2)}</span></div>
             </div>
         );
     };

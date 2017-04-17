@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { provinces } from '../json/appInfo.json';
+import { provinces } from '../asset/json/appInfo.json';
 import CarActionCreators from '../../actions/CarActionCreators';
 
 export default class ProvinceSelector extends Component {

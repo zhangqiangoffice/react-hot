@@ -29,17 +29,22 @@ export default class DatePic extends Component {
 
     render() {
         return (
-          <DatePicker 
-            mode="date" 
-            title={this.props.title} 
-            value={this.state.dpValue}
-            extra='请选择'
-            minDate={this.props.minDate ? moment(this.props.minDate, 'YYYY-MM-DD') : null}
-            maxDate={this.props.maxDate ? moment(this.props.maxDate, 'YYYY-MM-DD') : null}
-            onChange={this.changeDate}>
-            <CustomChildren />
-            
-          </DatePicker>
+          <li>
+            <label style={{verticalAlign: 'top'}}>{this.props.title}</label>
+            <div style={{display: 'inline-block'}}>
+              <DatePicker 
+                mode="date" 
+                title={this.props.title} 
+                value={this.state.dpValue}
+                extra='请选择'
+                minDate={this.props.minDate ? moment(this.props.minDate, 'YYYY-MM-DD') : null}
+                maxDate={this.props.maxDate ? moment(this.props.maxDate, 'YYYY-MM-DD') : null}
+                onChange={this.changeDate}>
+                <CustomChildren />
+                
+              </DatePicker>
+            </div>
+          </li>
         );
     };
 }

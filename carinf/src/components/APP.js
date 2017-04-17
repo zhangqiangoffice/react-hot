@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import Loading from './public/Loading'
 import AlertProgress from './public/AlertProgress'
 
 import AppStore from '../stores/AppStore';
@@ -15,7 +14,6 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            isLoading: AppStore.getIsLoading(), 
             isAlertProgress: AppStore.getIsAlertProgress(),
             isFinished: AppStore.getIsFinished(),
             msg: AppStore.getMsg(),
@@ -29,8 +27,7 @@ export default class App extends Component {
     };
 
     onAppChange() {
-        this.setState({
-            isLoading: AppStore.getIsLoading(),     
+        this.setState({  
             isAlertProgress: AppStore.getIsAlertProgress(),
             isFinished: AppStore.getIsFinished(),
             msg: AppStore.getMsg(),
@@ -56,7 +53,6 @@ export default class App extends Component {
 
         return (
             <div>
-                <Loading isLoading={this.state.isLoading} />
                 <AlertProgress isShow={this.state.isAlertProgress}  message={this.state.msg} isFinished={this.state.isFinished}/>
                 <RadioSelector 
                     isRadioSelector={this.state.isRadioSelector} 

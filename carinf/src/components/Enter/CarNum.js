@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import CarActionCreators from '../../actions/CarActionCreators';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import InsuranceStore from '../../stores/InsuranceStore';

@@ -1,5 +1,5 @@
-import citys from '../components/json/citys.json';
-import appInfo from '../components/json/appInfo.json';
+import citys from '../components/asset/json/citys.json';
+// import appInfo from '../components/json/appInfo.json';
 import InsuranceStore from '../stores/InsuranceStore';
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -102,19 +102,19 @@ function getCityCode() {
     }
 }
 
-//修改车辆类型
-function updateVehicleType(index) {
-    let obj = appInfo.vehicleType.data[index];
-    vehicleType = obj.Code;
-    vehicleTypeName = obj.Name;
-}
+// //修改车辆类型
+// function updateVehicleType(index) {
+//     let obj = appInfo.vehicleType.data[index];
+//     vehicleType = obj.Code;
+//     vehicleTypeName = obj.Name;
+// }
 
-//修改使用性质
-function updateUseCharacter(index) {
-    let obj = appInfo.useCharacter.data[index];
-    useCharacter = obj.Code;
-    useCharacterName = obj.Name;
-}
+// //修改使用性质
+// function updateUseCharacter(index) {
+//     let obj = appInfo.useCharacter.data[index];
+//     useCharacter = obj.Code;
+//     useCharacterName = obj.Name;
+// }
 
 //切换是否是私家车
 function switchIsHome() {
@@ -297,7 +297,8 @@ function updateFromRecent(obj) {
     idCard = obj.idCard;        //证件号 340222199504273538
     city = obj.city;        //城市代码
     isHome = obj.isHome - 0;     //是否是7座以下私家车，默认是=1，否=0
-    isNewCar = !!obj.newVhl;     //是否是新车 
+    isNewCar = obj.newVhl === '1';     //是否是新车 
+
 }
 
 function emitChange() {
@@ -403,14 +404,14 @@ function handleAction(action) {
             updatePlateNum(action.event);
             emitChange();
             break;
-        case 'update_vehicleType':
-            updateVehicleType(action.index);
-            emitChange();
-            break;
-        case 'update_useCharacter':
-            updateUseCharacter(action.index);
-            emitChange();
-            break;
+        // case 'update_vehicleType':
+        //     updateVehicleType(action.index);
+        //     emitChange();
+        //     break;
+        // case 'update_useCharacter':
+        //     updateUseCharacter(action.index);
+        //     emitChange();
+        //     break;
         case 'switch_isHome':
             switchIsHome();
             emitChange();

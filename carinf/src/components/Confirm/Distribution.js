@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import APIUtils from '../APIUtils';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 
-import zAJAX from 'z-ajax'
 
 export default class out extends Component {
     constructor(props){
@@ -11,19 +10,12 @@ export default class out extends Component {
         this.state = {
             name: '',
             phone: '',
-            province: '',
-            city: '',
-            county: '',
             address: '',
-
         };
-
-        this.quoteAddress = this.quoteAddress.bind(this);
-        this.addAddress = this.addAddress.bind(this);
     };
 
     componentDidMount() {      
-        this.getAddress();
+        this.queryAddress();
     };
 
     //跳转到地址列表页面
@@ -37,51 +29,31 @@ export default class out extends Component {
     }
 
     //获取邮寄地址列表
-    getAddress () {
-        let data = {
-            workNum: APIUtils.getUrlParam('workNum'),
-        };
-
+    queryAddress () {
         let cb = msg => {
-
             if (msg.result === 1) {
-                const obj = msg.list.find((ele, index) => {
-                    return ele.isDefault === '1'
+                let obj = null;
+                msg.list.map((ele, index) => {
+                    if (ele.isDefault === '1') {
+                        obj = ele;
+                    }
                 })
-
-                this.setState({
-                    name: obj.name,
-                    phone: obj.phone,
-                    province: obj.provinceName,
-                    city: obj.regionName,
-                    county: obj.countyName,
-                    address: obj.address,
-                })
-
-                InsuranceActionCreators.updateStakeholderAddress(obj)
-
+                if (obj) {
+                    this.setState({
+                        name: obj.name,
+                        phone: obj.phone,
+                        address: obj.provinceName + obj.regionName + obj.countyName + obj.address,
+                    })
+                    InsuranceActionCreators.updateStakeholderAddress(obj)
+                }
             }else{
                 alert(msg.message);
             }
         } 
-
-        zAJAX(`${ctx}/carInf/queryAddress`, data, cb)
+        APIUtils.queryAddress(cb);
     };
 
-
-
     render() {
-        const fr = {
-            float: 'right',
-        }
-
-        const liStyle ={
-            minHeight: '2rem',
-            height: 'auto',
-            lineHeight: '1.8rem',
-            padding: '1.5rem 1rem',
-
-        }
         return (
             <div className="distribution">
                 <div className="item_title">保单配送</div>
@@ -94,11 +66,11 @@ export default class out extends Component {
 
                         <li onClick={this.quoteAddress}>
                             <label>收件人</label>
-                            <span>{this.state.name}<span style={fr}>{this.state.phone}</span></span>
+                            <span>{this.state.name}<span className="phone">{this.state.phone}</span></span>
                         </li>
-                        <li onClick={this.quoteAddress} style={liStyle}>
+                        <li onClick={this.quoteAddress} className="address_li">
                             <label>收件地址</label>
-                            <span>{this.state.province}{this.state.city}{this.state.county}{this.state.address}</span>
+                            <span>{this.state.address}</span>
                         </li>
                     </ul>
                     :
@@ -110,6 +82,7 @@ export default class out extends Component {
 
                         <li onClick={this.addAddress}>
                             <label>添加联系人</label>
+                            <img className="open" src={require('../asset/img/right_arrow.png')} />
                         </li>
                     </ul>
                 }

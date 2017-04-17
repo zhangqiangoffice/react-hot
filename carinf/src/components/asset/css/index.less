@@ -110,24 +110,25 @@ body {
     }
 }
 
-//车险报价首页组件
-.index_desk {
-    font-size: 1.4rem;
+//车险快速报价首页组件
+.banner {
+    .w100;
+    vertical-align: bottom;
     margin-top: 4.5rem;
+}
 
-    .banner {
-        .w100;
-        vertical-align: bottom;
-    }
+.index_desk {
+    .p-r;
+    top: -1rem;
+    font-size: 1.4rem;
+    width: 90%;
+    background-color: #fff;
+    border-radius: 1rem;
+    margin: 0 auto 3rem;
+    .shadow-lay;
 
     .index_ul {
-        width: 90%;
-        .p-r;
-        margin: -2rem auto 3rem;
-        background-color: #fff;
-        border-radius: 1rem;
         padding: 1rem 0; 
-        .shadow-lay;
         .li {
             border-bottom: 1px solid #ccc;
             background-color: #fff;
@@ -203,6 +204,16 @@ body {
         padding: 0;
         margin: 0 0.3rem 0 0;
     }
+    .recent {
+        color: @ms-red;
+        .f-r;
+        margin: 0 1rem;
+    }
+
+    .remaining {
+        margin-left: 1rem;
+        color: @orange;
+    }
 }
 
 //选择省份的组件
@@ -261,13 +272,8 @@ body {
 //填写车辆信息的组件
 .car_info {
     font-size: 1.4rem;
-    margin-top: 4.5rem;
+    margin-top: 0;
 
-    .tip {
-        .t-c;
-        padding: 1rem 0;
-        color: #999;
-    }
     .info_ul {
         border-top: 1px solid #ccc;
         margin-bottom: 1.5rem;
@@ -289,16 +295,26 @@ body {
                 height: 4rem; 
             }
 
-            img {
-                .f-r;
-                width: 5rem;
-                margin-top: 1.1rem;
-            }
-
             span {
                 .f-r;
             }
         }
+    }
+}
+
+//最近询价车辆
+.recent_list {
+    border-top: @border;
+    font-size: 1.4rem;
+
+    li {
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+        padding: 0.5rem 1rem;
+    }
+
+    label{
+        .f-r;
     }
 }
 
@@ -320,7 +336,8 @@ body {
             padding: 1rem;
             text-indent: 3rem;
             background: url("@{images}/car.png") no-repeat left center;
-            background-size: auto 100%;
+            background-size: auto 40%;
+            background-position: 0.5rem;
             .o-h;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -352,7 +369,7 @@ body {
 //选择险种组件
 .plan {
     font-size: 1.4rem;
-    margin: 5.5rem 0 8rem;
+    margin: 5.5rem 0 12rem;
 
     .switcher {
         margin: 1rem auto;
@@ -453,10 +470,6 @@ body {
                     &:last-child {
                         .t-r;
                         padding-right: 1rem;
-                        img {
-                            width: 5rem;
-                            vertical-align: middle;
-                        }
                     }
 
                 }
@@ -615,6 +628,28 @@ body {
             input {
                 vertical-align: middle;
                 border: 0;
+            }
+        }
+    }
+
+    .distribution {
+        ul {
+            li {
+                &.address_li {
+                    min-height: 2rem;
+                    height: auto;
+                    line-height: 1.8rem;
+                    padding: 1.5rem 1rem;
+                }   
+                .phone {
+                    .f-r;
+                }
+
+                .open {
+                    .f-r;
+                    width: 1rem;
+                    margin-top: 1.5rem;
+                }
             }
         }
     }
@@ -866,6 +901,50 @@ body {
     }
 }
 
+.address_ul {
+    li {
+        border-bottom: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+        margin-bottom: 1rem;
+        background: #fff;
+
+        .lay {
+            padding: 0.5rem 1rem 0;
+
+            .phone{
+                .f-r;
+            }
+        }
+
+        .last_lay {
+            padding: 0.5rem 1rem 0.5rem;
+            border-top: 1px solid #ccc;
+            margin-top: 0.5rem;
+
+            .btns {
+                .f-r;
+            }
+
+            .btn {
+                background: #fff;
+                border: 0;
+                padding: 0 1.5rem;
+            }
+
+            .radio {
+                height: 2rem;
+                width: auto;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.address_form {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
 //遮罩层样式
 .loading {
     position: fixed;
@@ -884,6 +963,7 @@ body {
     }
 }
 
+//公共部分
 //下一步 按钮
 button.next {
     display: block;
@@ -904,6 +984,97 @@ button.next {
         margin: 0 0 1.5rem 10%;
     }
 }
+
+.button_bottom {
+    .w100;
+    button {
+        width: 80%;
+        margin: 2rem 10%;
+        padding: .5rem 0;
+        background-color: #f39900;
+        color: #fff;
+        border: 0;
+        font-size: 1.8rem;
+        border-radius: .5rem;
+    }
+
+
+}
+
+.button_fixed {
+    .button_bottom;
+    position : fixed;
+    bottom : 0;
+    left : 0;
+    background-color: rgba(150, 150, 150, 0.5);
+}
+
+.top_tip {
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 1rem 0;
+    color: #999;
+    margin-top: 4.5rem;
+}
+
+.switcher_img {
+    .f-r;
+    width: 5rem;
+    margin-top: 1.1rem;
+}
+
+//单选选择器组件
+.selector_radio {
+    font-size: 1.4rem;
+    .p-f;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+
+    ul {
+        width: 20rem;
+        background-color: #fff;
+        .p-a;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 1rem;
+        -ms-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        .o-h;
+        border: 0;
+
+        li {
+            .one-height(5rem);
+            text-indent: 2rem;
+            .t-l;
+            .clearfix;
+            border-bottom: 1px solid #ccc;
+            padding-left: 2rem;
+            .o-h;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            img {
+                .square(2rem);
+                margin-top: 1.5rem;
+                margin-right: 2rem;
+                .inline;
+                .f-r;
+            }
+        }
+    }
+}
+
 
 //li选择控件
 .li_selector {

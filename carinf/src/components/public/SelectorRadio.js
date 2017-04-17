@@ -1,30 +1,24 @@
 import React, {Component} from 'react';
 
-export default class RadioSelector extends Component {
-    constructor(props){
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    };
-
-    //点击事件
-    handleClick(event) {
-        let index = event.target.dataset.index;
-        this.props.onClickHandle(index);
-    }
+export default class Out extends Component {
     
     render() {
+        if (!this.props.isShow) {
+            return null
+        }
 
-        let listShows = this.props.options.map((option, index) => {
-            let onOrOff = (option === this.props.selectedOption) ? 'on' : 'off';
+        let listShows = this.props.options.map((text, index) => {
+            let onOrOff = (text === this.props.selectedOption) ? 'on' : 'off';
             return (
-                <li key={index} data-index={index} onClick={this.handleClick}><img data-index={index} src={require('../asset/img/radio_' + onOrOff + '.png')} />{option}</li>
+                <li key={index} onClick={e => this.props.onClickHandle({text, index,})}>
+                    <img src={require('../asset/img/radio_' + onOrOff + '.png')} />{text}
+                </li>
             )
                 
         });
 
         return (
-            <div className="radio_selector" onClick={this.props.onClose}>
+            <div className="selector_radio" onClick={this.props.onClose}>
                 <ul>
                     {listShows}
                 </ul>

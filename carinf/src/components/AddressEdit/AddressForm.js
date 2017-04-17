@@ -2,14 +2,18 @@ import React, {Component} from 'react';
 import LiText from '../public/LiText';
 import LiNumber from '../public/LiNumber';
 import LiClick from '../public/LiClick';
-import SelectorInLine from '../public/SelectorInLine';
 import ButtonBottom from '../public/ButtonBottom';
+import SelectorProvince from '../public/SelectorProvince'
+import SelectorCity from '../public/SelectorCity'
+import SelectorCounty from '../public/SelectorCounty';
 
 import APIUtils from '../APIUtils';
 import zAJAX from 'z-ajax'
+import { Toast } from 'antd-mobile';
+
 import assign from 'object-assign';
 
-export default class TitleBar extends Component {
+export default class Out extends Component {
     constructor(props) {
         super(props);
 
@@ -25,7 +29,11 @@ export default class TitleBar extends Component {
             countyNo: this.props.params.no,
             address: this.props.params.address,
 
-            provinceData: [],
+            isShowProvinces: false,
+            isShowCities: false,
+            isShowCounties: false,
+
+            // provinceData: [],
             regionData: {},
             countyData: {}, 
 
@@ -42,21 +50,9 @@ export default class TitleBar extends Component {
         this.clickRegion = this.clickRegion.bind(this)
         this.clickCounty = this.clickCounty.bind(this)
 
-        this.showSelector = this.showSelector.bind(this)
-        this.closeSelector = this.closeSelector.bind(this)
         this.selectorClick = this.selectorClick.bind(this)
         this.saveData = this.saveData.bind(this)
-    };
-
-    componentDidMount() {      
-        //初始化省份数据
-        this.initProvinceData()
-
-        //如果是编辑状态，还有获取已选市县的数据
-        if (this.state.id) {
-            this.getListByNo(this.state.provinceNo, 'region')
-            this.getListByNo(this.state.regionNo, 'county')
-        }
+        this.onClose = this.onClose.bind(this)
     };
 
     handleChangeName(text) {
@@ -77,94 +73,52 @@ export default class TitleBar extends Component {
         });
     };
 
-    //展示选择框
-    showSelector(item) {
-        let options = [];
-        switch(item) {
-            case 'province':
-                options = this.state.provinceData.map((pro, index) => {
-                    return pro.provinceName
-                });
-                break;
-            case 'region':
-                options = this.state.regionData[this.state.provinceNo].map((region, index) => {
-                    return region.regionName
-                });
-                break;
-            case 'county':
-                options = this.state.countyData[this.state.regionNo].map((county, index) => {
-                    return county.countyName
-                });
-                break;
-            default :
-                break;
-        }
+    //关闭选择器
+    onClose() {
         this.setState({
-            selectorIsShow: true,
-            selectorFor: item,
-            selectorOptions: options,
-            selectorSelected: this.state[item],
+            isShowProvinces: false,
+            isShowCities: false,
+            isShowCounties: false,
         })
-        
-    }
-
-    //关闭选择框
-    closeSelector() {
-        this.setState({
-          selectorIsShow: false,
-          selectorOptions: [],
-          selectorSelected: '',
-        });
-    };
-
-    //从后台获取省份列表
-    initProvinceData() {
-        const cb = (msg) => {
-            this.setState({
-                provinceData: msg,
-            });
-        }
-        zAJAX(`${ctx}/webService/province`, null, cb)
     }
 
     //点击选择省,展示省列表
     clickProvince() {
-        if (this.state.provinceData) {
-            this.showSelector('province')
-        } else {
-            initProvinceData()
-        }
+        this.setState({
+            isShowProvinces: true,
+            selectorFor: 'province',
+        });
+
     };
 
     clickRegion() {
-        const no = this.state.provinceNo;
-        if (!no) {
-            alert('请先选择省');
-        } else if (!this.state.regionData[no]){
-            this.getListByNo(no, 'region')
+        if (this.state.provinceNo) {
+            this.setState({
+                isShowCities: true,
+                selectorFor: 'region',
+            });
         } else {
-            this.showSelector('region');
+            Toast.info('请先选择省份!', 2);
         }
     };
 
     clickCounty() {
-        let no = this.state.regionNo;
-        if (!no) {
-            alert('请先选择市');
-        } else if (!this.state.countyData[no]) {
-            this.getListByNo(no, 'county')
+        if (this.state.countyNo) {
+            this.setState({
+                isShowCounties: true,
+                selectorFor: 'county',
+            });
         } else {
-            this.showSelector('county')
+            Toast.info('请先选择市!', 2);
         }
+
     };
 
     //点击选择框选择省市县
     selectorClick(obj) {
-        let no = '';
+        let no = obj.no;
         switch(this.state.selectorFor) {
             case 'province':
-                no = this.state.provinceData[obj.index].provinceNo;
-                this.getListByNo(no, 'region');
                 if (no !== this.state.provinceNo) {
                     this.setState({
                       region: '',
@@ -175,8 +129,6 @@ export default class TitleBar extends Component {
                 }
                 break;
             case 'region':
-                no = this.state.regionData[this.state.provinceNo][obj.index].regionNo;
-                this.getListByNo(no, 'county');
                 if (no !== this.state.regionNo) {
                     this.setState({
                       county: '',
@@ -184,26 +136,14 @@ export default class TitleBar extends Component {
                     });
                 }
                 break;
-            case 'county' :
-                no = this.state.countyData[this.state.regionNo][obj.index].countyNo;
             default:
                 break;
         }
         this.setState({
-          [this.state.selectorFor]: obj.text,
+          [this.state.selectorFor]: obj.name,
           [this.state.selectorFor + 'No']: no,
         });
     };
-
-    //从后台请求市、县数据
-    getListByNo(no, target) {
-        const cb = (msg) => {
-            this.setState(prevState => ({
-              [`${target}Data`]: assign({}, prevState[`${target}Data`], {[no] : msg})
-            }));
-        }
-        zAJAX(`${ctx}/webService/${target}`, {id: no}, cb)
-    }
 
     //点击保存
     saveData() {
@@ -233,15 +173,9 @@ export default class TitleBar extends Component {
 
 
     render() {
-        const ulStyle = {
-            backgroundColor: '#fff',
-            borderTop: '1px solid #ccc',
-            marginTop: '5rem',
-        };
-        
         return (
             <div>
-                <ul style={ulStyle}>
+                <ul className="address_form">
                     <LiText item="收件人" val={this.state.name} onChangeVal={this.handleChangeName}/>
                     <LiNumber item="联系电话" val={this.state.phone} onChangeVal={this.handleChangePhone}/>
                     <LiClick item="收件省" val={this.state.province} onClickHandle={this.clickProvince}/>
@@ -250,13 +184,26 @@ export default class TitleBar extends Component {
                     <LiText item="详细地址" val={this.state.address} onChangeVal={this.handleChangeAddress}/>
                 </ul>
                 <ButtonBottom text='保存' onClickHandle={this.saveData}/>
-                <SelectorInLine 
-                    isShow={this.state.selectorIsShow} 
-                    options={this.state.selectorOptions} 
-                    selected={this.state.selectorSelected} 
-                    onClose={this.closeSelector}
-                    onSelect={this.selectorClick}
-                    />
+
+                <SelectorProvince
+                    isShow={this.state.isShowProvinces} 
+                    selected={this.state.province} 
+                    onClose={this.onClose} 
+                    onSelect={this.selectorClick}/>
+
+                <SelectorCity
+                    isShow={this.state.isShowCities} 
+                    pro={this.state.provinceNo} 
+                    selected={this.state.region} 
+                    onClose={this.onClose} 
+                    onSelect={this.selectorClick}/>
+
+                <SelectorCounty 
+                    isShow={this.state.isShowCounties} 
+                    city={this.state.regionNo} 
+                    selected={this.state.county} 
+                    onClose={this.onClose} 
+                    onSelect={this.selectorClick}/>
             </div>
         );
     };

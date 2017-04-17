@@ -30,7 +30,6 @@ export default class ApplyScheme extends Component {
                         key={index} 
                         insurance={insurance} 
                         deductible={deductible} 
-                        insuranceCom={this.props.insuranceCom}
                     />
                 )
             }

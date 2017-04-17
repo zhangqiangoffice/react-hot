@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
-
 import TitleBar from '../public/TitleBar';
 import Stakeholder from './Stakeholder';
 
-export default class App extends Component {
-    constructor(props) {
-        super(props);
-
-    };
+export default class Out extends Component {
 
     render() {
 

@@ -204,13 +204,6 @@ module.exports = {
         AppDispatcher.dispatch(action);
     },
 
-    initBbr: function() {
-        var action = {
-            type: 'initBbr',
-        };
-        AppDispatcher.dispatch(action);
-    },
-
     initTBr: function(datas) {
         var action = {
             type: 'initTBr',
@@ -275,6 +268,24 @@ module.exports = {
             obj, 
         };
         AppDispatcher.dispatch(action);
-    }
+    },
+
+    initBBrAsOwner: function(name, no) {
+        var action = {
+            type: 'initBBrAsOwner',
+            name,
+            no, 
+        };
+        AppDispatcher.dispatch(action);
+    },
+
+    updateUsedTimes: function(tp, zh) {
+        var action = {
+            type: 'updateUsedTimes',
+            tp,
+            zh, 
+        };
+        AppDispatcher.dispatch(action);
+    },
    
 };

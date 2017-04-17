@@ -1,4 +1,4 @@
-import appInfo from '../components/json/appInfo.json';
+import appInfo from '../components/asset/json/appInfo.json';
 import CarStore from './CarStore';
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -61,6 +61,8 @@ var stakeholder = {         //保单相关方
     };
 var contactAddress = [];    //业务员的常用保单投寄地址
 var isShowAddress = false;  //是否显示选择地址的框
+
+var usedTimes = {tp: 0, zh:0}; //报价次数
 
 //更新投保公司和是否是私家车的时候，要判断保单配送方式，太平中华私家车必须快递0，其他必须自取1
 function judgeDeliveryType() {
@@ -293,16 +295,17 @@ function updateStore(index) {
 }
 
 //初始化被保人，如果被保人为空，则将车主信息注入被保人
-function initBbr() {
+function initBBrAsOwner(name, no) {
     // CarStore总是成立一个空对象
     // if (!stakeholder.bbrName) {
     //     console.log(CarStore);
-    //     stakeholder.bbrName = CarStore.getName();
+        stakeholder.bbrName = name;
     // }
     // if (!stakeholder.bbrNo) {
-    //     stakeholder.bbrNo = CarStore.getIdCard();
+        stakeholder.bbrNo = no;
     // }
 }
+
 
 //更改投保地区的省份
 function changeTbProvince(obj) {
@@ -388,6 +391,11 @@ function updateStakeholderAddress(obj) {
     stakeholder.add_district_name = obj.countyName
 }
 
+//修改已报价次数
+function updateUsedTimes(tp, zh) {
+    // body...
+}
+
 function emitChange() {
     InsuranceStore.emit(CHANGE_EVENT);
 };
@@ -460,6 +468,10 @@ var InsuranceStore = assign({}, EventEmitter.prototype, {
 
     getIsShowAddress: function() {
         return isShowAddress;
+    },
+
+    getUsedTimes: function() {
+        return usedTimes;
     }
 
 });
@@ -554,11 +566,6 @@ function handleAction(action) {
             updateStore(action.index);
             emitChange();
             break;
-        case 'initBbr':
-            console.log('initBbr');
-            initBbr();
-            emitChange();
-            break;
         case 'initTBr':
             console.log('initTBr');
             initTBr(action.datas);
@@ -595,8 +602,17 @@ function handleAction(action) {
         case 'changeAddressBookShow':
             changeAddressBookShow();
             emitChange();
+            break;
         case 'updateStakeholderAddress':
             updateStakeholderAddress(action.obj);
+            emitChange();
+            break;
+        case 'initBBrAsOwner':
+            initBBrAsOwner(action.name, action.no);
+            emitChange();
+            break;
+        case 'updateUsedTimes':
+            updateUsedTimes(action.tp, action.zh);
             emitChange();
             break;
         default: // ... do nothing

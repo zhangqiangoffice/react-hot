@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import CarActionCreators from '../../actions/CarActionCreators';
-import AppActionCreators from '../../actions/AppActionCreators';
 import APIUtils from '../APIUtils';
 
 export default class Style extends Component {
@@ -18,7 +17,7 @@ export default class Style extends Component {
     render() {
         let style = this.props.styleObj;
         return (
-            <li className="one_style" onClick={this.handleClick.bind(this)}>
+            <li className="one_style" onClick={this.handleClick}>
                 <div className="style_title">{style.carBrand + ' ' + style.familyName}</div>
                 <div className="style_name">
                     <div>{style.comment}</div>

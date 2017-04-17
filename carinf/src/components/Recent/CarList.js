@@ -11,7 +11,6 @@ export default class CarList extends Component {
         this.state = {
             carList: [],
         };
-
     };
 
     componentDidMount() {      
@@ -21,17 +20,17 @@ export default class CarList extends Component {
     //获取最近投保车辆列表
     getList() {
         AppActionCreators.startAlertProgress();
-        
-        let data = {
-            workNum: APIUtils.getUrlParam('workNum'),
-        };
 
         let cb = msg => {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
-                this.setState({
-                    carList: [ ...msg.list]
-                })
+                if (msg.list.length) {
+                    this.setState({
+                        carList: [ ...msg.list]
+                    })
+                } else {
+                    this.props.noRecent();
+                }
             } else {
                 AppActionCreators.messageAlertProgress(msg.message);
             }
@@ -47,11 +46,8 @@ export default class CarList extends Component {
             return  <Car key={index} car={car}/>
         });
 
-        const ulStyle = {
-            borderTop: '1px solid #ccc',
-        }
         return (
-            <ul style={ulStyle}>
+            <ul className="recent_list">
                 {listShows}
             </ul>
         );

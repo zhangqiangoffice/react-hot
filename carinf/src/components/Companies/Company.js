@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-
 import AppStore from '../../stores/AppStore';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
-
-import APIUtils from '../APIUtils';
 
 export default class Company extends Component {
     constructor(props){
@@ -12,10 +9,8 @@ export default class Company extends Component {
         this.handleClick = this.handleClick.bind(this);
     };
 
-    
     handleClick() {
         let id = this.props.company.id;
-        
         InsuranceActionCreators.updateInsuranceCom(id); 
         //太平洋车险要跳转到单独页面
         if (id === 1) {

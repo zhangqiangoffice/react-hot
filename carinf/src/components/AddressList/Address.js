@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-
 import APIUtils from '../APIUtils';
-import zAJAX from 'z-ajax'
-import SelectorRadio from '../public/SelectorRadio';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 
 export default class Company extends Component {
@@ -17,29 +14,29 @@ export default class Company extends Component {
     carAddressDelete(e) {
         e.stopPropagation();
         if(confirm('您确定删除此地址？')) {
-            this.props.changeIsLoading();
+            AppActionCreators.startAlertProgress();    
             let data = {
                 id: this.props.address.id,
-                workNum: APIUtils.getUrlParam('workNum'),
+                workNum: AppStore.getWorkNum(),
             };
 
             let cb = msg => {
-                this.props.changeIsLoading();
                 if (msg.result === 1) {
+                    AppActionCreators.finishAlertProgress();
                     this.props.deleteAddress(this.props.index)
                 }else{
-                    alert(msg.message);
+                    AppActionCreators.messageAlertProgress(msg.message);
                 }
-            } 
-
-            zAJAX(`${ctx}/carInf/carAddressDelete`, data, cb)
+            }
+            APIUtils.carAddressDelete(data, cb)
         }
     };
 
     //打开编辑页面
     toEdit(e) {
         e.stopPropagation();
-        window.location = `#/addressEdit/${this.props.address.id}/${this.props.address.name}/${this.props.address.phone}/${this.props.address.provinceName}/${this.props.address.regionName}/${this.props.address.countyName}/${this.props.address.address}/${this.props.address.county}`
+        const address = this.props.address;
+        window.location = `#/addressEdit/${address.id}/${address.name}/${address.phone}/${address.provinceName}/${address.regionName}/${address.countyName}/${address.address}/${address.county}`
     }
 
     //选择了其中一个地址
@@ -52,7 +49,7 @@ export default class Company extends Component {
     setDefault() {
         let data = {
             id: this.props.address.id,
-            workNum: APIUtils.getUrlParam('workNum'),
+            workNum: AppStore.getWorkNum(),
         };
 
         let cb = msg => {
@@ -61,53 +58,24 @@ export default class Company extends Component {
             } else {
                 alert(msg.message);
             }
-        } 
+        }
 
-        zAJAX(`${ctx}/carInf/carAddressDefault`, data, cb)
+        APIUtils.carAddressDefault(data, cb);
     }
 
     render() {
-        const liStyle = {
-            borderBottom: '1px solid #ccc',
-            borderTop: '1px solid #ccc',
-            marginBottom: '1rem',
-            background: '#fff',
-        };
-        const divStyle = {
-            padding: '0.5rem 1rem 0',
-        };
-        const lastDivStyle = {
-            padding: '0.5rem 1rem 0.5rem',
-            borderTop: '1px solid #ccc',
-            marginTop: '0.5rem',
-        };
-        const fr = {
-            float: 'right',
-        };
-        const buttonStyle = {
-            background: '#fff',
-            border: '0',
-            padding: '0 1.5rem',
-        };
-        const sDivStyle = {
-            dispaly: 'inline-block',
-        };
-        const imgStyle = {
-            height: '2rem',
-            width: 'auto',
-            verticalAlign: 'middle',
-        }
+        const address = this.props.address;
 
         return (
-            <li style={liStyle} onClick={this.choiceAddress}>
-                <div style={divStyle}>{this.props.address.name} <span style={fr}>{this.props.address.phone}</span></div>
-                <div style={divStyle}>{this.props.address.provinceName}{this.props.address.regionName}{this.props.address.countyName}{this.props.address.address}</div>
-                <div  style={lastDivStyle} >
-                    <img style={imgStyle} src={require(`../asset/img/radio_${this.props.address.isDefault === '1' ? 'on' : 'off'}.png`)} />
+            <li onClick={this.choiceAddress}>
+                <div className="lay">{address.name} <span className="phone" >{address.phone}</span></div>
+                <div className="lay">{address.provinceName}{address.regionName}{address.countyName}{address.address}</div>
+                <div className="last_lay" >
+                    <img className="radio" src={require(`../asset/img/radio_${address.isDefault === '1' ? 'on' : 'off'}.png`)} />
                     &nbsp;&nbsp;默认地址 
-                    <div style={fr}>
-                        <button type="button" style={buttonStyle} onClick={this.toEdit}>编辑</button>
-                        <button type="button" style={buttonStyle} onClick={this.carAddressDelete}>删除</button>
+                    <div className="btns">
+                        <button type="button" className="btn" onClick={this.toEdit}>编辑</button>
+                        <button type="button" className="btn" onClick={this.carAddressDelete}>删除</button>
                     </div>
                 </div>
             </li>
