@@ -6,12 +6,10 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
-var isLoading = false;      //是否显示遮罩，默认隐藏
 var isAlertProgress = false;        //是否显示进度条
 var isFinished = false;     //是否完成请求
 var msg = '';
 
-var step = 0;       //步骤，默认第一步
 var edit = 'no';        //是否是编辑页面，yes是，no否
 var fromPage = '';      //如果是编辑，则来自detail或list页面
 var isSubFrame = false;      //是否显示iframe，用于展示爱豆的页面
@@ -27,45 +25,16 @@ var position;       //经纬度
 var tempOrderNo = '';       //获取推荐保险起期时，后台的临时订单号
 var csPrice = '';       //临时的转存数据
 
-//改变loading遮罩层显隐
-function changeLoading() {
-    isLoading = !isLoading;
-}
-
-//显示loading遮罩层
-function showLoading() {
-    isLoading = true;
-}
-
-//隐藏loading遮罩层
-function hideLoading() {
-    isLoading = false;
-}
-
 //返回到第一步
 function stepGoFirst() {
-    step = 0;
     edit = 'no';
     fromPage = '';
 }
 
-//后退一步
-function stepGoBack() {
-    if (step) {
-        step--;
-    };
-}
-
 //跳转到保单相关人步骤
 function stepGoStakeholder(_fromPage) {
-    step = 6;
     edit = 'yes';
     fromPage = _fromPage;
-}
-
-//下一步
-function stepNext() {
-    step++;
 }
 
 //显示RadioSelector
@@ -145,14 +114,6 @@ var AppStore = assign({}, EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, callback);
     },
 
-    getStep: function () {
-        return step;
-    },
-
-    getIsLoading: function() {
-        return isLoading;
-    },
-
     getIsRadioSelector: function() {
         return isRadioSelector;
     },
@@ -219,36 +180,12 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 function handleAction(action) {
     switch (action.type) {
-        case 'changeLoading':
-            changeLoading();
-            emitChange();
-            break;
-        case 'update_step':
-            updateStep();
-            emitChange();
-            break;
-        case 'show_loading':
-            showLoading();
-            emitChange();
-            break;
-        case 'hide_loading':
-            hideLoading();
-            emitChange();
-            break;
-        case 'step_go_back':
-            stepGoBack();
-            emitChange();
-            break;
         case 'stepGoStakeholder':
             stepGoStakeholder(action.fromPage);
             emitChange();
             break;
         case 'step_go_first':
             stepGoFirst();
-            emitChange();
-            break;
-        case 'step_next':
-            stepNext();
             emitChange();
             break;
         case 'show_radioSelector':

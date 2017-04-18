@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import AppActionCreators from '../../actions/AppActionCreators';
 import Car from './Car';
-import Loading from '../public/Loading';
 import APIUtils from '../APIUtils';
 
 export default class CarList extends Component {

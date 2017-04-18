@@ -5,7 +5,6 @@ import CarActionCreators from '../actions/CarActionCreators';
 import InsuranceActionCreators from '../actions/InsuranceActionCreators';
 import AppActionCreators from '../actions/AppActionCreators';
 import  * as mock from './asset/mock/index';
-
 import zAJAX from 'z-ajax'
 
 const isMock = true;
@@ -37,7 +36,7 @@ module.exports = {
             let serial = getUrlParam('serial');
             let fromPage = getUrlParam('fromPage');
 
-            AppActionCreators.showLoading();
+            AppActionCreators.startAlertProgress();
             AppActionCreators.stepGoStakeholder(fromPage);
 
             let datas = {
@@ -47,14 +46,13 @@ module.exports = {
 
             let cb = msg => {
                 if (msg.result - 0  === 1) {
-                    
+                    AppActionCreators.finishAlertProgress();
                     CarActionCreators.initCarEditData(msg);
                     InsuranceActionCreators.initInsuranceEditData(insuranceCom, serial, msg);
                     window.location = '#/confirm'
                 } else {
-                    alert(msg.message);
+                    AppActionCreators.messageAlertProgress(msg.message);
                 }
-                AppActionCreators.hideLoading();
             }
 
             zAJAX(`${ctx}/mobile/carInf/order_detail`, datas, cb)
@@ -68,7 +66,6 @@ module.exports = {
 
             //如果存在toCom，则是要跳转到第二页面的
             if (toCom === '702' || toCom === '703') {
-                AppActionCreators.stepNext();
                 InsuranceActionCreators.updateInsuranceCom((toCom - 0) % 700);
                 window.location = '#/enter'
             } else if (toCom === '701') {
@@ -117,15 +114,11 @@ module.exports = {
 
         if (isMock) {
             cb(mock.MgetOwnerInfo)
-            console.log(mock.MgetOwnerInfo)
         } else {
 
         zAJAX(`${ctx}/carInf/getOwner`, datas, cb)
         }
-
     },
-
-
 
     //获取行驶证信息
     cardInfo: function() {
@@ -206,7 +199,6 @@ module.exports = {
 
     //获取推荐投保日期
     queryInsuranceDate: function() {
-
         AppActionCreators.startAlertProgress();
         let style = CarStore.getStyleList()[CarStore.getStyleIndex()];
 
@@ -303,7 +295,7 @@ module.exports = {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
                 InsuranceActionCreators.changeOffers(msg);
-                AppActionCreators.stepNext();
+                InsuranceActionCreators.updateUnUsedTimes(msg.tpCount, msg.zhCount)
                 window.location = '#/results'
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
@@ -314,87 +306,11 @@ module.exports = {
             cb(mock.Mquote)
         } else {
             zAJAX(`${ctx}/carInf/quote`, datas, cb)
-
         }
-
     },
-
-    //获取报价
-    quote2: function() {
-        AppActionCreators.startAlertProgress();
-        let style = CarStore.getStyleList()[CarStore.getStyleIndex()];
-
-        let insuranceItems = '';
-        InsuranceStore.getThreeSchemeList()[InsuranceStore.getSchemeIndex()].map((value, index) => {
-            let choice;
-            //国产玻璃为0，进口玻璃为1
-            if (value.choice === '国产') {
-                choice = 0
-            } else if (value.choice === '进口') {
-                choice = 1
-            } else {
-                choice = value.choice
-            }
-            insuranceItems += value.code + ',' + value.name + ',' + choice + ';';
-        });
-
-        let datas = {
-            insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
-            isHome: CarStore.getIsHome(),
-            plateNo : CarStore.getPlateNo(),
-            city: CarStore.getCity(),
-            name: CarStore.getName(),
-            idCard: CarStore.getIdCard(),
-            newVhl: CarStore.getIsNewCar() ? '1' : '0',
-            engineNo: CarStore.getEngineNo(),
-            vin: CarStore.getVin(),
-            brandModel: CarStore.getBrandModel(),
-            registerDate: CarStore.getRegisterDate(),
-            isTransferOwnership: CarStore.getIsTransferOwnership(),
-            issueDate: CarStore.getIssueDate() ? CarStore.getIssueDate() + ' 00:00:00' : '',
-            serial: InsuranceStore.getSerial(),
-
-            workNum: AppStore.getWorkNum(),
-            cid: AppStore.getCid(),
-            biFlag: true,
-            ciFlag: InsuranceStore.getCiFlag(),
-            insBegin: InsuranceStore.getBeginDate(),
-            traffBegin: InsuranceStore.getTraBeginDate(),
-            passengers: style.passengers,
-            carBrand: style.carBrand,
-            purchaseValence: style.purchaseValence,
-            exhaustScale: style.exhaustScale,
-            familyName: style.familyName,
-            modelCode: style.modelCode,
-            vehicleType: CarStore.getVehicleType(),
-            useCharacter: CarStore.getUseCharacter(),
-            insuranceItems: insuranceItems,
-            tbCity: InsuranceStore.getTbPlace().city.no,
-            orderNo: AppStore.getTempOrderNo(),
-            csPrice: AppStore.getCsPrice(),
-        };
-
-        let cb = msg => {
-            if (msg.result === 1) {
-                AppActionCreators.finishAlertProgress();
-                InsuranceActionCreators.changeOffers(msg);
-            }else{
-                AppActionCreators.messageAlertProgress(msg.message);
-            }
-        } 
-
-        if (isMock) {
-            cb(mock.Mquote)
-        } else {
-            zAJAX(`${ctx}/carInf/quote`, datas, cb)
-        }
-
-    },
-
 
     //下单
     orderOperation: function(){
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
         let stakeholder = InsuranceStore.getStakeholder();
 
@@ -429,19 +345,15 @@ module.exports = {
             datas.tbrName = datas.bbrName;
             datas.tbrNo = datas.bbrNo;
             datas.tbrPhone = datas.bbrPhone;
-            // datas.tbrEmail = datas.bbrEmail;
         }
 
         let cb = msg => {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
-                AppActionCreators.stepNext();
                 window.location = '#/final'
             }else{
-                // alert(msg.message);
                 AppActionCreators.messageAlertProgress(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
         if (isMock) {
@@ -449,13 +361,10 @@ module.exports = {
         } else {
             zAJAX(`${ctx}/carInf/orderOperation`, datas, cb)
         }
-
-
     },
 
     //支付申请
     applyPay: function() {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
 
         let datas = {
@@ -467,7 +376,6 @@ module.exports = {
         let cb = msg => {
             if (msg.result === 1) {
                 AppActionCreators.finishAlertProgress();
-                AppActionCreators.stepNext();
                 if (window.minsheng) {
                     window.minsheng.turnToActivity('支付页面', msg.url);
                 } else {
@@ -475,9 +383,7 @@ module.exports = {
                 }
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
         zAJAX(`${ctx}/carInf/orderPay`, datas, cb)
@@ -485,7 +391,6 @@ module.exports = {
 
     //申请邮寄地址
     quoteAddress: function () {
-        // AppActionCreators.showLoading();
         AppActionCreators.startAlertProgress();
         let datas = {
             workNum: AppStore.getWorkNum(),
@@ -493,14 +398,11 @@ module.exports = {
 
         let cb = msg => {
             if (msg.result === 1) {
-                console.log(msg.list);
                 InsuranceActionCreators.changeContactAddress(msg.list)
                 InsuranceActionCreators.changeAddressBookShow()
             }else{
                 AppActionCreators.messageAlertProgress(msg.message);
-                // alert(msg.message);
             }
-            // AppActionCreators.hideLoading();
         } 
 
         if (isMock) {
@@ -509,38 +411,6 @@ module.exports = {
             zAJAX(`${ctx}/carInf/queryAddress`, datas, cb)
         }
 
-    },
-
-    //删除邮寄地址
-    carAddressDelete: function(id) {
-        let datas = {
-            id,
-            workNum: AppStore.getWorkNum(),
-        };
-
-        let cb = msg => {
-            if (msg.result === 1) {
-                // InsuranceActionCreators.changeContactAddress(msg.list)
-                // InsuranceActionCreators.changeAddressBookShow()
-            }else{
-                alert(msg.message);
-            }
-            AppActionCreators.hideLoading();
-        } 
-        console.log(datas);
-
-        // zAJAX(`${ctx}/carInf/carAddressDelete`, datas, cb)
-    },
-
-    //获取url参数 方法
-    getUrlParam : function(name){  
-        //构造一个含有目标参数的正则表达式对象  
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");  
-        //匹配目标参数  
-        var r = window.location.search.substr(1).match(reg);  
-        //返回参数值  
-        if (r!== null) return unescape(r[2]);  
-        return null;  
     },
 
     //获取城市列表
@@ -589,8 +459,26 @@ module.exports = {
         }
     },
 
+    //保存地址
+    saveAddress(data) {
+        AppActionCreators.startAlertProgress();
+        const cb = (msg) => {
+            if (msg.result === 1) {
+                AppActionCreators.finishAlertProgress();
+                window.location = '#/addressList'
+            } else {
+                AppActionCreators.messageAlertProgress(msg.message);
+            }
+        }
+        if (isMock) {
+            cb(mock.Msuccess)
+        } else {
+            zAJAX(`${ctx}/carInf/operationCarAddress`, data, cb)
+        }
+    },
+
     //删除地址
-    carAddressDelete() {
+    carAddressDelete(data, cb) {
         if (isMock) {
             cb(mock.MoperationCarAddress)
         } else {

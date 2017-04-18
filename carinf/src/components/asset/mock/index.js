@@ -17,3 +17,4 @@ export const Mcounty = [{"countyId":4354,"countyName":"瑶海区","countyNo":"34
 export const MoperationCarAddress = {"message":"操作成功！","result":1};
 export const MqueryAddress = {"result":1,"list":[{"id":1,"region":"340100","countyName":"瑶海区","phone":"15256095683","staffId":"00000120","address":"阿斯蒂芬","county":"340102","isDefault":"1","name":"长得","province":"340000","regionName":"合肥市","provinceName":"安徽省"}]};
 export const MorderOperation = {"message":"太平车险 车险投保确认接口失败：错误信息:规则违反信息描述:安徽地区不承保平台返回无上年承保记录的旧车业务。 ","result":0};
+export const Msuccess = {"result":1, "message": "操作成功！"}

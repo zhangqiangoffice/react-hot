@@ -1,33 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 module.exports = {
-    changeLoading: function () {
-        var action = {
-            type: 'changeLoading'
-        };
-        AppDispatcher.dispatch(action);
-    },
-
-    showLoading: function () {
-        var action = {
-            type: 'show_loading'
-        };
-        AppDispatcher.dispatch(action);
-    },
-
-    hideLoading: function () {
-        var action = {
-            type: 'hide_loading'
-        };
-        AppDispatcher.dispatch(action);
-    },
-
-    stepGoBack: function () {
-        var action = {
-            type: 'step_go_back'
-        };
-        AppDispatcher.dispatch(action);
-    },
 
     stepGoStakeholder: function(fromPage) {
         var action = {
@@ -40,13 +13,6 @@ module.exports = {
     stepGoFirst: function () {
         var action = {
             type: 'step_go_first'
-        };
-        AppDispatcher.dispatch(action);
-    },
-
-    stepNext: function () {
-        var action = {
-            type: 'step_next'
         };
         AppDispatcher.dispatch(action);
     },

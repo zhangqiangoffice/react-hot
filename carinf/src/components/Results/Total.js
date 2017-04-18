@@ -11,7 +11,7 @@ export default class Out extends Component {
             <table className="total_table">
                 <tbody>
                     <tr>
-                        <td><img src={ctx + '/static/img/carInf/circle_' + company.spell + '.png'}/></td>
+                        <td><img src={require(`../asset/img/circle_${company.spell}.png`)}/></td>
                         <td colSpan="2">
                             <p className="company_name">{company.product}</p>
                             <p className="company_detail">正常精准报价</p>

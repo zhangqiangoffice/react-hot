@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SelectorInLine from './SelectorInLine';
 import Provinces from '../asset/json/provinces'
 
-export default class Loading extends Component {
+export default class Out extends Component {
     constructor(props) {
         super(props);
 

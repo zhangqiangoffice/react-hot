@@ -8,10 +8,8 @@ import SelectorCity from '../public/SelectorCity'
 import SelectorCounty from '../public/SelectorCounty';
 
 import APIUtils from '../APIUtils';
-import zAJAX from 'z-ajax'
 import { Toast } from 'antd-mobile';
-
-import assign from 'object-assign';
+import AppStore from '../../stores/AppStore';
 
 export default class Out extends Component {
     constructor(props) {
@@ -32,15 +30,7 @@ export default class Out extends Component {
             isShowProvinces: false,
             isShowCities: false,
             isShowCounties: false,
-
-            // provinceData: [],
-            regionData: {},
-            countyData: {}, 
-
-            selectorIsShow: false,
             selectorFor: '',
-            selectorOptions: [],
-            selectorSelected: '',
         };
 
         this.handleChangeName = this.handleChangeName.bind(this)
@@ -51,7 +41,7 @@ export default class Out extends Component {
         this.clickCounty = this.clickCounty.bind(this)
 
         this.selectorClick = this.selectorClick.bind(this)
-        this.saveData = this.saveData.bind(this)
+        this.saveAddress = this.saveData.bind(this)
         this.onClose = this.onClose.bind(this)
     };
 
@@ -146,19 +136,10 @@ export default class Out extends Component {
     };
 
     //点击保存
-    saveData() {
-        this.props.changeIsLoading();
-        const cb = (msg) => {
-            this.props.changeIsLoading();
-            if (msg.result === 1) {
-                window.location = '#/addressList'
-            } else {
-                alert(msg.message)
-            }
-        }
+    saveAddress() {
         const data = {
             id: this.state.id,     //地址id
-            workNum: APIUtils.getUrlParam('workNum'),        //
+            workNum: AppStore.getWorkNum(),        //
             name: this.state.name,       //收件人姓名
             phone: this.state.phone,      //收件人手机号
             province: this.state.provinceNo,        //省级代码
@@ -167,8 +148,7 @@ export default class Out extends Component {
             address: this.state.address,     //收货地址
 
         }
-
-        zAJAX(`${ctx}/carInf/operationCarAddress`, data, cb)
+        APIUtils.saveAddress(data);
     };
 
 
@@ -183,7 +163,7 @@ export default class Out extends Component {
                     <LiClick item="收件区县" val={this.state.county} onClickHandle={this.clickCounty}/>
                     <LiText item="详细地址" val={this.state.address} onChangeVal={this.handleChangeAddress}/>
                 </ul>
-                <ButtonBottom text='保存' onClickHandle={this.saveData}/>
+                <ButtonBottom text='保存' onClickHandle={this.saveAddress}/>
 
                 <SelectorProvince
                     isShow={this.state.isShowProvinces} 

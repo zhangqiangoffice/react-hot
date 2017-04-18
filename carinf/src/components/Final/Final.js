@@ -15,6 +15,7 @@ export default class Final extends Component {
 
     //再次下单，回到第一步，并清空数据
     reset() {
+        window.location= '#/';
         AppActionCreators.stepGoFirst();
         CarActionCreators.reset();
         InsuranceActionCreators.reset();

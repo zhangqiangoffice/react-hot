@@ -87,7 +87,7 @@ export default class Out extends TitleBar {
     //         ids.push(el.id);
     //     });
     //     InsuranceActionCreators.updateInsuranceCom(ids[index]);
-    //     APIUtils.quote2();
+    //     APIUtils.quote();
 
     //     //当请求最后一家其他家报价后，三个点的按钮将不再显示
     //     if (len === 1) {

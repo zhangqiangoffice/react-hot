@@ -3,7 +3,7 @@ import TitleBar from '../public/TitleBar';
 import AddressForm from './AddressForm';
 import TopTip from '../public/TopTip';
 
-export default class App extends Component {
+export default class Out extends Component {
     render() {
         return (
             <div>

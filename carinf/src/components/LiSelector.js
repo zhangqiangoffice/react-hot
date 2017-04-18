@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class Loading extends Component {
+export default class Out extends Component {
     constructor(props){
         super(props);
 

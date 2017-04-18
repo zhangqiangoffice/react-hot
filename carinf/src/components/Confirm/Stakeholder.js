@@ -6,7 +6,6 @@ import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import AppActionCreators from '../../actions/AppActionCreators';
 import appInfo from '../asset/json/appInfo.json';
 import APIUtils from '../APIUtils';
-import Loading from '../Loading';
 
 import Sheet from './Sheet';
 import CarOwner from './CarOwner';
