@@ -15,9 +15,7 @@ export default class ChoiceApplyType extends Component {
     };
 
     //显示新增申请
-    showBlankForm(event) {
-        let index = Number.parseInt(event.target.dataset.index);
-        let text = event.target.innerHTML;
+    showBlankForm(index, text) {
         AppActionCreators.updateApplyType(index);
         switch (index) {
             case 0:
@@ -52,7 +50,7 @@ export default class ChoiceApplyType extends Component {
         let listShows = AppStore.getCanNewApply().map((name, index) => {
             if (!!name) {
                 return (
-                    <li key={index}><button data-index={index} type="button" onClick={this.showBlankForm} style={btnStyle}>{name}</button></li>
+                    <li key={index}><button type="button" onClick={e => this.showBlankForm(index, name)} style={btnStyle}>{name}</button></li>
                 ); 
             } 
         });

@@ -17,7 +17,7 @@ export default class AppLi extends Component {
         let staffId = AppStore.getStaffid();
 
         //判断是否是签报,不是就进行React，是就进行页面跳转
-        if (type - 0 < 3) {
+        if (type - 0 !== 3) {
             AppActionCreators.updateActivedApplyId(id);
             AppActionCreators.updateApplyType(type);
             
