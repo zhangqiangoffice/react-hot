@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import InsuranceStore from '../../stores/InsuranceStore';
 import CarActionCreators from '../../actions/CarActionCreators';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import { componies } from '../asset/json/appInfo.json';
 import APIUtils from '../APIUtils';
+import { Toast } from 'antd-mobile';
 
 export default class Car extends Component {
     constructor(props){
@@ -13,9 +16,17 @@ export default class Car extends Component {
     
     //获取行驶证信息
     handleClick() {
-        CarActionCreators.updateFromRecent(this.props.car)
-        InsuranceActionCreators.changeTbCity({no: this.props.car.tbCity, name: this.props.car.tbName})
-        APIUtils.cardInfo();
+        let car = this.props.car
+
+        //判断已报价次数
+        if (car[`${componies[InsuranceStore.getInsuranceCom() - 1].spell}Count`] >= 10) {
+            Toast.info('该车投保已超过10次')
+        } else {
+            CarActionCreators.updateFromRecent(this.props.car)
+            InsuranceActionCreators.changeTbCity({no: this.props.car.tbCity, name: this.props.car.tbName})
+            InsuranceActionCreators.updateUnUsedTimes(car.tpCount, car.zhCount)
+            APIUtils.cardInfo();
+        }
     }
 
     render() {

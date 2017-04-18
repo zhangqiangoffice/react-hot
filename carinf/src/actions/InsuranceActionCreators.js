@@ -279,12 +279,13 @@ module.exports = {
         AppDispatcher.dispatch(action);
     },
 
-    updateUsedTimes: function(tp, zh) {
+    updateUnUsedTimes: function(tp, zh) {
         var action = {
-            type: 'updateUsedTimes',
+            type: 'updateUnUsedTimes',
             tp,
             zh, 
         };
+        console.log(action)
         AppDispatcher.dispatch(action);
     },
    

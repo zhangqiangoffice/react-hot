@@ -111,12 +111,13 @@ module.exports = {
         let cb = msg => {
             if (msg.result === 1 && msg.idCard) {
                 CarActionCreators.updateOwner(msg.name, msg.idCard);
-                InsuranceActionCreators.updateUsedTimes(msg.tpCount, msg.zhCount)
+                InsuranceActionCreators.updateUnUsedTimes(msg.tpCount, msg.zhCount)
             }
         }
 
         if (isMock) {
             cb(mock.MgetOwnerInfo)
+            console.log(mock.MgetOwnerInfo)
         } else {
 
         zAJAX(`${ctx}/carInf/getOwner`, datas, cb)

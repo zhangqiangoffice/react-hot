@@ -62,7 +62,7 @@ var stakeholder = {         //保单相关方
 var contactAddress = [];    //业务员的常用保单投寄地址
 var isShowAddress = false;  //是否显示选择地址的框
 
-var usedTimes = {tp: 0, zh:0}; //报价次数
+var unUsedTimes = {tp: 10, zh:10}; //报价次数
 
 //更新投保公司和是否是私家车的时候，要判断保单配送方式，太平中华私家车必须快递0，其他必须自取1
 function judgeDeliveryType() {
@@ -392,7 +392,9 @@ function updateStakeholderAddress(obj) {
 }
 
 //修改已报价次数
-function updateUsedTimes(tp, zh) {
+function updateUnUsedTimes(tp, zh) {
+    unUsedTimes.tp = 10 - tp;
+    unUsedTimes.zh = 10 - zh;
     // body...
 }
 
@@ -470,8 +472,8 @@ var InsuranceStore = assign({}, EventEmitter.prototype, {
         return isShowAddress;
     },
 
-    getUsedTimes: function() {
-        return usedTimes;
+    getUnUsedTimes: function() {
+        return unUsedTimes;
     }
 
 });
@@ -611,8 +613,8 @@ function handleAction(action) {
             initBBrAsOwner(action.name, action.no);
             emitChange();
             break;
-        case 'updateUsedTimes':
-            updateUsedTimes(action.tp, action.zh);
+        case 'updateUnUsedTimes':
+            updateUnUsedTimes(action.tp, action.zh);
             emitChange();
             break;
         default: // ... do nothing

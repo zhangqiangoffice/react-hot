@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { componies } from '../asset/json/appInfo.json';
 import Home from './Home';
 import Place from './Place';
 import CarNum from './CarNum';
@@ -30,7 +31,7 @@ export default class IndexDesk extends Component {
             name: CarStore.getName(),
             idCard: CarStore.getIdCard(),
             tbPlace: InsuranceStore.getTbPlace(),
-            usedTimes: InsuranceStore.getUsedTimes(),
+            unUsedTimes: (InsuranceStore.getUnUsedTimes())[componies[InsuranceStore.getInsuranceCom() - 1].spell],
         }
     };
 
@@ -50,14 +51,20 @@ export default class IndexDesk extends Component {
 
     //点击下一步
     nextStep() {
-        if (!this.state.tbPlace.city.name) {
-            Toast.info('请选择投保城市', 2)
+        if (this.state.unUsedTimes > 0) {
+            if (!this.state.tbPlace.city.name) {
+                Toast.info('请选择投保城市', 2)
+            } else {
+                APIUtils.cardInfo();
+            }
         } else {
-            APIUtils.cardInfo();
+            Toast.info('投保次数已用完', 2)
         }
+
     };
 
     render() {
+
         return (
             <div className="index_desk">
                 <ul className="index_ul">
@@ -67,7 +74,7 @@ export default class IndexDesk extends Component {
                     <OwnerName name={this.state.name} />
                     <OwnerCard idCard={this.state.idCard} />
                 </ul>
-                <RemainingTimes usedTimes={this.state.usedTimes}/>
+                <RemainingTimes unUsedTimes={this.state.unUsedTimes}/>
                 <Link to="/recent"><span className="recent">最近询价车辆</span></Link>
                 <ButtonBottom text="下一步" onClickHandle={this.nextStep}/>          
             </div>

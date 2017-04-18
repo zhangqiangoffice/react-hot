@@ -6,6 +6,7 @@ import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import InsuranceStore from '../../stores/InsuranceStore';
 import InsuranceDate from './InsuranceDate'
 import ButtonBottom from '../public/ButtonBottom';
+import { componies } from '../asset/json/appInfo.json';
 
 export default class Plan extends Component {
     constructor(props){
@@ -25,6 +26,7 @@ export default class Plan extends Component {
             lastTraBeginDate: InsuranceStore.getLastTraBeginDate(),
             ciFlag: InsuranceStore.getCiFlag(),
             threeSchemeList: InsuranceStore.getThreeSchemeList(),
+            unUsedTimes: (InsuranceStore.getUnUsedTimes())[componies[InsuranceStore.getInsuranceCom() - 1].spell],
         }
     }
 
@@ -62,7 +64,7 @@ export default class Plan extends Component {
 
                 <ApplyScheme scheme={this.state.threeSchemeList[this.state.schemeIndex]}/>
                 
-                <ButtonBottom onClickHandle={this.quote} fixed={true}/>
+                <ButtonBottom onClickHandle={this.quote} fixed={true} disabled={this.state.unUsedTimes <= 0 } text={this.state.unUsedTimes ? `还有 ${this.state.unUsedTimes} 次报价机会` : '报价次数已用完'}/>
             </div>
         );
     };
