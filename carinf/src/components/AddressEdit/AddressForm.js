@@ -7,7 +7,7 @@ import SelectorProvince from '../public/SelectorProvince'
 import SelectorCity from '../public/SelectorCity'
 import SelectorCounty from '../public/SelectorCounty';
 
-import APIUtils from '../APIUtils';
+import { saveAddress } from '../APIUtils';
 import { Toast } from 'antd-mobile';
 import AppStore from '../../stores/AppStore';
 
@@ -41,7 +41,7 @@ export default class Out extends Component {
         this.clickCounty = this.clickCounty.bind(this)
 
         this.selectorClick = this.selectorClick.bind(this)
-        this.saveAddress = this.saveData.bind(this)
+        this.postSaveAddress = this.postSaveAddress.bind(this)
         this.onClose = this.onClose.bind(this)
     };
 
@@ -93,7 +93,7 @@ export default class Out extends Component {
     };
 
     clickCounty() {
-        if (this.state.countyNo) {
+        if (this.state.regionNo) {
             this.setState({
                 isShowCounties: true,
                 selectorFor: 'county',
@@ -136,7 +136,7 @@ export default class Out extends Component {
     };
 
     //点击保存
-    saveAddress() {
+    postSaveAddress() {
         const data = {
             id: this.state.id,     //地址id
             workNum: AppStore.getWorkNum(),        //
@@ -148,7 +148,7 @@ export default class Out extends Component {
             address: this.state.address,     //收货地址
 
         }
-        APIUtils.saveAddress(data);
+        saveAddress(data);
     };
 
 
@@ -163,7 +163,7 @@ export default class Out extends Component {
                     <LiClick item="收件区县" val={this.state.county} onClickHandle={this.clickCounty}/>
                     <LiText item="详细地址" val={this.state.address} onChangeVal={this.handleChangeAddress}/>
                 </ul>
-                <ButtonBottom text='保存' onClickHandle={this.saveAddress}/>
+                <ButtonBottom text='保存' onClickHandle={this.postSaveAddress}/>
 
                 <SelectorProvince
                     isShow={this.state.isShowProvinces} 

@@ -7,7 +7,7 @@ import OwnerName from './OwnerName';
 import OwnerCard from './OwnerCard';
 import RemainingTimes from './RemainingTimes';
 import ProvinceSelector from './ProvinceSelector';
-import APIUtils from '../APIUtils';
+import { cardInfo } from '../APIUtils';
 import CarStore from '../../stores/CarStore';
 import InsuranceStore from '../../stores/InsuranceStore';
 import ButtonBottom from '../public/ButtonBottom';
@@ -55,7 +55,7 @@ export default class IndexDesk extends Component {
             if (!this.state.tbPlace.city.name) {
                 Toast.info('请选择投保城市', 2)
             } else {
-                APIUtils.cardInfo();
+                cardInfo();
             }
         } else {
             Toast.info('投保次数已用完', 2)

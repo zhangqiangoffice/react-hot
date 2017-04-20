@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-
 import AppActionCreators from '../../actions/AppActionCreators';
 import Car from './Car';
-import APIUtils from '../APIUtils';
+import {queryOfferCar} from '../APIUtils';
 
 export default class CarList extends Component {
     constructor(props) {
@@ -34,9 +33,7 @@ export default class CarList extends Component {
                 AppActionCreators.messageAlertProgress(msg.message);
             }
         } 
-
-        APIUtils.queryOfferCar(cb)
-
+        queryOfferCar(cb)
     };
 
     render() {

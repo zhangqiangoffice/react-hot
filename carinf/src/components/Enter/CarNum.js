@@ -4,7 +4,7 @@ import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import InsuranceStore from '../../stores/InsuranceStore';
 import { Toast } from 'antd-mobile';
 import ProvinceSelector from './ProvinceSelector';
-import APIUtils from '../APIUtils';
+import {getOwnerInfo} from '../APIUtils';
 
 export default class IndexDesk extends Component {
     constructor(props) {
@@ -57,7 +57,7 @@ export default class IndexDesk extends Component {
             })
         } else if (val.length === 6  && /^[A-Z]/.test(val)) {
             let plateNo = this.state.provinceShort + val;
-            APIUtils.getOwnerInfo(plateNo);
+            getOwnerInfo(plateNo);
         }
     }
 

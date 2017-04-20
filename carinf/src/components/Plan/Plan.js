@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import APIUtils from '../APIUtils';
+import {quote} from '../APIUtils';
 import ApplyScheme from './ApplyScheme';
 import SchemeSwitcher from './SchemeSwitcher';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
@@ -43,9 +43,9 @@ export default class Plan extends Component {
     };
 
     //请求报价方案
-    quote() {
+    postQuote() {
         InsuranceActionCreators.clearQuote();
-        APIUtils.quote();
+        quote();
     }
 
     render() {
@@ -64,7 +64,7 @@ export default class Plan extends Component {
 
                 <ApplyScheme scheme={this.state.threeSchemeList[this.state.schemeIndex]}/>
                 
-                <ButtonBottom onClickHandle={this.quote} fixed={true} disabled={this.state.unUsedTimes <= 0 } text={this.state.unUsedTimes ? `还有 ${this.state.unUsedTimes} 次报价机会` : '报价次数已用完'}/>
+                <ButtonBottom onClickHandle={this.postQuote} fixed={true} disabled={this.state.unUsedTimes <= 0 } text={this.state.unUsedTimes ? `还有 ${this.state.unUsedTimes} 次报价机会` : '报价次数已用完'}/>
             </div>
         );
     };

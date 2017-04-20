@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import InsuranceStore from '../../stores/InsuranceStore';
 import CarStore from '../../stores/CarStore';
-import LiSelector from '../LiSelector';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import AppActionCreators from '../../actions/AppActionCreators';
 import appInfo from '../asset/json/appInfo.json';
-import APIUtils from '../APIUtils';
+import {orderOperation} from '../APIUtils';
 
 import Sheet from './Sheet';
 import CarOwner from './CarOwner';
@@ -61,7 +60,7 @@ export default class Stakeholder extends Component {
                 <Applicant stakeholder={this.state.stakeholder}/>
                 <Distribution />
                 <CarInfos />
-                <ButtonBottom onClickHandle={APIUtils.orderOperation} fixed={true}/>
+                <ButtonBottom onClickHandle={orderOperation} fixed={true}/>
             </div>
         );
     };

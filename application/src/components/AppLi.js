@@ -52,7 +52,7 @@ export default class AppLi extends Component {
 
     render() {
         let apply = this.props.apply;
-        let state = ['处理中', '已完成', '驳回', '审批通过'];
+        let state = ['审核中', '通过', '驳回', '审核通过'];
         let stateClass = ['handle', 'success', 'reject', 'passed'];
 
         //拼接岗位信息，只有提交给我的显示
@@ -80,7 +80,10 @@ export default class AppLi extends Component {
         return (
             <li onClick={this.askDetail}>
                 <div className="first_lay">
-                    <div className="apply_type">{apply.applyTypeName}</div>
+                    <div className="apply_type">
+                        {apply.applyTypeName}
+                        {apply.emergencyDegree === '2' ?<span className="emergencied">已催办</span> : null}
+                    </div>
                     <div className={'state ' + stateClass[apply.dealStatus]}>{state[apply.dealStatus]}</div>
                 </div>
                 {str}

@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
-import APIUtils from '../APIUtils';
+import { carAddressDelete, carAddressDefault } from '../APIUtils';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import AppStore from '../../stores/AppStore';
+import AppActionCreators from '../../actions/AppActionCreators';
+import { Modal, Toast } from 'antd-mobile';
 
-export default class Company extends Component {
+const alert = Modal.alert;
+
+export default class Out extends Component {
     constructor(props){
         super(props);
 
@@ -13,24 +18,17 @@ export default class Company extends Component {
 
     carAddressDelete(e) {
         e.stopPropagation();
-        if(confirm('您确定删除此地址？')) {
-            AppActionCreators.startAlertProgress();    
-            let data = {
-                id: this.props.address.id,
-                workNum: AppStore.getWorkNum(),
-            };
-
-            let cb = msg => {
-                if (msg.result === 1) {
-                    AppActionCreators.finishAlertProgress();
-                    this.props.deleteAddress(this.props.index)
-                }else{
-                    AppActionCreators.messageAlertProgress(msg.message);
-                }
-            }
-            APIUtils.carAddressDelete(data, cb)
-        }
+        alert('删除', '确定删除么???', [
+          { text: '取消'},
+          { text: '确定', onPress: () => this.postDeleteAddress(), style: { fontWeight: 'bold' } },
+        ])
     };
+
+    postDeleteAddress() {
+        this.props.deleteAddress(this.props.index)
+        carAddressDelete(this.props.address.id)
+
+    }
 
     //打开编辑页面
     toEdit(e) {
@@ -56,11 +54,11 @@ export default class Company extends Component {
             if (msg.result === 1) {
                 window.location = '#/confirm'
             } else {
-                alert(msg.message);
+                Toast.fail(msg.message, 1);
             }
         }
 
-        APIUtils.carAddressDefault(data, cb);
+        carAddressDefault(data, cb);
     }
 
     render() {

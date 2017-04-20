@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
-import APIUtils from '../APIUtils';
+import {applyPay} from '../APIUtils';
 import AppActionCreators from '../../actions/AppActionCreators';
 import CarStore from '../../stores/CarStore';
 import AppStore from '../../stores/AppStore';
@@ -59,7 +59,7 @@ export default class Final extends Component {
 
                 </div>
                 <button type="button" onClick={this.reset}>再次下单</button>
-                <button type="button" className={flag ? '' : 'hide'} onClick={APIUtils.applyPay}>前去支付</button>
+                <button type="button" className={flag ? '' : 'hide'} onClick={applyPay}>前去支付</button>
                 {cid ? <iframe src={src}></iframe> : null}
             </div>
         );

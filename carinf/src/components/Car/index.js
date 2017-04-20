@@ -3,7 +3,7 @@ import TitleBar from '../public/TitleBar';
 import TopTip from '../public/TopTip';
 import CarInfo from './CarInfo';
 import ButtonBottom from '../public/ButtonBottom';
-import APIUtils from '../APIUtils';
+import { carModel } from '../APIUtils';
 
 export default class App extends Component {
 
@@ -14,7 +14,7 @@ export default class App extends Component {
                 <TitleBar title="投保车辆信息" />
                 <TopTip tip="我们确保您的个人信息仅用于车险报价" />
                 <CarInfo />
-                <ButtonBottom text="下一步" onClickHandle={APIUtils.carModel}/> 
+                <ButtonBottom text="下一步" onClickHandle={carModel}/> 
             </div>
         )
     };

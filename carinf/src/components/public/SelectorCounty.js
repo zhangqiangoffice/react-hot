@@ -3,7 +3,7 @@ import SelectorInLine from './SelectorInLine';
 import InsuranceStore from '../../stores/InsuranceStore';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { Toast } from 'antd-mobile';
-import APIUtils from '../APIUtils';
+import { getCountiesList } from '../APIUtils';
 
 export default class Out extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export default class Out extends Component {
                 Toast.hide();
             }
             Toast.loading('加载中...', 0);
-            APIUtils.getCountiesList(nextProps.city, cb);
+            getCountiesList(nextProps.city, cb);
         } else {
             this.getCountyString(date)
         }

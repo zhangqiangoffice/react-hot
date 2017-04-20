@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CarActionCreators from '../../actions/CarActionCreators';
-import APIUtils from '../APIUtils';
+import {queryInsuranceDate} from '../APIUtils';
 
 export default class Style extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ export default class Style extends Component {
 
     handleClick() {
         CarActionCreators.updateStyleIndex(this.props.index);
-        APIUtils.queryInsuranceDate();
+        queryInsuranceDate();
     };
 
     render() {

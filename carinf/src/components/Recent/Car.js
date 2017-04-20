@@ -3,7 +3,7 @@ import InsuranceStore from '../../stores/InsuranceStore';
 import CarActionCreators from '../../actions/CarActionCreators';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { componies } from '../asset/json/appInfo.json';
-import APIUtils from '../APIUtils';
+import { cardInfo } from '../APIUtils';
 import { Toast } from 'antd-mobile';
 
 export default class Car extends Component {
@@ -20,12 +20,12 @@ export default class Car extends Component {
 
         //判断已报价次数
         if (car[`${componies[InsuranceStore.getInsuranceCom() - 1].spell}Count`] >= 10) {
-            Toast.info('该车投保已超过10次')
+            Toast.info('该车报价已超过10次')
         } else {
             CarActionCreators.updateFromRecent(this.props.car)
             InsuranceActionCreators.changeTbCity({no: this.props.car.tbCity, name: this.props.car.tbName})
             InsuranceActionCreators.updateUnUsedTimes(car.tpCount, car.zhCount)
-            APIUtils.cardInfo();
+            cardInfo();
         }
     }
 

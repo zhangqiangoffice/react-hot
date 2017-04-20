@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import APIUtils from '../APIUtils';
+import { queryAddress } from '../APIUtils';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import { Toast } from 'antd-mobile';
 
 
 export default class out extends Component {
@@ -15,7 +16,7 @@ export default class out extends Component {
     };
 
     componentDidMount() {      
-        this.queryAddress();
+        this.getAddress();
     };
 
     //跳转到地址列表页面
@@ -29,7 +30,7 @@ export default class out extends Component {
     }
 
     //获取邮寄地址列表
-    queryAddress () {
+    getAddress () {
         let cb = msg => {
             if (msg.result === 1) {
                 let obj = null;
@@ -47,10 +48,10 @@ export default class out extends Component {
                     InsuranceActionCreators.updateStakeholderAddress(obj)
                 }
             }else{
-                alert(msg.message);
+                Toast.fail(msg.message, 1);
             }
         } 
-        APIUtils.queryAddress(cb);
+        queryAddress(cb);
     };
 
     render() {

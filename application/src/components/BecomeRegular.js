@@ -234,7 +234,7 @@ export default class BecomeRegular extends Component {
                         </tr>
                         <tr>
                             <td className="item">工作总结：</td>
-                            <td colSpan="3">{detail.memo}</td>
+                            <td colSpan="3" style={{paddingRight: '1rem'}}>{detail.memo}</td>
                         </tr>
                         <tr className={isLeader ? 'hide' : ''}>
                             <td className="item">综合评级：</td>

@@ -3,7 +3,7 @@ import SelectorInLine from './SelectorInLine';
 import InsuranceStore from '../../stores/InsuranceStore';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { Toast } from 'antd-mobile';
-import APIUtils from '../APIUtils';
+import {getCitiesList} from '../APIUtils';
 
 export default class Out extends Component {
     constructor(props) {
@@ -19,16 +19,24 @@ export default class Out extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
+      console.log(nextProps.pro);
       if (nextProps.isShow) {
         let cityData = InsuranceStore.getStakeholder().cityDatas[nextProps.pro]
         if (!cityData) {
-            let cb = (msg) => {
-                InsuranceActionCreators.updateCityDatas(nextProps.pro, msg);
-                this.getCityString(msg);
-                Toast.hide();
-            }
             Toast.loading('加载中...', 0);
-            APIUtils.getCitiesList(nextProps.pro, cb);
+            let cb = (msg) => {
+                Toast.hide();
+                //请求失败则关闭，并提示
+                if (msg.result === 0) {
+                    this.props.onClose()
+                    Toast.fail('加载失败!!!', 1);
+                } else {
+                //请求成功，则设置城市信息
+                    InsuranceActionCreators.updateCityDatas(nextProps.pro, msg);
+                    this.getCityString(msg);
+                }
+            }
+            getCitiesList(nextProps.pro, cb);
         } else {
             this.getCityString(cityData)
         }

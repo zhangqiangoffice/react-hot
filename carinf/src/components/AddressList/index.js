@@ -4,7 +4,7 @@ import List from './List';
 import ButtonBottom from '../public/ButtonBottom';
 import TopTip from '../public/TopTip'
 import AppActionCreators from '../../actions/AppActionCreators';
-import APIUtils from '../APIUtils';
+import { queryAddress } from '../APIUtils';
 
 export default class App extends Component {
     constructor(props) {
@@ -32,7 +32,7 @@ export default class App extends Component {
                 AppActionCreators.messageAlertProgress(msg.message);
             }
         } 
-        APIUtils.queryAddress(cb);
+        queryAddress(cb);
     };
 
     addNewAddress() {

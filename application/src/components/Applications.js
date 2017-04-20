@@ -18,11 +18,15 @@ export default class Applications extends Component {
             );
         });
 
-        return (
-            
-            <ul className="applications">
-                {listShows}
-            </ul>
-        );
+        if (this.props.list.length === 0 ) {
+            return <div className="no_record">暂无记录</div>
+        } else {
+            return (
+                <ul className="applications">
+                    {listShows}
+                </ul>
+            )
+        }
+        
     };
 }
