@@ -1,0 +1,588 @@
+/**
+ * 文件：审批样式
+ * 作者：无名小强
+ * 版本：v0.1
+ * 版权：民盛集团
+ * 日期：2016-11-7
+**/
+
+@gray_border: #b3b3b3;
+@blue_car: #448fb9;
+@cyan: #12b5b0;
+
+@import "./zlib.v2.less";
+@carInf_images: "../img";
+@orange: #f39900;
+
+body {
+    background-color: #f2f2f2;
+    .size(100%, 100%);
+}
+
+.hide {
+    .hide;
+}
+
+.cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+}
+
+//列表容器组件
+.application_list {
+    
+    .title_bar {
+        .w100;
+        height: 90px;
+        background-color: #fff;
+        .t-c;
+        .p-f;
+        top: 0;
+        left: 0;
+
+        h1 {
+            .w100;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            line-height: 90px;
+            .t-c;
+            font-size: 40px;
+        }
+    }
+
+    .list_title {
+        .w100;
+        height: 90px;
+        background-color: #fff;
+        border-top: @border;
+        font-size: 32px;
+        .p-f;
+        top: 90px;
+        left: 0;
+
+        li {
+            .f-l;
+            width: 37%;
+            .t-c;
+            height: 100%;
+            line-height: 86px;
+            color: #999;
+            border-bottom: @border;
+
+            &:last-child {
+                width: 26%;
+            }
+            
+            &.selected {
+                color: @ms-red;
+                border-bottom: 1PX solid @ms-red;
+            }
+        }
+    }
+    button.add_new {
+        .w100;
+        height: 100px;
+        .p-f;
+        bottom: 0;
+        color: #fff;
+        font-size: 40px;
+        background-color: @ms-red;
+        border: 0;
+    }
+    .no_record {
+        margin-top: 440px;
+        text-align: center;
+        color: #999;
+        font-size: 32px;
+    }
+}
+
+//列表组件
+.applications {
+    margin: 201px 0 200px 0;
+    border-top: @border;
+    background-color: #fff;
+
+    li {
+        border-bottom: @border;
+
+        .first_lay {
+            margin-top: 20px;
+            div {
+                .inline;
+
+                &.apply_type {
+                    width: 40%;
+                    font-size: 32px;
+                    background-color: #f2f2f2;
+                    padding-left: 20px;
+
+                    .emergencied {
+                        color: @ms-red;
+                        .f-r;
+                        margin-right: 20px;
+                        font-size: 24px;
+                    }
+                }
+
+                &.state {
+                    .f-r;
+                    margin-right: 20px;
+                    
+                    &.handle {
+                        color: @orange;
+                    }
+
+                    &.success {
+                        color: @blue_car;
+                    }
+
+                    &.reject {
+                        color: @ms-red;
+                    }
+
+                    &.passed {
+                        color: @cyan;
+                    }
+
+
+                }
+            }
+        }
+
+        .applyer_lay {
+            margin-top: 20px;
+            color: #999;
+            .applyer {
+                .inline;
+                .f-r;
+                margin-right: 20px;
+               
+            }
+            .department {
+                .inline;
+                li {
+                    border-bottom: 0;
+                    padding-left: 20px;
+                }
+            }
+        }
+
+        .date_lay {
+            margin: 20px 0 20px;
+            padding-left: 20px;
+        }
+    }
+}
+
+//遮罩层样式
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+    img {
+        position: fixed;
+        width: 25%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}
+
+//标题栏组件
+.title_bar {
+    .w100;
+    .p-f;
+    top: 0;
+    left: 0;
+    height: 90px;
+    background-color: #fff;
+    .t-c;
+    border-bottom: @border;
+
+    button {
+        .p-a;
+        left: 20px;
+        .square(50px);
+        top: 50%;
+        margin-top: -25px;
+        border: 0;
+        background: url("@{carInf_images}/back.png"); 
+        background-color: #fff;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    h1 {
+        .w100;
+        height: 100%;
+        line-height: 100px;
+        .t-c;
+        font-size: 40px;
+    }
+
+    span {
+        .p-a;
+        right: 20px;
+        top: 50%;
+        margin-top: -24px;
+        font-size: 32px;
+        color: @ms-red;
+        padding-left: 60px;
+
+    }
+}
+
+//人员基本信息
+.staff_info {
+    .w100;
+    padding: 20px 0;
+    border-bottom: @border;
+    margin-top: 90px;
+
+    td {
+        width: 25%;
+        vertical-align: top;
+        word-break: break-all;
+    }
+
+    background-color: #fff;
+
+    .item {
+        color: @orange;
+        .t-r;
+    }
+
+    .split {
+        .t-c;
+        color: #999;
+
+        td {
+            border-top: @border;
+            padding: 20px;
+        }
+    }
+
+    .last {
+        padding-bottom: 20px;
+    }
+}
+
+//子标题
+.sub_title {
+    border-left: 20px solid @ms-red;
+    color: #997a7a;
+    margin: 20px 0 16px 20px;
+    padding-left: 20px;
+    line-height: 28px;
+}
+
+//公出申请组件
+.new_business_travel {
+    .reason {
+        margin-top: 20px;
+        .w100;
+        border: 0;
+        border-top: @border;
+        border-bottom: @border;
+        padding: 20px 0;
+        text-indent: 20px;
+    }
+
+    .place {
+        border-top: @border;
+        background-color: #fff;
+
+        li {
+            border-bottom: @border;
+            .clearfix;
+
+            .selector {
+                .inline;
+                width: 30%;
+                .t-c;
+                color: #999;
+                padding: 20px 0;
+                margin: 20px 0;
+                border-right: @border;
+
+                &.checked {
+                    color: #333;
+                }
+
+                &:last-child {
+                    border: 0;
+                }
+            }
+
+            input {
+                border: 0;
+                text-indent: 20px;
+                line-height: 80px;
+            }
+
+            button {
+                .f-r;
+                .size(120px, 80px);
+                background-color: @blue;
+                color: #fff;
+                border: 0;
+            }
+        }
+    }
+
+    .time {
+        border-top: @border;
+        background-color: #fff;
+
+        li {
+            border-bottom: @border;
+            .clearfix;
+            line-height: 80px;
+
+            label {
+                margin-left: 20px;
+            }
+
+            &>div {
+                display: inline;
+                border-top: 1PX solid rgba(255, 255, 255, 0);
+                border-bottom: 1PX solid rgba(255, 255, 255, 0);
+                .f-r;
+            }
+
+            input {
+                .f-r;
+                line-height: 80px;
+                border: 0;
+                .t-r;
+                margin-right: 20px;
+            }
+        }
+    }
+
+    .flow {
+        margin-top: 20px;
+
+        li {
+            line-height: 80px;
+            .clearfix;
+            padding: 0 20px;
+
+            button {
+                background-color: #999;
+                color: #fff;
+                border: 0;
+                border-radius: 40px;
+                margin-top: 10px;
+                .f-r;
+                padding: 10px 20px;
+            }
+        }
+    }
+
+    .dxq {
+        button {
+            border: 1PX solid @blue;
+            background-color: #fff;
+            color: @blue;
+            padding: 20px 20px;
+            margin: 20px;
+            border-radius: 20px;
+        }
+    }
+}
+
+//li选择控件
+.li_selector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+
+    ul {
+        .p-a;
+        width: 400px;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding: 20px 0 20px 30px;
+        background-color: #fff;
+        border: 0;
+        border-radius: 20px;
+        -ms-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        .o-h;
+
+        li {
+            .inline;
+            color: #999;
+            font-size: 32px;
+            margin: 16px 20px 0 0;
+
+            &.selected {
+                color: @ms-red;
+            }
+        }
+    }
+}
+
+//签批意见列表
+.options {
+    margin-bottom: 200px;
+
+    .department {
+        .t-c;
+        color: @ms-red;
+        margin: 20px 0 20px; 
+    }
+
+    .one_signer {
+        border-top: @border;
+        border-bottom: @border;
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 30px;
+        font-size: 28px;
+        .up_storey {
+            border-bottom: @border;
+            padding-bottom: 20px;
+            img {
+                display: inline-block;
+                .square(80px);
+            }
+            .signer_person {
+                display: inline-block;
+                margin-left: 20px;
+                vertical-align: top;
+            }
+            .signer_result {
+                display: inline-block;
+                color: #fff;
+                .f-r;
+                margin-right: 20px;
+                &.ok {
+                    .circle(80px, #32b059);
+                    line-height: 80px;
+                    position: static;
+
+                }
+
+                &.no {
+                    .circle(80px, @ms-red);
+                    line-height: 80px;
+                    position: static;
+                }
+
+                &.un {
+                    .circle(80px, @blue);
+                    line-height: 80px;
+                    position: static;
+                }
+            }
+        }
+
+        .down_storey {
+            padding-top: 20px;
+            .suggestion_item {
+                display: inline-block;
+                width: 140px;
+                font-weight: 700;
+                vertical-align: top;
+            }
+
+            input {
+                border: 0;
+                width: 400px;
+            }
+
+            textarea {
+                border: 0;
+                width: 400px;
+            }
+
+            p {
+                .t-r;
+                padding: 20px 0;
+                img {
+                    width: 100px;
+                    margin-left: 40px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+//请假申请中的请假原因
+.leave_reason {
+    background-color: #fff;
+    border-top: @border;
+    margin-top: 20px;
+    margin-bottom: -20px;
+    padding: 20px 20px 0;
+
+    ul {
+        .clearfix;
+        .inline;
+        vertical-align: top;
+        width: 80%;
+        margin-top: 4px;
+
+        li {
+            .f-l;
+            margin: 0 0 20px 40px;
+            padding-left: 44px;
+            background-image: url("@{carInf_images}/radio_off.png"); 
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            line-height: 36px;
+
+            &.selected {
+                background-image: url("@{carInf_images}/radio_on.png"); 
+            }
+        }
+    }
+}
+
+//转正申请的底部边框
+.border_bottom {
+    border-bottom: @border;
+    ul {
+        li {
+            float: none;
+
+            &>div {
+                .inline;
+            }
+
+            input {
+                width: 200px;
+                height: 28px;
+                border: @border;
+                padding: 5px 0;
+                margin-left: 5px;
+            }
+        }
+    }
+}
+

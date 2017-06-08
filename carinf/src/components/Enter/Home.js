@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Toast } from 'antd-mobile';
+import style from '../asset/css/Enter.less'
 
 export default class Out extends Component {
 
@@ -10,10 +11,10 @@ export default class Out extends Component {
 
     render() {
         return (
-            <li className="li">
-                <label className="item_name">7座以下私家车</label>
-                <span className="selections"  onClick={this.switchIsHome}>
-                    <label className='selected'>是</label>
+            <li className={style.li}>
+                <label className={style.item_name}>7座以下私家车</label>
+                <span className={style.selections}  onClick={this.switchIsHome}>
+                    <label className={style.selected}>是</label>
                     <label>否</label>
                 </span>
             </li>        

@@ -5,6 +5,7 @@ import AppActionCreators from '../../actions/AppActionCreators';
 import CarStore from '../../stores/CarStore';
 import AppStore from '../../stores/AppStore';
 import InsuranceStore from '../../stores/InsuranceStore';
+import style from '../asset/css/Final.less'
 
 export default class Final extends Component {
     constructor(props){
@@ -47,12 +48,12 @@ export default class Final extends Component {
         }
 
         return (
-            <div className="final">
-                <div className="bg"></div>
-                <div className="success">
-                    <p className="red">核保成功！</p>
+            <div className={style.final}>
+                <div className={style.bg}></div>
+                <div className={style.success}>
+                    <p className={style.red}>核保成功！</p>
                     <p>
-                        需支付<span className="red"> {total}元</span><br/>
+                        需支付<span className={style.red}> {total}元</span><br/>
                         请在48小时内完成支付<br />
                         订单编号：{orderNo}
                     </p>

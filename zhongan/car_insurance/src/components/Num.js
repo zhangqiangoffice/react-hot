@@ -3,6 +3,7 @@ import BlankLi from './BlankLi'
 import ClickDiv from './ClickDiv'
 import data from '../reducers/data.json'
 import { getTotalFee } from '../api'
+import style from './asset/css/index.less'
 
 const OutPut = ({ applyNum, carType, usingType, onShowSelector}) => {
   let totalFee = getTotalFee(carType, usingType, applyNum)

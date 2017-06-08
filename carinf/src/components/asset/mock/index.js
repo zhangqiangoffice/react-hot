@@ -1,10 +1,10 @@
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
 
-let dataList = Mock.mock({
-  'list|1-10': [{
-    'id|+1': 1
-  }]
-});
+// let dataList = Mock.mock({
+//   'list|1-10': [{
+//     'id|+1': 1
+//   }]
+// });
 
 export const MgetOwnerInfo = {"message":"接口调用成功！","result":1,"idCard":"340302198811021029","name":"张舒","tpCount":6,"zhCount":7};
 export const MqueryOfferCar = {"result":1,"list":[{"tbCity":"340100","idCard":"340621198912014114","tbName":"合肥市","name":"曾海鸥","isHome":"1","tpCount":0,"newVhl":"0","zhCount":0,"plateNo":"皖A978X1","city":"340100"},{"tbCity":"340100","idCard":"342223197503080119","tbName":"合肥市","name":"谢发红","isHome":"1","tpCount":0,"newVhl":"0","zhCount":0,"plateNo":"皖F81991","city":"340600"},{"tbCity":"340100","idCard":"340302198811021029","tbName":"合肥市","name":"张舒","isHome":"1","tpCount":7,"newVhl":"0","zhCount":6,"plateNo":"皖A12594","city":"340100"},{"tbCity":"340100","idCard":"342221198709294536","tbName":"合肥市","name":"贾庆鑫","isHome":"1","tpCount":0,"newVhl":"0","zhCount":0,"plateNo":"皖L7D559","city":"341300"},{"tbCity":"340100","idCard":"340603198306150228","tbName":"合肥市","name":"朱株","isHome":"1","tpCount":0,"newVhl":"0","zhCount":0,"plateNo":"皖FM2986","city":"340600"}]};

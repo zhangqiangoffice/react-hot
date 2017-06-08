@@ -16,6 +16,10 @@ import AppStore from '../stores/AppStore';
 import APIUtils from './APIUtils';
 import AppActionCreators from '../actions/AppActionCreators';
 
+import "babel-polyfill";
+import '../asset/css/index.css'
+import '../asset/css/mobile_initial.css'
+
 export default class App extends Component {
     constructor(props) {
         super(props);

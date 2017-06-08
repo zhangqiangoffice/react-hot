@@ -16,6 +16,13 @@ export default class OffWork extends Component {
         
     };
 
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     //返回列表页面
     goLists() {
         AppActionCreators.showComponent('Lists');

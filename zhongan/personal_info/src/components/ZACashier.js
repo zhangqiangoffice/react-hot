@@ -2,11 +2,12 @@ import React from 'react'
 import BlankLi from './BlankLi'
 import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
+import style from './asset/css/index.less'
 
 const OutPut = ({ insuredId, url, applyNum}) => {
 
   return (
-    <li className="cashier_li">
+    <li className={style.cashier_li}>
       <p>
         <label>订单编号：</label>
         {insuredId}
@@ -24,7 +25,7 @@ const OutPut = ({ insuredId, url, applyNum}) => {
         {applyNum} 份
       </p>
       <a href={url}>
-          <button className="next_btn">去支付</button>
+          <button className={style.next_btn}>去支付</button>
         </a>
     </li>
   )

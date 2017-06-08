@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { goToStep } from '../actions'
-import Instruction from '../components/Instruction'
+import Instruction from '../components/Instruction/'
 
 const mapDispatchToProps = (dispatch) => ({
   onGoToStep: () => {

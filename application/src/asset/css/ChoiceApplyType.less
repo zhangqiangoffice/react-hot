@@ -1,0 +1,33 @@
+@import "./zlib.v3.less";
+
+.box {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #f2f2f2;
+  .t-c;
+
+  h1 {
+    color: @ms-red;
+    font-size: 32px;
+    margin: 20px 0;
+  }
+
+  button {
+      width: 44%;
+      margin: 0 3% 20px;
+      border: @border;
+      background-color: #fff;
+      padding: 20px 0;
+      .f-l;
+      .o-h;
+
+      &.cancel {
+          margin: 0 1% 20px;
+          width: 98%;
+          background-color: @ms-red;
+          color: #fff;
+          border: 1PX solid @ms-red;
+      }
+  }
+}

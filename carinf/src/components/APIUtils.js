@@ -4,12 +4,11 @@ import InsuranceStore from '../stores/InsuranceStore';
 import CarActionCreators from '../actions/CarActionCreators';
 import InsuranceActionCreators from '../actions/InsuranceActionCreators';
 import AppActionCreators from '../actions/AppActionCreators';
-import  * as mock from './asset/mock/index';
 import { Modal, Toast } from 'antd-mobile';
+import  * as mock from './asset/mock/index';
 import zAJAX from 'z-ajax';
 
-const isMock = false;
-
+//从地址栏获取参数
 const getUrlParam = function(name){  
     //构造一个含有目标参数的正则表达式对象  
     const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");  
@@ -19,6 +18,31 @@ const getUrlParam = function(name){
     if (r!== null) return unescape(r[2]);  
     return null;  
 };
+
+//装填保险公司ID
+const getCom = function() {
+    return 700 + (InsuranceStore.getInsuranceCom() - 0)
+}
+
+//将保额转换成适当汉字
+export function transformChoice(choice) {
+    let label = '';
+    switch (true) {
+        case choice - 0 === 0:
+            label = "投保";
+            break;
+        case choice - 0 === -1:
+            label = "不投保";
+            break;
+        case choice - 0 >= 10000:
+            label = (choice / 10000) + '万'
+            break;
+        default:
+            label = choice;
+            break;
+    }
+    return label;
+}
 
     
 //页面一打开即获取url中的参数，并判断下一步去哪里
@@ -99,7 +123,7 @@ export function getOwnerInfo(plateNo) {
 export function cardInfo() {
     AppActionCreators.startAlertProgress();
     let data = {
-        insuranceCom: 700 + (InsuranceStore.getInsuranceCom() - 0),
+        insuranceCom: getCom(),
         isHome: CarStore.getIsHome(),
         plateNo: CarStore.getPlateNo(),
         city: CarStore.getCity(),
@@ -135,7 +159,7 @@ export function cardInfo() {
 export function carModel() {
     AppActionCreators.startAlertProgress();
     let datas = {
-        insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
+        insuranceCom: getCom(),
         isHome: CarStore.getIsHome(),
         plateNo : CarStore.getPlateNo(),
         city: CarStore.getCity(),
@@ -178,7 +202,7 @@ export function queryInsuranceDate() {
     let style = CarStore.getStyleList()[CarStore.getStyleIndex()];
 
     let datas = {
-        insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
+        insuranceCom: getCom(),
         isHome: CarStore.getIsHome(),
         plateNo : CarStore.getPlateNo(),
         tbCity: InsuranceStore.getTbPlace().city.no,
@@ -231,7 +255,7 @@ export function quote() {
     });
 
     let datas = {
-        insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
+        insuranceCom: getCom(),
         isHome: CarStore.getIsHome(),
         plateNo : CarStore.getPlateNo(),
         city: CarStore.getCity(),
@@ -293,7 +317,7 @@ export function orderOperation(){
         serial: InsuranceStore.getSerial(),
         name: CarStore.getName(),
         idCard: CarStore.getIdCard(),
-        insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
+        insuranceCom: getCom(),
         orderNo: InsuranceStore.getOffers()[InsuranceStore.getInsuranceCom()].orderNo,
 
         bbrName: stakeholder.bbrName,                     //被保人姓名
@@ -345,7 +369,7 @@ export function applyPay() {
     let datas = {
         orderNo: InsuranceStore.getOffers()[InsuranceStore.getInsuranceCom()].orderNo,
         serial: InsuranceStore.getSerial(),
-        insuranceCom: 700 + InsuranceStore.getInsuranceCom(),
+        insuranceCom: getCom(),
     };
 
     let cb = msg => {
@@ -457,7 +481,7 @@ export function carAddressDelete(id) {
         id,
         workNum: AppStore.getWorkNum(),
     };
-    let cb = msg => {if (msg.result !== 1) {Toast.fail('删除操作失败!!!')}}
+    let cb = msg => {if (msg.result !== 1) {Toast.fail('删除操作失败!!!', 2)}}
 
     if (isMock) {
         cb(mock.MoperationCarAddress)

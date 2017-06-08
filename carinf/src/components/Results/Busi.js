@@ -15,7 +15,7 @@ export default class Out extends Component {
         });
 
         return (  
-            <table className="detail_table">
+            <table>
                 <thead>
                     <tr>
                         <th>险种</th>

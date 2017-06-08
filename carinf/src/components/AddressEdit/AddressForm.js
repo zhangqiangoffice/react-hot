@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import LiText from '../public/LiText';
-import LiNumber from '../public/LiNumber';
-import LiClick from '../public/LiClick';
 import ButtonBottom from '../public/ButtonBottom';
 import SelectorProvince from '../public/SelectorProvince'
 import SelectorCity from '../public/SelectorCity'
@@ -151,17 +148,34 @@ export default class Out extends Component {
         saveAddress(data);
     };
 
-
     render() {
         return (
             <div>
-                <ul className="address_form">
-                    <LiText item="收件人" val={this.state.name} onChangeVal={this.handleChangeName}/>
-                    <LiNumber item="联系电话" val={this.state.phone} onChangeVal={this.handleChangePhone}/>
-                    <LiClick item="收件省" val={this.state.province} onClickHandle={this.clickProvince}/>
-                    <LiClick item="收件市" val={this.state.region} onClickHandle={this.clickRegion}/>
-                    <LiClick item="收件区县" val={this.state.county} onClickHandle={this.clickCounty}/>
-                    <LiText item="详细地址" val={this.state.address} onChangeVal={this.handleChangeAddress}/>
+                <ul className="blank_ul">
+                    <li>
+                        <label>收件人</label>
+                        <input type="text" placeholder="请输入" value={this.state.name} onChange={e => this.handleChangeName((e.target.value).trim())}/>
+                    </li>
+                    <li>
+                        <label>联系电话</label>
+                        <input type="number" placeholder="请输入" value={this.state.phone} onChange={e => this.handleChangePhone((e.target.value).trim())}/>
+                    </li>
+                    <li onClick={this.clickProvince}>
+                        <label>收件省</label>
+                        <input type="text" placeholder="请选择" value={this.state.province}  readOnly="readonly"/>
+                    </li>
+                    <li onClick={this.clickRegion}>
+                        <label>收件市</label>
+                        <input type="text" placeholder="请选择" value={this.state.region}  readOnly="readonly"/>
+                    </li>
+                    <li onClick={this.clickCounty}>
+                        <label>收件区县</label>
+                        <input type="text" placeholder="请选择" value={this.state.county}  readOnly="readonly"/>
+                    </li>
+                    <li>
+                        <label>详细地址</label>
+                        <input type="text" placeholder="请输入" value={this.state.address} onChange={e => this.handleChangeAddress((e.target.value).trim())}/>
+                    </li>
                 </ul>
                 <ButtonBottom text='保存' onClickHandle={this.postSaveAddress}/>
 

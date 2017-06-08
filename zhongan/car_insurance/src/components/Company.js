@@ -3,6 +3,7 @@ import BlankLi from './BlankLi'
 import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
 import data from '../reducers/data.json'
+import style from './asset/css/index.less'
 
 const OutPut = ({ justRead, companyName, companyCertiType, companyCertiNo, companyProvinceName, companyCityName, companyCountryName, companyAddress, onChangeCompanyName, onChangeCompanyCertiNo, onChangeCompanyAddress, onShowCompanyCertiTypeBox, onShowLiSelectBox}) => (
   <ul className="coat_ul">

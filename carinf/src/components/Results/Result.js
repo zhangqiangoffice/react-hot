@@ -5,6 +5,7 @@ import AppActionCreators from '../../actions/AppActionCreators';
 import InsuranceStore from '../../stores/InsuranceStore';
 import Detail from './Detail';
 import Total from './Total';
+import style from '../asset/css/Results.less'
 
 export default class Result extends Component {
     constructor(props) {
@@ -37,11 +38,11 @@ export default class Result extends Component {
         return (
             <li>
                 <Total result={this.props.result} index={this.props.index} />
-                <div className="btn_div">
-                    <button type="button" className="apply" onClick={this.apply}>立即投保</button>
+                <div className={style.btn_div}>
+                    <button type="button" onClick={this.apply}>立即投保</button>
                 </div>
                 {this.state.showMore? <Detail result={this.props.result}/> : null}
-                <div className={'handler ' + (this.state.showMore ? 'toHide' : '')} onClick={this.toggleShow}></div>
+                <div className={this.state.showMore ? style.toHide : style.handler} onClick={this.toggleShow}></div>
             </li>
         );
     };

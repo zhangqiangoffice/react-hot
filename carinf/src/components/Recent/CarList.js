@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AppActionCreators from '../../actions/AppActionCreators';
 import Car from './Car';
 import {queryOfferCar} from '../APIUtils';
+import style from '../asset/css/Recent.less'
 
 export default class CarList extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ export default class CarList extends Component {
         });
 
         return (
-            <ul className="recent_list">
+            <ul className={style.recent_list}>
                 {listShows}
             </ul>
         );

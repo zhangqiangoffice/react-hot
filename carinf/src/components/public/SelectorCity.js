@@ -19,7 +19,6 @@ export default class Out extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-      console.log(nextProps.pro);
       if (nextProps.isShow) {
         let cityData = InsuranceStore.getStakeholder().cityDatas[nextProps.pro]
         if (!cityData) {

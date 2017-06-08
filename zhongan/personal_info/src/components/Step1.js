@@ -6,6 +6,7 @@ import ProductContainer from '../containers/ProductContainer'
 import Navigation from './Navigation'
 import SubTitle from './SubTitle'
 import { Link } from 'react-router'
+import style from './asset/css/index.less'
 
 
 const Step1 = ({step, onGoToStep}) => (
@@ -19,7 +20,7 @@ const Step1 = ({step, onGoToStep}) => (
 
     <HolderContainer />
 
-    <button className="next_btn" onClick={onGoToStep}>下一步</button>
+    <button className={style.next_btn} onClick={onGoToStep}>下一步</button>
 
     <SelectorContainer />
 

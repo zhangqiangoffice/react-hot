@@ -7,6 +7,7 @@ import ProductContainer from '../containers/ProductContainer'
 import LoadingContainer from '../containers/LoadingContainer'
 import Navigation from './Navigation'
 import SubTitle from './SubTitle'
+import style from './asset/css/index.less'
 
 const OutPut = ({step, onGoToStep}) => (
   <div>
@@ -25,7 +26,7 @@ const OutPut = ({step, onGoToStep}) => (
 
     <InsurantContainer />
     
-    <button className="next_btn" onClick={onGoToStep}>下一步</button>
+    <button className={style.next_btn} onClick={onGoToStep}>下一步</button>
 
     <LoadingContainer />
 

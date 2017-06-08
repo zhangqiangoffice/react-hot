@@ -4,6 +4,9 @@ import APIUtils from './APIUtils';
 import AppActionCreators from '../actions/AppActionCreators';
 import Options from './Options';
 import AppStore from '../stores/AppStore';
+import { DatePicker } from 'antd-mobile';
+import zAJAX from 'z-ajax'
+import moment from 'moment';
 
 export default class BecomeRegular extends Component {
     constructor(props) {
@@ -22,6 +25,13 @@ export default class BecomeRegular extends Component {
         this.changeAdviseMemo = this.changeAdviseMemo.bind(this);
         
     };
+
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
 
     //返回列表页面
     goLists() {
@@ -46,8 +56,8 @@ export default class BecomeRegular extends Component {
     }
 
     //输入转正建议的文本
-    changeAdviseMemo(event) {
-        let text = event.target.value.trim();
+    changeAdviseMemo(text) {
+        // let text = event.target.value.trim();
         this.setState({
             adviseMemo: text,
         });
@@ -79,21 +89,18 @@ export default class BecomeRegular extends Component {
             }
 
             AppActionCreators.showLoading();
-            $.ajax({
-                type: "post",
-                url: ctx + "/application_mobile/deal_application",
-                data: datas,
-                dataType: "json",
-                success: function(msg) {
-                    if (msg.result === 1) {
-                        AppActionCreators.showComponent('Lists');
-                        alert('提交成功！');
-                        window.location.reload();
-                    } else {
-                        alert(msg.message);
-                    }
-                }
-            });
+
+            let cb = msg => {
+                if (msg.result === 1) {
+                    AppActionCreators.showComponent('Lists');
+                    alert('提交成功！');
+                    window.location.reload();
+                } else {
+                    alert(msg.message);
+                }  
+            }
+
+            zAJAX(`${ctx}/application_mobile/deal_application`, datas, cb)
         } else {
             APIUtils.deal_application();
         }
@@ -134,35 +141,50 @@ export default class BecomeRegular extends Component {
 
                     <ul>
                         <li className={this.state.adviseLevel === "0" ? 'selected' : ''} data-index="0" onClick={this.selectAdvise}>
-                            提前转正，提前至
-                            <input type="text" placeholder="请输入" 
-                                data-index="0" 
-                                value={this.state.adviseLevel === "0" ? this.state.adviseMemo : ''}
-                                className={this.state.adviseLevel === "0" ? '' : 'hide'}
-                                onChange={this.state.adviseLevel === "0" ? this.changeAdviseMemo : null}
-                                />
+                            提前至
+                            <DatePicker 
+                                  mode="date"
+                                  onChange={val => this.changeAdviseMemo(moment(val).format('YYYY-MM-DD'))}
+                                >
+                                <input type="text" placeholder="请选择" 
+                                    data-index="0" 
+                                    readOnly="readonly"
+                                    value={ this.state.adviseLevel === "0" ? this.state.adviseMemo : ''}
+                                    className={this.state.adviseLevel === "0" ? '' : 'hide'}
+                                    />
+                            </DatePicker>
+
                         </li>
                         <li className={this.state.adviseLevel === "1" ? 'selected' : ''} data-index="1" onClick={this.selectAdvise}>
                             按期转正
                         </li>
                         <li className={this.state.adviseLevel === "2" ? 'selected' : ''} data-index="2" onClick={this.selectAdvise}>
-                            延长试用期，延长至
-                            <input type="text" placeholder="请输入" 
-                                data-index="2" 
-                                value={this.state.adviseLevel === "2" ? this.state.adviseMemo : ''}
-                                className={this.state.adviseLevel === "2" ? '' : 'hide'}
-                                onChange={this.state.adviseLevel === "2" ? this.changeAdviseMemo : null}
-                                />
+                            延长至
+                            <DatePicker 
+                                  mode="date"
+                                  onChange={val => this.changeAdviseMemo(moment(val).format('YYYY-MM-DD'))}
+                                >
+                                <input type="text" placeholder="请选择" 
+                                    data-index="2" 
+                                    readOnly="readonly"
+                                    value={this.state.adviseLevel === "2" ? this.state.adviseMemo : ''}
+                                    className={this.state.adviseLevel === "2" ? '' : 'hide'}
+                                    />
+                            </DatePicker>
                         </li>
                         <li className={this.state.adviseLevel === "3" ? 'selected' : ''} data-index="3" onClick={this.selectAdvise}>
                             辞退，最后工作日
-                            <input type="text" 
-                                placeholder="请输入" 
-                                data-index="3" 
-                                value={this.state.adviseLevel === "3" ? this.state.adviseMemo : ''}
-                                className={this.state.adviseLevel === "3" ? '' : 'hide'}
-                                onChange={this.state.adviseLevel === "3" ? this.changeAdviseMemo : null}
-                                />
+                            <DatePicker 
+                                  mode="date"
+                                  onChange={val => this.changeAdviseMemo(moment(val).format('YYYY-MM-DD'))}
+                                >
+                                <input type="text" placeholder="请选择" 
+                                    data-index="3" 
+                                    readOnly="readonly"
+                                    value={this.state.adviseLevel === "3" ? this.state.adviseMemo : ''}
+                                    className={this.state.adviseLevel === "3" ? '' : 'hide'}
+                                    />
+                            </DatePicker>
                         </li>
                         <li className={this.state.adviseLevel === "4" ? 'selected' : ''} data-index="4" onClick={this.selectAdvise}>
                             转岗，建议岗位
@@ -171,7 +193,7 @@ export default class BecomeRegular extends Component {
                                 data-index="4" 
                                 value={this.state.adviseLevel === "4" ? this.state.adviseMemo : ''}
                                 className={this.state.adviseLevel === "4" ? '' : 'hide'}
-                                onChange={this.state.adviseLevel === "4" ? this.changeAdviseMemo : null}
+                                onChange={this.state.adviseLevel === "4" ? e => this.changeAdviseMemo(e.target.value.trim()) : null}
                                 />
                         </li>
                     </ul>

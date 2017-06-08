@@ -5,6 +5,7 @@ import InsuranceStore from '../../stores/InsuranceStore';
 import { Toast } from 'antd-mobile';
 import ProvinceSelector from './ProvinceSelector';
 import {getOwnerInfo} from '../APIUtils';
+import style from '../asset/css/Enter.less'
 
 export default class IndexDesk extends Component {
     constructor(props) {
@@ -63,11 +64,11 @@ export default class IndexDesk extends Component {
 
     render() {
         return (
-            <li className="li">
-                <label className="item_name">车&nbsp;&nbsp;牌</label>
-                <input type="text" placeholder="省份" readOnly="readonly" className="select_province" value={this.state.provinceShort} onClick={this.switchSelector}></input>
-                <input type="text" placeholder="车牌号" className="info_input car_num" value={this.state.plateNum} onChange={this.updatePlateNum}/>
-                <label className="new_car" onClick={this.noNum}><span>未上牌</span></label>
+            <li className={style.li}>
+                <label className={style.item_name}>车&nbsp;&nbsp;牌</label>
+                <input type="text" placeholder="省份" readOnly="readonly" className={style.select_province} value={this.state.provinceShort} onClick={this.switchSelector}></input>
+                <input type="text" placeholder="车牌号" className={`${style.info_input} ${style.car_num}`} value={this.state.plateNum} onChange={this.updatePlateNum}/>
+                <label className={style.new_car} onClick={this.noNum}><span>未上牌</span></label>
                 <ProvinceSelector isShow={this.state.isShow} selectedShort={this.state.provinceShort} switchSelector={this.switchSelector}/>
             </li>
         );

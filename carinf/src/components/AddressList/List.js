@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Address from './Address';
+import style from '../asset/css/AddressList.less'
 
 export default class List extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export default class List extends Component {
             });
         
         return (
-            <ul className="address_ul">
+            <ul className={style.address_ul}>
                 {listShows}
             </ul>
         );

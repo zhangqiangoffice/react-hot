@@ -1,7 +1,6 @@
 import AppActionCreators from '../actions/AppActionCreators';
 import AppStore from '../stores/AppStore';
 import NewBusinessTravel from './NewBusinessTravel';
-
 import zAJAX from 'z-ajax'
 
 module.exports = {
@@ -152,17 +151,6 @@ module.exports = {
         }
 
         zAJAX(`${ctx}/document_mobile/develop/h5api_send`, datas, cb)
-
-
-
-        // $.ajax({
-        //     type: "post",
-        //     url: ctx + "/document_mobile/develop/h5api_send",
-        //     data: datas,
-        //     dataType: "json",
-        //     success: function(msg) {
-        //     }
-        // });
     },
 
     //更多的提交给我审批
@@ -186,15 +174,6 @@ module.exports = {
         }
 
         zAJAX(`${ctx}/document_mobile/develop/h5api_receive`, datas, cb)
-
-        // $.ajax({
-        //     type: "post",
-        //     url: ctx + "/document_mobile/develop/h5api_receive",
-        //     data: datas,
-        //     dataType: "json",
-        //     success: function(msg) {
-        //     }
-        // });
     },
 
 
@@ -213,20 +192,10 @@ module.exports = {
         }
 
         zAJAX(ctx + urlArr[index], {id: id, staffId: AppStore.getStaffid()}, cb)
-
-        // $.ajax({
-        //     type: "post",
-        //     url: ctx + urlArr[index],
-        //     data: {id: id, staffId: AppStore.getStaffid()},
-        //     dataType: "json",
-        //     success: function(msg) {
-        //     }
-        // });
     },
 
     //提交审批意见
     deal_application: function() {
-        console.log('deal_application');
         if (!AppStore.getSignContent()) {
             alert('签批意见不能为空！');
             return false;
@@ -244,26 +213,18 @@ module.exports = {
         }
 
         let cb = msg => {
+            AppActionCreators.hideLoading();
             if (msg.result === 1) {
-                AppActionCreators.showComponent('Lists');
+                // AppActionCreators.showComponent('Lists');
                 alert('提交成功！');
-                window.location.reload();
+                let first = (window.location.href).split('?')[0];
+                window.location.href = `${first}?staffId=${AppStore.getStaffid()}`;
+                // window.location.reload();
             } else {
                 alert(msg.message);
             }  
         }
 
         zAJAX(`${ctx}/application_mobile/deal_application`, datas, cb)
-
-
-
-        // $.ajax({
-        //     type: "post",
-        //     url: ctx + "/application_mobile/deal_application",
-        //     data: datas,
-        //     dataType: "json",
-        //     success: function(msg) {
-        //     }
-        // });
     }
 }

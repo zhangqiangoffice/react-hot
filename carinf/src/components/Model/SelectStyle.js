@@ -13,7 +13,7 @@ export default class SelectStyle extends Component {
         });
         
         return (
-            <ul className="select_style">
+            <ul>
                 {listShows}
             </ul>
         );

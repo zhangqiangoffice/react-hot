@@ -16,6 +16,13 @@ export default class BusinessTravel extends Component {
         
     };
 
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     //返回列表页面
     goLists() {
         AppActionCreators.showComponent('Lists');
@@ -67,7 +74,7 @@ export default class BusinessTravel extends Component {
                         </tr>
                         <tr>
                             <td className="item">时间总计：</td>
-                            <td colSpan="3">{detail.intervals}</td>
+                            <td colSpan="3">{detail.intervals} 天</td>
                         </tr>
 
                     </tbody>

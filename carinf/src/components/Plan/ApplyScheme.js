@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import InsuranceItem from './InsuranceItem';
+import style from '../asset/css/Plan.less'
 
 export default class ApplyScheme extends Component {
     constructor(props){
@@ -37,7 +38,7 @@ export default class ApplyScheme extends Component {
 
         return (
             <div>
-                <table>
+                <table className={style.items}>
                     <thead>
                         <tr>
                             <th><span>条款</span></th>

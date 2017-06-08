@@ -20,11 +20,13 @@ export default class AppLi extends Component {
         if (sign.editFlag === "0" || sign.editFlag === "2") {
             second = (<div className="down_storey">
                         <span className="suggestion_item">签批意见</span>
-                        <input data-id={sign.id} type="text" placeholder="请输入意见，且不得为空" value={this.props.signContent} onChange={AppActionCreators.changeSignContent}/>
-                        <p>
-                            {this.props.signStatus === '1' ? '同意' : '驳回'}
-                            <Switcher isOn={this.props.signStatus === '1'} onClick={AppActionCreators.switchSignStatus}/>
-                        </p>
+                        <textarea  data-id={sign.id} type="text" placeholder={sign.signDepartmentName === '出差地负责人确认' ? '请详细说明到达时间以及工作状态' : '请输入意见，且不得为空'} value={this.props.signContent} onChange={AppActionCreators.changeSignContent}></textarea>
+                        {sign.signDepartmentName === '出差地负责人确认' ? null : 
+                            <p>
+                                {this.props.signStatus === '1' ? '同意' : '驳回'}
+                                <Switcher isOn={this.props.signStatus === '1'} onClick={AppActionCreators.switchSignStatus}/>
+                            </p>
+                        }
                     </div>
                 );
         }
@@ -34,7 +36,7 @@ export default class AppLi extends Component {
                 <div className="department">{sign.signDepartmentName}</div>
                 <div className="one_signer">
                     <div className="up_storey">
-                        <img src={ctx + '/static/img/document/portrait.png'} />
+                        <img src={require('../asset/img/portrait.png')} />
                         <div className="signer_person">
                             <p>{sign.signPersonName}
                                <br/>

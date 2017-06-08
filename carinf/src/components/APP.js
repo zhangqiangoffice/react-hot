@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import AlertProgress from './public/AlertProgress'
 import { getDataFromUrl } from './APIUtils';
-import './asset/css/index.less'
-import './asset/css/mobile_initial.css'
+import './asset/css/init.less'
 
 export default class App extends Component {
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "dev": "node ./server.js",
+    "dev": "node ./server.js ",
     "build": "webpack --progress --colors"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "eslint-plugin-react": "^3.6.2",
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "~1.0.1",
+    "html-loader": "^0.4.5",
     "json-loader": "^0.5.4",
     "less": "~2.7.1",
     "less-loader": "~2.2.3",
@@ -61,12 +62,13 @@
   },
   "dependencies": {
     "antd-mobile": "~1.0.0",
-    "moment": "^2.14.1",
     "flux": "^3.1.0",
+    "moment": "^2.14.1",
     "object-assign": "^4.1.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^3.0.0",
+    "styled-components": "^1.4.5",
     "z-ajax": "^1.0.9"
   }
 }

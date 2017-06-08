@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Result from './Result';
 import InsuranceStore from '../../stores/InsuranceStore';
+import style from '../asset/css/Results.less'
 
 export default class ResultList extends Component {
 
@@ -14,7 +15,7 @@ export default class ResultList extends Component {
         });
 
         return (
-            <ul className="result">
+            <ul className={style.result}>
                 {listShows}
             </ul>
         );

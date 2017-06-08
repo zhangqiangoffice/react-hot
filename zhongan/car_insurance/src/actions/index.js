@@ -419,7 +419,7 @@ export const checkPayData = () => (dispatch, getState) => {
     } else {
       alert(msg.message)
       //如果是订单超过24小时失效，则页面要回到订单列表页面
-      if (msg.message === '该订单已超过24小时未支付,订单已失效！' || msg.message === '该订单已被处理,请从订单列表重新进入！') {
+      if (msg.message === '该订单已超过24小时未支付,订单已失效！' || msg.message === '该订单已被处理,请从订单列表重新进入！' || msg.message === '该订单已从其他渠道处理！') {
         window.location.href = `./app_order_list?staffId=${msg.staffId}`
       }
     }

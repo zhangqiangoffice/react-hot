@@ -251,7 +251,6 @@ module.exports = {
             list,
             
         };
-        console.log(list);
         AppDispatcher.dispatch(action);
     },
 
@@ -285,7 +284,6 @@ module.exports = {
             tp,
             zh, 
         };
-        console.log(action)
         AppDispatcher.dispatch(action);
     },
    

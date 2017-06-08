@@ -10,6 +10,7 @@ import Navigation from './Navigation'
 import SubTitle from './SubTitle'
 import InsureItemCard from './InsureItemCard'
 import { Link } from 'react-router'
+import style from './asset/css/index.less'
 
 
 const OutPut = ({step, onGoToStep}) => (
@@ -33,7 +34,7 @@ const OutPut = ({step, onGoToStep}) => (
 
     <InsureItemCard title="团体住院津贴保险" rate="100" responsibility="意外住院津贴" sum="50" deductible="天数（天）" d_sum="无（最多180天）"/>
 
-    <button className="next_btn" onClick={onGoToStep}>下一步</button>
+    <button className={style.next_btn} onClick={onGoToStep}>下一步</button>
 
     <SelectorContainer />
 

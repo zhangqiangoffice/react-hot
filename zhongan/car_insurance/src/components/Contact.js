@@ -3,6 +3,7 @@ import BlankLi from './BlankLi'
 import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
 import data from '../reducers/data.json'
+import style from './asset/css/index.less'
 
 const OutPut = ({ justRead, contactPeople, contactCertiType, contactCertiNo, contactPhone, contactEmail, onChangeContactPeople, onChangeContactCertiNo, onChangeContactPhone, onChangeContactEmail, onShowContactCertiTypeBox}) => (
   <ul className="coat_ul">

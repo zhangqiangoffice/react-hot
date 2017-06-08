@@ -3,6 +3,8 @@ import LiSelector from './LiSelector';
 import APIUtils from './APIUtils';
 import AppActionCreators from '../actions/AppActionCreators';
 import AppStore from '../stores/AppStore';
+import DatePic from './public/DatePic';
+import zAJAX from 'z-ajax'
 
 export default class NewBusinessTravel extends Component {
     constructor(props) {
@@ -53,6 +55,13 @@ export default class NewBusinessTravel extends Component {
         
     };
 
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     //修改外出原因
     changeMemo(event) {
         let val = event.target.value;
@@ -65,18 +74,29 @@ export default class NewBusinessTravel extends Component {
     province() {
         AppActionCreators.showLoading();
 
-        $.ajax({
-            type: "post",
-            url: ctx + "/webService/province",
-            dataType: "json",
-            success: function(msg) {
-                AppActionCreators.hideLoading();
-                this.setState({
-                    provinceDatas: msg
-                });
-                this.showProvinceSelector();
-            }.bind(this)
-        });
+        let datas = {}
+        let cb = msg => {
+            AppActionCreators.hideLoading();
+            this.setState({
+                provinceDatas: msg
+            });
+            this.showProvinceSelector();
+        }
+
+        // $.ajax({
+        //     type: "post",
+        //     url: ctx + "/webService/province",
+        //     dataType: "json",
+        //     success: function(msg) {
+        //         AppActionCreators.hideLoading();
+        //         this.setState({
+        //             provinceDatas: msg
+        //         });
+        //         this.showProvinceSelector();
+        //     }.bind(this)
+        // });
+
+        zAJAX(`${ctx}/webService/province`, datas, cb)
     }
 
     //获取城市
@@ -84,21 +104,33 @@ export default class NewBusinessTravel extends Component {
         AppActionCreators.showLoading();
         let no = this.state.placeArr[0].no;
 
-        $.ajax({
-            type: "post",
-            url: ctx + "/webService/region",
-            data: {id: no},
-            dataType: "json",
-            success: function(msg) {
-                AppActionCreators.hideLoading();
-                let obj = this.state.cityDatas;
-                obj[no] = msg
-                this.setState({
-                    cityDatas: obj
-                });
-                this.showCitySelector();
-            }.bind(this)
-        });
+        // $.ajax({
+        //     type: "post",
+        //     url: ctx + "/webService/region",
+        //     data: {id: no},
+        //     dataType: "json",
+        //     success: function(msg) {
+        //         AppActionCreators.hideLoading();
+        //         let obj = this.state.cityDatas;
+        //         obj[no] = msg
+        //         this.setState({
+        //             cityDatas: obj
+        //         });
+        //         this.showCitySelector();
+        //     }.bind(this)
+        // });
+
+        let cb = msg => {
+            AppActionCreators.hideLoading();
+            let obj = this.state.cityDatas;
+            obj[no] = msg
+            this.setState({
+                cityDatas: obj
+            });
+            this.showCitySelector();
+        }
+
+        zAJAX(`${ctx}/webService/region`, {id: no}, cb)
     }
 
     //获取区县
@@ -106,21 +138,33 @@ export default class NewBusinessTravel extends Component {
         AppActionCreators.showLoading();
         let no = this.state.placeArr[1].no;
 
-        $.ajax({
-            type: "post",
-            url: ctx + "/webService/county",
-            data: {id: no},
-            dataType: "json",
-            success: function(msg) {
-                AppActionCreators.hideLoading();
-                let obj = this.state.countyDatas;
-                obj[no] = msg
-                this.setState({
-                    countyDatas: obj
-                });
-                this.showCountySelector();
-            }.bind(this)
-        });
+        // $.ajax({
+        //     type: "post",
+        //     url: ctx + "/webService/county",
+        //     data: {id: no},
+        //     dataType: "json",
+        //     success: function(msg) {
+        //         AppActionCreators.hideLoading();
+        //         let obj = this.state.countyDatas;
+        //         obj[no] = msg
+        //         this.setState({
+        //             countyDatas: obj
+        //         });
+        //         this.showCountySelector();
+        //     }.bind(this)
+        // });
+
+        let cb = msg => {
+            AppActionCreators.hideLoading();
+            let obj = this.state.countyDatas;
+            obj[no] = msg
+            this.setState({
+                countyDatas: obj
+            });
+            this.showCountySelector();
+        }
+
+        zAJAX(`${ctx}/webService/county`, {id: no}, cb)
     }
 
     //通过index选择省
@@ -131,6 +175,10 @@ export default class NewBusinessTravel extends Component {
             no: pro.provinceNo
         }
         let arr = this.state.placeArr;
+        if (obj.name !== arr[0].name) {
+            arr[1] = {name: '请选择城市'};
+            arr[2] = {name: '请选择县区'};
+        }
         arr[0] = obj;
         this.setState({
             isShow:false,
@@ -147,6 +195,9 @@ export default class NewBusinessTravel extends Component {
             no: city.regionNo
         }
         let arr = this.state.placeArr;
+        if (obj.name !== arr[1].name) {
+            arr[2] = {name: '请选择县区'};
+        }
         arr[1] = obj;
         this.setState({
             isShow: false,
@@ -270,26 +321,42 @@ export default class NewBusinessTravel extends Component {
         let move = this.state.movePlace.trim();
         if (move.length > 1) {
             AppActionCreators.showLoading();
-            $.ajax({
-                type: "post",
-                url: ctx + "/application_mobile/getdxq",
-                data: {movePlace: this.state.movePlace},
-                dataType: "json",
-                success: function(msg) {
-                    AppActionCreators.hideLoading();
-                    if (msg.result === 1) {
-                        if (msg.list.length) {
-                            this.setState({
-                                dxqList: msg.list
-                            })
-                        } else {
-                            alert('未找到，请更改搜索条件！');
-                        }
+            // $.ajax({
+            //     type: "post",
+            //     url: ctx + "/application_mobile/getdxq",
+            //     data: {movePlace: this.state.movePlace},
+            //     dataType: "json",
+            //     success: function(msg) {
+            //         AppActionCreators.hideLoading();
+            //         if (msg.result === 1) {
+            //             if (msg.list.length) {
+            //                 this.setState({
+            //                     dxqList: msg.list
+            //                 })
+            //             } else {
+            //                 alert('未找到，请更改搜索条件！');
+            //             }
+            //         } else {
+            //             alert(msg.message);
+            //         }
+            //     }.bind(this)
+            // });
+            let cb = msg => {
+                AppActionCreators.hideLoading();
+                if (msg.result === 1) {
+                    if (msg.list.length) {
+                        this.setState({
+                            dxqList: msg.list
+                        })
                     } else {
-                        alert(msg.message);
+                        alert('未找到，请更改搜索条件！');
                     }
-                }.bind(this)
-            }); 
+                } else {
+                    alert(msg.message);
+                }
+            }
+
+            zAJAX(`${ctx}/application_mobile/getdxq`, {movePlace: this.state.movePlace}, cb) 
         } else {
             alert('至少输入两个汉字');
         }
@@ -318,37 +385,30 @@ export default class NewBusinessTravel extends Component {
         if (d <= 0) {
             alert ('结束时间必须大于开始时间！');
         }
+
+        if (d >7 ) {
+            alert('单次出差时间不允许超过7天');
+            this.setState({
+                intervals: '',
+                greaterThan3: false,
+            })
+        }
     }
 
     //修改结束日期
-    changeEndDate(event) {
-        let val = event.target.value.trim();
-        let len = val.length;
-        if (len < 11) {
-            this.setState({
-                endDate: val
-            });
-
-            if (len === 10) {
-                this.countDays(undefined, val);
-            }
-        }
-
+    changeEndDate(val) {
+        this.setState({
+            endDate: val
+        });
+        this.countDays(undefined, val);
     }
 
     //修改开始日期
-    changeStartDate(event) {
-        let val = event.target.value.trim();
-        let len = val.length;
-        if (len < 11) {
-            this.setState({
-                startDate: val
-            });
-
-            if (len === 10) {
-                this.countDays(val, );
-            }
-        }
+    changeStartDate(val) {
+        this.setState({
+            startDate: val
+        });
+        this.countDays(val, );
     }
 
     //检查数据是否满足提交要求
@@ -389,32 +449,54 @@ export default class NewBusinessTravel extends Component {
             }
 
             AppActionCreators.showLoading();
-            $.ajax({
-                type: "post",
-                url: ctx + "/application_mobile/add_application",
-                data: {data: JSON.stringify(datas)},
-                dataType: "json",
-                success: function(msg) {
-                    AppActionCreators.hideLoading();
-                    if (msg.result === 1) {
-                        alert('提交成功！');
-                        this.goLists();
-                        this.setState({
-                            memo: '',
-                            movePlace: '',
-                            businessPlace: '',
-                            startDate: '',
-                            endDate: '',
-                            intervals: '',
-                            greaterThan3: false,
-                        });
-                        AppActionCreators.reload();
-                        APIUtils.initList();
-                    } else {
-                        alert(msg.message);
-                    }
-                }.bind(this)
-            });
+            // $.ajax({
+            //     type: "post",
+            //     url: ctx + "/application_mobile/add_application",
+            //     data: {data: JSON.stringify(datas)},
+            //     dataType: "json",
+            //     success: function(msg) {
+            //         AppActionCreators.hideLoading();
+            //         if (msg.result === 1) {
+            //             alert('提交成功！');
+            //             this.goLists();
+            //             this.setState({
+            //                 memo: '',
+            //                 movePlace: '',
+            //                 businessPlace: '',
+            //                 startDate: '',
+            //                 endDate: '',
+            //                 intervals: '',
+            //                 greaterThan3: false,
+            //             });
+            //             AppActionCreators.reload();
+            //             APIUtils.initList();
+            //         } else {
+            //             alert(msg.message);
+            //         }
+            //     }.bind(this)
+            // });
+
+            let cb = msg => {
+                AppActionCreators.hideLoading();
+                if (msg.result === 1) {
+                    alert('提交成功！');
+                    this.goLists();
+                    this.setState({
+                        memo: '',
+                        movePlace: '',
+                        businessPlace: '',
+                        startDate: '',
+                        endDate: '',
+                        intervals: '',
+                        greaterThan3: false,
+                    });
+                    AppActionCreators.reload();
+                    APIUtils.initList();
+                } else {
+                    alert(msg.message);
+                }
+            }
+            zAJAX(`${ctx}/application_mobile/add_application`, {data: JSON.stringify(datas)}, cb) 
         }
     }
 
@@ -426,9 +508,9 @@ export default class NewBusinessTravel extends Component {
 
         let blankForm = this.props.blankForm.entity;
         let signList = blankForm.signList.map((sign, index) => {
-            if (!this.state.greaterThan3 && index === 2) {
-                return null
-            }
+            // if (!this.state.greaterThan3 && index === 2) {
+            //     return null
+            // }
             return(
                 <li key={index}>
                     {sign.signDepartmentName}
@@ -489,14 +571,16 @@ export default class NewBusinessTravel extends Component {
                 <div className="sub_title">外出时间</div>
 
                 <ul className="time">
-                    <li>
-                        <label>开始时间</label>
-                        <input type="text" placeholder="请输入,如2016-01-01" value={this.state.startDate} onChange={this.changeStartDate}/>
-                    </li>
-                    <li>
-                        <label>结束时间</label>
-                        <input type="text" placeholder="请输入,如2016-01-03" value={this.state.endDate} onChange={this.changeEndDate}/>
-                    </li>
+                    <DatePic title="开始时间" 
+                        theDate={this.state.startDate} 
+                        minDate="2016-01-01" 
+                        onChangeDate={this.changeStartDate}
+                    />
+                    <DatePic title="结束时间" 
+                        theDate={this.state.endDate} 
+                        minDate="2016-01-01" 
+                        onChangeDate={this.changeEndDate}
+                    />
                     <li>
                         <label>时间总计（天）</label>
                         <input type="text" value={this.state.intervals} readOnly="readonly" />

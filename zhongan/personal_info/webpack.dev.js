@@ -1,5 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const pxtorem = require('postcss-pxtorem');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -27,14 +30,32 @@ module.exports = {
     },{ 
       test: /\.(svg)$/i, 
       loader: 'svg-sprite', 
-      include: [require.resolve('antd-mobile').replace(/warn\.js$/, '')]
+      include: [require.resolve('antd-mobile').replace(/warn\.js$/, ''), path.resolve(__dirname, 'src/components/asset/svg')]
     },{
       test: /\.json$/,
       loader: "json"
     },{ 
       test: /\.css$/, 
-      loader: 'style!css' 
-    } // 把css处理成内联style，动态插入到页面
+      loader: 'style!css!postcss' 
+    },{ 
+      test: /\.less$/, 
+      loader: "style!css?modules&localIdentName=[hash:base64:10]!postcss!less" 
+    },{
+      test: /\.(png|jpg)$/,
+      loader: 'url?limit=50000'
+    }
     ]
+  },
+  postcss: function () {
+    return [
+        autoprefixer({
+            browsers: ['last 3 versions', '> 1%']
+        }),
+        pxtorem({
+            rootValue: 100,
+            propWhiteList: [],
+        }),
+        cssnano
+      ]
   }
 };

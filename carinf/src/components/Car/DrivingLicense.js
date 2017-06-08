@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import CarActionCreators from '../../actions/CarActionCreators';
-import DatePic from '../public/DatePic';
+import { DatePicker } from 'antd-mobile';
+import moment from 'moment';
+
 
 export default class CarInfo extends Component {
     
     render() {
         return (
-            <ul className="info_ul">
+            <ul className="blank_ul">
                 <li>
                     <label>车架号</label>
                     <input type="text" placeholder="请输入" value={this.props.vin} onChange={CarActionCreators.updateVin}/>
@@ -19,12 +21,23 @@ export default class CarInfo extends Component {
                     <label>品牌型号</label>
                     <input type="text" placeholder="请输入" value={this.props.brandModel} onChange={CarActionCreators.updateBrandModel}/>
                 </li>
-                <DatePic title="注册日期" 
-                    theDate={this.props.registerDate} 
-                    minDate="2005-01-01" 
-                    maxDate={new Date()}
-                    onChangeDate={CarActionCreators.changeRegisterDate}
-                />
+                <li>
+                    <DatePicker 
+                          mode="date"
+                          maxDate={moment()}
+                          title="注册日期"
+                          value={this.props.registerDate === '' ? moment() : moment(this.props.registerDate)}
+                          onChange={val => CarActionCreators.changeRegisterDate(moment(val).format('YYYY-MM-DD'))}
+                        >
+                        <div>
+                            <label>注册日期</label>
+                            <input type="text" placeholder="请选择" 
+                                readOnly="readonly"
+                                value={this.props.registerDate}
+                                />
+                        </div>
+                    </DatePicker>
+                </li>
             </ul>
         );
     };

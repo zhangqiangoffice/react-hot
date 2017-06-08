@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import { Icon } from 'antd-mobile';
+import style from '../asset/css/TitleBar.less'
 
 export default class TitleBar extends Component {
 
@@ -9,8 +11,8 @@ export default class TitleBar extends Component {
 
     render() {
         return (
-            <div className="title_bar">
-                <button type="button" onClick={this.goBack} id="go_back"> </button>
+            <div className={style.title_bar}>
+                <Icon  className={style.goBack} type={require('../asset/svg/goBack.svg')} onClick={this.goBack} id="go_back"/>
                 <h1>{this.props.title}</h1>
             </div>
         );

@@ -14,6 +14,7 @@ import SubTitle from './SubTitle'
 import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
 import { Link } from 'react-router'
+import style from './asset/css/index.less'
 
 
 const Step1 = ({step, holderType, onChangeHolderType, onGoToStep}) => (
@@ -42,7 +43,7 @@ const Step1 = ({step, holderType, onChangeHolderType, onGoToStep}) => (
         </div>
     }
 
-    <button className="next_btn" onClick={e => onGoToStep(holderType)}>下一步</button>
+    <button className={style.next_btn} onClick={e => onGoToStep(holderType)}>下一步</button>
 
     <SelectorContainer />
     <LiSelectorContainer />

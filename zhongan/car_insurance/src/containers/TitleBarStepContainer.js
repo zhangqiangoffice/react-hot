@@ -3,7 +3,7 @@ import { toggleShowParameter, goToStep } from '../actions'
 import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
-  title: '驾乘意外险',
+  title: '驾乘意外伤害险',
   step: state.step,
 })
 

@@ -2,6 +2,7 @@ import React from 'react'
 import BlankLi from './BlankLi'
 import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
+import style from './asset/css/index.less'
 
 const OutPut = ({ insuredId, fee, applyNum}) => {
 

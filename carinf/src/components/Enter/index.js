@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TitleBar from '../public/TitleBar';
 import Desk from './Desk';
+import style from '../asset/css/Enter.less'
 
 export default class App extends Component {
 
@@ -8,7 +9,7 @@ export default class App extends Component {
         return (
             <div>
                 <TitleBar title="快速报价" />
-                <img className="banner" src={require('../asset/img/banner.png')} />
+                <img className={style.banner} src={require('../asset/img/banner.png')} />
                 <Desk />
             </div>
         )

@@ -1,5 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const pxtorem = require('postcss-pxtorem');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -24,6 +27,9 @@ module.exports = {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, './src')
+    },{
+        test: /\.(png|jpg)$/,
+        loader: 'url?limit=40000'
     },{ 
       test: /\.(svg)$/i, 
       loader: 'svg-sprite', 
@@ -33,8 +39,24 @@ module.exports = {
       loader: "json"
     },{ 
       test: /\.css$/, 
-      loader: 'style!css' 
-    } // 把css处理成内联style，动态插入到页面
+      loader: 'style!css!postcss' 
+    },{ 
+      test: /\.less$/, 
+      loader: "style!css?modules&localIdentName=[hash:base64:10]!postcss!less" 
+      }
     ]
+  },
+  postcss: function () {
+      return [
+          autoprefixer({
+              browsers: ['last 3 versions', '> 1%']
+          }),
+          pxtorem({
+              rootValue: 100,
+              propWhiteList: [],
+          }),
+          cssnano
+      ]
   }
+
 };

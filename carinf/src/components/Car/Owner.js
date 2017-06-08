@@ -6,7 +6,7 @@ export default class CarInfo extends Component {
     render() {
 
         return (
-            <ul className="info_ul">
+            <ul className="blank_ul">
                 <li>
                     <label>车主名</label>
                     <input type="text" placeholder="请输入" value={this.props.name} onChange={CarActionCreators.updateName}/>

@@ -13,6 +13,7 @@ import SubTitle from './SubTitle'
 import InsureItemCard from './InsureItemCard'
 import BlankLi from './BlankLi'
 import { Link } from 'react-router'
+import style from './asset/css/index.less'
 
 
 const OutPut = ({step, holderType, onGoToStep}) => (
@@ -43,7 +44,7 @@ const OutPut = ({step, holderType, onGoToStep}) => (
         </div>
     }
 
-    <button className="next_btn" onClick={onGoToStep}>下一步</button>
+    <button className={style.next_btn} onClick={onGoToStep}>下一步</button>
 
     <LoadingContainer />
 

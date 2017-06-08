@@ -4,6 +4,7 @@ import InputBox from './InputBox'
 import ClickDiv from './ClickDiv'
 import RadioSelector from './RadioSelector'
 import data from '../reducers/data.json'
+import style from './asset/css/index.less'
 
 
 export default class OutPut extends Component {

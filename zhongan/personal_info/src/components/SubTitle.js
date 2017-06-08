@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './asset/css/index.less'
 
 const SubTitle = ({title}) => (
     
-  <div className="subtitle">
+  <div className={style.subtitle}>
     {title}
   </div>
 )

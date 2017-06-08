@@ -188,7 +188,9 @@ function showApplyment() {
 
 //扩展新增申请的类别
 function extendCanNewApply(list) {
-    canNewApply = canNewApply.concat(list);
+    if (canNewApply.length === 3) {
+        canNewApply = canNewApply.concat(list);
+    }
 }
 
 function emitChange() {

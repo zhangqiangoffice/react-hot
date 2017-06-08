@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import APIUtils from './APIUtils';
 import AppActionCreators from '../actions/AppActionCreators';
 import AppStore from '../stores/AppStore';
+import style from '../asset/css/ChoiceApplyType.less'
 
 export default class ChoiceApplyType extends Component {
     constructor(props) {
@@ -40,32 +41,22 @@ export default class ChoiceApplyType extends Component {
             return null
         }
 
-        let btnStyle = {
-            width: '44%',
-            overflow: 'hidden',
-            float: 'left',
-            margin: '0 3% 1rem',
-        }
-
         let listShows = AppStore.getCanNewApply().map((name, index) => {
             if (!!name) {
                 return (
-                    <li key={index}><button type="button" onClick={e => this.showBlankForm(index, name)} style={btnStyle}>{name}</button></li>
+                    <button type="button" key={index} onClick={e => this.showBlankForm(index, name)}>{name}</button>
                 ); 
             } 
         });
 
         return (
-            <div className="choice_apply_type">
-                <div className="type_box">
-                    <h1 className="type_title">
-                        请选择申请表类型
-                    </h1>
+            <div className="cover">
+                <div className={style.box}>
+                    <h1>请选择申请表类型</h1>
 
-                    <ul className="type_list">
-                        {listShows}
-                    </ul>
-                    <button className="cancel" type="button" onClick={this.props.closeApplyType}>取消</button>
+                    {listShows}
+                    
+                    <button className={style.cancel} type="button" onClick={this.props.closeApplyType}>取消</button>
                 </div>
             </div>      
         );

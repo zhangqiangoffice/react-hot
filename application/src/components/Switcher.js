@@ -8,7 +8,7 @@ export default class Switcher extends Component {
     render() {
         let yesOrNo = this.props.isOn ? 'yes' : 'no';
         return (
-            <img src={ctx + '/static/img/carInf/' + yesOrNo + '.png'} onClick={this.props.onClick}/>
+            <img src={require(`../asset/img/${yesOrNo}.png`)} onClick={this.props.onClick}/>
         );
     };
 }

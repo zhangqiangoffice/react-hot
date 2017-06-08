@@ -8,6 +8,7 @@ import BlankLi from './BlankLi'
 import ClickDiv from './ClickDiv'
 import LoadingContainer from '../containers/LoadingContainer'
 import { Link } from 'react-router'
+import style from './asset/css/index.less'
 
 const OutPut = ({step, applyNum, insuredId, sumPremium, url, isZACashier, isOtherWay, balance, onGoToZACashier, onChangeIsOtherWay, onGoToStep}) => (
 
@@ -15,11 +16,11 @@ const OutPut = ({step, applyNum, insuredId, sumPremium, url, isZACashier, isOthe
     <TitleBarStepContainer />
     <Navigation step={step}/>
 
-    <div className="total">
+    <div className={style.total}>
       应付金额：<span>{sumPremium}</span>({applyNum}份)
     </div>
 
-    <ul className="coat_ul">
+    <ul className={style.coat_ul}>
       <BlankLi item="众安收银台">
         <ClickDiv val={'(可用)'} isOpen={isZACashier} onClickHandler={e => (onGoToZACashier())}/>
       </BlankLi>

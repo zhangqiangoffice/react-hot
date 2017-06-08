@@ -43,7 +43,7 @@ export default class CarInfo extends Component {
     render() {
 
         return (
-            <div className="car_info">
+            <div>
                 <DrivingLicense vin={this.state.vin}
                     engineNo={this.state.engineNo}
                     brandModel={this.state.brandModel}

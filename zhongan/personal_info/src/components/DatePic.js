@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { DatePicker } from 'antd-mobile';
 import moment from 'moment';
-
 // 如果不是使用 List.Item 作为 children
 const CustomChildren = props => (
   <div onClick={props.onClick} style={{ backgroundColor: '#fff',height: '4.9rem', width: '8.1rem'}}> 

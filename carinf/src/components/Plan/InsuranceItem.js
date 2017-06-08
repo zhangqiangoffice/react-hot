@@ -4,6 +4,7 @@ import SelectorRadio from '../public/SelectorRadio';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { insuranceList } from '../asset/json/appInfo.json';
 import InsuranceStore from '../../stores/InsuranceStore';
+import { transformChoice } from '../APIUtils'
 
 export default class InsuranceItem extends Component {
     constructor(props){
@@ -22,26 +23,6 @@ export default class InsuranceItem extends Component {
     toggleDedu() {
         let code = this.props.deductible.code;
         InsuranceActionCreators.toggleDedu(code);
-    }
-
-    //转换选项
-    transformChoice(choice) {
-        let label = '';
-        switch (true) {
-            case choice - 0 === 0:
-                label = "投保";
-                break;
-            case choice - 0 === -1:
-                label = "不投保";
-                break;
-            case choice - 0 >= 10000:
-                label = (choice / 10000) + '万'
-                break;
-            default:
-                label = choice;
-                break;
-        }
-        return label;
     }
 
     //获取某险种的保额数组
@@ -79,12 +60,12 @@ export default class InsuranceItem extends Component {
         
         let insurance = this.props.insurance;
         let deductible = this.props.deductible;
-        let label = this.transformChoice(insurance.choice);
+        let label = transformChoice(insurance.choice);
         let itemArr = this.getItemStr();
         //保额代码数组转保额字符数组
         itemArr.map((item, index) => {
             //已选择的投保项
-            let label = this.transformChoice(item);
+            let label = transformChoice(item);
             itemArr[index] = label;
         });
         

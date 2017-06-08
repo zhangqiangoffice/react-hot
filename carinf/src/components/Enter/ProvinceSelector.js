@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { provinces } from '../asset/json/appInfo.json';
 import CarActionCreators from '../../actions/CarActionCreators';
+import style from '../asset/css/Enter.less'
+
 
 export default class ProvinceSelector extends Component {
 
@@ -18,13 +20,13 @@ export default class ProvinceSelector extends Component {
         let listShows = provinces.map((short, index) => {
             let flag = (this.props.selectedShort !== short);
             return (
-                <li key={index} className={flag ? '' : 'selected'} onClick={this.clickShort}>{short}</li>
+                <li key={index} className={flag ? '' : style.selected} onClick={this.clickShort}>{short}</li>
             );   
         });
 
         return (
-            <div className="province_selector" onClick={this.props.switchSelector}>
-                <div className="box">
+            <div className={style.province_selector} onClick={this.props.switchSelector}>
+                <div className={style.box}>
                     <ul>
                         {listShows}
                     </ul>

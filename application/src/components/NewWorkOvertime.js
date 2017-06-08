@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import APIUtils from './APIUtils';
 import AppActionCreators from '../actions/AppActionCreators';
 import AppStore from '../stores/AppStore';
+import DatePic from './public/DatePic';
+import { DatePicker, List } from 'antd-mobile';
+import zAJAX from 'z-ajax'
+import moment from 'moment';
+
+const Item = List.Item;
+const zhNow = moment();
 
 export default class NewWorkOvertime extends Component {
     constructor(props) {
@@ -24,6 +31,13 @@ export default class NewWorkOvertime extends Component {
         
     };
 
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     //修改原因
     changeMemo(event) {
         let val = event.target.value;
@@ -39,50 +53,41 @@ export default class NewWorkOvertime extends Component {
 
     //计算日期之间的天数
     countDays(sStr = this.state.startDate, eStr = this.state.endDate) {
-        let s = new Date(sStr.replace(' ', 'T'));
-        let e = new Date(eStr.replace(' ', 'T'));
+        let s = new Date(sStr);
+        let e = new Date(eStr);
         let minutes = Number.parseInt((e - s) / (60 * 1000));
 
         if (minutes > 0) {
             let h = Number.parseInt(minutes / 60);
             let m = minutes % 60;
+            let first = h > 0 ? h + '小时' : '';
+            let second = m > 0 ? m + '分钟' : '';
             this.setState({
-                intervals: h > 0 ? h + '小时' + m + '分钟' : m + '分钟',
+                intervals: first + second,
             });
         } else if (minutes <= 0) {
             alert ('结束时间必须大于开始时间！');
+            this.setState({
+                intervals: '',
+            });
         } 
     }
 
     //修改结束日期
-    changeEndDate(event) {
-        let val = event.target.value;
-        let len = val.length;
-        if (len < 17) {
-            this.setState({
-                endDate: val
-            });
-
-            if (len === 16) {
-                this.countDays(undefined, val);
-            }
-        }
+    changeEndDate(val) {
+        this.setState({
+            endDate: val
+        });
+        this.countDays(undefined, val);
 
     }
 
     //修改开始日期
-    changeStartDate(event) {
-        let val = event.target.value;
-        let len = val.length;
-        if (len < 17) {
-            this.setState({
-                startDate: val
-            });
-
-            if (len === 16) {
-                this.countDays(val, );
-            }
-        }
+    changeStartDate(val) {
+        this.setState({
+            startDate: val
+        });
+        this.countDays(val, undefined);
     }
 
     //检查数据是否满足提交要求
@@ -107,35 +112,55 @@ export default class NewWorkOvertime extends Component {
                 staffId: AppStore.getStaffid(),
                 applyType: 6,
                 memo: this.state.memo,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate,
+                startDate: moment(this.state.startDate).format('YYYY-MM-DD HH:mm'),
+                endDate:  moment(this.state.endDate).format('YYYY-MM-DD HH:mm'),
                 intervals: this.state.intervals,
             }
 
             AppActionCreators.showLoading();
-            $.ajax({
-                type: "post",
-                url: ctx + "/application_mobile/add_application",
-                data: {data: JSON.stringify(datas)},
-                dataType: "json",
-                success: function(msg) {
-                    AppActionCreators.hideLoading();
-                    if (msg.result === 1) {
-                        alert('提交成功！');
-                        this.goLists();
-                        this.setState({
-                            memo: '',
-                            startDate: '',
-                            endDate: '',
-                            intervals: '',
-                        });
-                        AppActionCreators.reload();
-                        APIUtils.initList();
-                    } else {
-                        alert(msg.message);
-                    }
-                }.bind(this)
-            });
+            // $.ajax({
+            //     type: "post",
+            //     url: ctx + "/application_mobile/add_application",
+            //     data: {data: JSON.stringify(datas)},
+            //     dataType: "json",
+            //     success: function(msg) {
+            //         AppActionCreators.hideLoading();
+            //         if (msg.result === 1) {
+            //             alert('提交成功！');
+            //             this.goLists();
+            //             this.setState({
+            //                 memo: '',
+            //                 startDate: '',
+            //                 endDate: '',
+            //                 intervals: '',
+            //             });
+            //             AppActionCreators.reload();
+            //             APIUtils.initList();
+            //         } else {
+            //             alert(msg.message);
+            //         }
+            //     }.bind(this)
+            // });
+
+            let cb = msg => {
+                AppActionCreators.hideLoading();
+                if (msg.result === 1) {
+                    alert('提交成功！');
+                    this.goLists();
+                    this.setState({
+                        memo: '',
+                        startDate: '',
+                        endDate: '',
+                        intervals: '',
+                    });
+                    AppActionCreators.reload();
+                    APIUtils.initList();
+                } else {
+                    alert(msg.message);
+                }
+            }
+
+            zAJAX(`${ctx}/application_mobile/add_application`, {data: JSON.stringify(datas)}, cb)
         }
     }
 
@@ -187,17 +212,32 @@ export default class NewWorkOvertime extends Component {
                 
                 <div className="sub_title">加班日期</div>
 
+               
                 <ul className="time">
                     <li>
                         <label>开始时间</label>
-                        <input type="text" placeholder="请输入,如2016-01-01 18:00" value={this.state.startDate} onChange={this.changeStartDate}/>
+                        <DatePicker 
+                              mode="datetime"
+                              onChange={this.changeStartDate}
+                              value={this.state.startDate}
+                            >
+                              
+                            <input type="text" placeholder="请选择" readOnly="readonly" value={this.state.startDate ? moment(this.state.startDate).format('YYYY-MM-DD HH:mm') : ''} />
+                        </DatePicker>
                     </li>
                     <li>
                         <label>结束时间</label>
-                        <input type="text" placeholder="请输入,如2016-01-01 18:30" value={this.state.endDate} onChange={this.changeEndDate}/>
+                        <DatePicker 
+                              mode="datetime"
+                              onChange={this.changeEndDate}
+                              value={this.state.endDate}
+                            >
+                    
+                            <input type="text" placeholder="请选择" readOnly="readonly"  value={this.state.endDate ?  moment(this.state.endDate).format('YYYY-MM-DD HH:mm') : ''} onChange={this.changeEndDate}/>
+                        </DatePicker>
                     </li>
                     <li>
-                        <label>时间总计（小时）</label>
+                        <label>时间总计</label>
                         <input type="text" value={this.state.intervals} readOnly="readonly" />
                     </li>
                 </ul>

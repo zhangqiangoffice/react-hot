@@ -23,7 +23,7 @@ export default class Out extends Component {
         let date = InsuranceStore.getStakeholder().countyDatas[nextProps.city]
         if (!date) {
             let cb = (msg) => {
-                InsuranceActionCreators.updatecountyDatas(nextProps.city, msg);
+                InsuranceActionCreators.updateCountyDatas(nextProps.city, msg);
                 this.getCountyString(msg);
                 Toast.hide();
             }

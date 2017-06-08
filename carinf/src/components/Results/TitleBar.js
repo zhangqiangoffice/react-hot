@@ -11,14 +11,14 @@ export default class Out extends TitleBar {
     constructor(props) {
         super(props);
 
-        this.state = {
-            // offers: InsuranceStore.getOffers(),  
-            hasMore: false, 
-            // edit: AppStore.getEdit(),  
-            // fromPage: AppStore.getFromPage(),   
-        };
+        // this.state = {
+        //     // offers: InsuranceStore.getOffers(),  
+        //     hasMore: false, 
+        //     // edit: AppStore.getEdit(),  
+        //     // fromPage: AppStore.getFromPage(),   
+        // };
 
-        this.showOthers = this.showOthers.bind(this);
+        // this.showOthers = this.showOthers.bind(this);
         // this.askOther = this.askOther.bind(this);
         // this.unOffers = this.unOffers.bind(this);
         // this.onInsuranceChange = this.onInsuranceChange.bind(this);
@@ -65,8 +65,8 @@ export default class Out extends TitleBar {
 
 
     //打开其他家保险公司
-    showOthers() {
-        let options = [];
+    // showOthers() {
+    //     let options = [];
         // let unOffersArr = this.unOffers();
         // unOffersArr.forEach(function(el){
         //     options.push(el.product);
@@ -76,7 +76,7 @@ export default class Out extends TitleBar {
         //     selectedOption: '',
         //     liClickHandle: this.askOther
         // });
-    };
+    // };
 
     // //请求其他家数据
     // askOther(index) {
@@ -98,13 +98,13 @@ export default class Out extends TitleBar {
 
     // }
 
-    render() {
-        return (
-            <div className="title_bar">
-                <button id="go_back" type="button" onClick={this.goBack}> </button>
-                <h1>{this.props.title}</h1>
-                {this.state.hasMore ? <button type="button" className="others" onClick={this.showOthers}> </button> : null}
-            </div>
-        );
-    };
+    // render() {
+    //     return (
+    //         <div className="title_bar">
+    //             <button id="go_back" type="button" onClick={this.goBack}> </button>
+    //             <h1>{this.props.title}</h1>
+    //             {this.state.hasMore ? <button type="button" className="others" onClick={this.showOthers}> </button> : null}
+    //         </div>
+    //     );
+    // };
 }

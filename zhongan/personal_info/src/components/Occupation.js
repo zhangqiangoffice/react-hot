@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import data from '../reducers/data.json'
+import style from './asset/css/index.less'
 
 export default class OutPut extends Component{
   componentWillUnmount() {
@@ -33,12 +34,12 @@ export default class OutPut extends Component{
     }
     
     return (
-      <div className="occupation">
-        <div className="o_head">
+      <div className={style.occupation}>
+        <div className={style.o_head}>
           <h2>请选择{this.props.title}</h2>
           <span dangerouslySetInnerHTML={{__html: this.props.btn}} onClick={e => this.props.onClickBtn(this.props.step)}></span>
         </div>
-        <div className="o_body">
+        <div className={style.o_body}>
           <ol>
             {listShows}
           </ol>

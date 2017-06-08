@@ -15,6 +15,8 @@ import ButtonBottom from '../public/ButtonBottom';
 import { Link } from 'react-router'
 import { Toast } from 'antd-mobile';
 
+import style from '../asset/css/Enter.less'
+
 export default class IndexDesk extends Component {
     constructor(props) {
         super(props);
@@ -66,8 +68,8 @@ export default class IndexDesk extends Component {
     render() {
 
         return (
-            <div className="index_desk">
-                <ul className="index_ul">
+            <div className={style.index_desk}>
+                <ul className={style.index_ul}>
                     <Home />
                     <Place province={this.state.tbPlace.province} city={this.state.tbPlace.city}/>
                     <CarNum num={this.state.plateNo}/>
@@ -75,7 +77,7 @@ export default class IndexDesk extends Component {
                     <OwnerCard idCard={this.state.idCard} />
                 </ul>
                 <RemainingTimes unUsedTimes={this.state.unUsedTimes}/>
-                <Link to="/recent"><span className="recent">最近询价车辆</span></Link>
+                <Link to="/recent"><span className={style.recent}>最近询价车辆</span></Link>
                 <ButtonBottom text="下一步" onClickHandle={this.nextStep}/>          
             </div>
         );

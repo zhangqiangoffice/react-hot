@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AppStore from '../../stores/AppStore';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import style from '../asset/css/Companies.less'
 
 export default class Company extends Component {
     constructor(props){
@@ -30,11 +31,10 @@ export default class Company extends Component {
             <li onClick={this.handleClick}>
                 <img src={require(`../asset/img/pic_${company.spell}.png`)} />
                 <section>
-                    <p className="title">{company.product}</p>
-                    <p className="content">{company.info}</p> 
+                    <p className={style.title}>{company.product}</p>
+                    <p className={style.content}>{company.info}</p> 
                     <img src={require(`../asset/img/logo_${company.spell}.png`)} />
                 </section>
-                <i className="clear"></i>
             </li>
         );
     };

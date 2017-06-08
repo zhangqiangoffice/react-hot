@@ -4,6 +4,7 @@ import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import AppStore from '../../stores/AppStore';
 import AppActionCreators from '../../actions/AppActionCreators';
 import { Modal, Toast } from 'antd-mobile';
+import style from '../asset/css/AddressList.less'
 
 const alert = Modal.alert;
 
@@ -66,14 +67,14 @@ export default class Out extends Component {
 
         return (
             <li onClick={this.choiceAddress}>
-                <div className="lay">{address.name} <span className="phone" >{address.phone}</span></div>
-                <div className="lay">{address.provinceName}{address.regionName}{address.countyName}{address.address}</div>
-                <div className="last_lay" >
-                    <img className="radio" src={require(`../asset/img/radio_${address.isDefault === '1' ? 'on' : 'off'}.png`)} />
+                <div className={style.lay}>{address.name} <span className={style.phone} >{address.phone}</span></div>
+                <div className={style.lay}>{address.provinceName}{address.regionName}{address.countyName}{address.address}</div>
+                <div className={style.last_lay} >
+                    <img className={style.radio} src={require(`../asset/img/radio_${address.isDefault === '1' ? 'on' : 'off'}.png`)} />
                     &nbsp;&nbsp;默认地址 
-                    <div className="btns">
-                        <button type="button" className="btn" onClick={this.toEdit}>编辑</button>
-                        <button type="button" className="btn" onClick={this.carAddressDelete}>删除</button>
+                    <div className={style.btns}>
+                        <button type="button" className={style.btn} onClick={this.toEdit}>编辑</button>
+                        <button type="button" className={style.btn} onClick={this.carAddressDelete}>删除</button>
                     </div>
                 </div>
             </li>

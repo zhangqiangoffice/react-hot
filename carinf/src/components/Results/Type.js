@@ -14,7 +14,7 @@ export default class Out extends Component {
         }
 
         return (  
-            <table className="detail_table">
+            <table>
                 <tbody>
                     {type !== '' ?
                     <tr>

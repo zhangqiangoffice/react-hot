@@ -4,6 +4,7 @@ import SelectorCity from '../public/SelectorCity'
 import CarActionCreators from '../../actions/CarActionCreators';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { Toast } from 'antd-mobile';
+import style from '../asset/css/Enter.less'
 
 export default class IndexDesk extends Component {
     constructor(props) {
@@ -73,11 +74,11 @@ export default class IndexDesk extends Component {
 
     render() {
         return (
-            <li className="li">
-                <label className="item_name">投保地区</label>
-                <span className="selections">
-                    <input className="select_toubao" placeholder="请选择省" readOnly="readOnly" value={this.props.province.name} onClick={this.showTbProvinceSelector} />
-                    <input className="select_toubao" placeholder="请选择市" readOnly="readonly" value={this.props.city.name} onClick={this.showTbCitySelector}/>
+            <li className={style.li}>
+                <label className={style.item_name}>投保地区</label>
+                <span className={style.selections}>
+                    <input className={style.select_toubao} placeholder="请选择省" readOnly="readOnly" value={this.props.province.name} onClick={this.showTbProvinceSelector} />
+                    <input className={style.select_toubao} placeholder="请选择市" readOnly="readonly" value={this.props.city.name} onClick={this.showTbCitySelector}/>
                 </span>
                 <SelectorProvince
                     isShow={this.state.isShowProvinces} 

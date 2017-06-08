@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { queryAddress } from '../APIUtils';
+import { Icon } from 'antd-mobile';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
 import { Toast } from 'antd-mobile';
+import style from '../asset/css/Confirm.less';
 
 
 export default class out extends Component {
@@ -56,10 +58,13 @@ export default class out extends Component {
 
     render() {
         return (
-            <div className="distribution">
-                <div className="item_title">保单配送</div>
+            <div className={style.distribution}>
+                <div className="item_title">
+                    <Icon type={require('../asset/svg/distribution.svg')} />
+                    保单配送
+                </div>
                 {this.state.name ?
-                    <ul>
+                    <ul className="blank_ul">
                         <li>
                             <label>配送方式</label>
                             <span>快递</span>
@@ -67,15 +72,15 @@ export default class out extends Component {
 
                         <li onClick={this.quoteAddress}>
                             <label>收件人</label>
-                            <span>{this.state.name}<span className="phone">{this.state.phone}</span></span>
+                            <span>{this.state.name}<span className={style.phone}>{this.state.phone}</span></span>
                         </li>
-                        <li onClick={this.quoteAddress} className="address_li">
+                        <li onClick={this.quoteAddress} className={style.address_li}>
                             <label>收件地址</label>
                             <span>{this.state.address}</span>
                         </li>
                     </ul>
                     :
-                    <ul>
+                    <ul className="blank_ul">
                         <li>
                             <label>配送方式</label>
                             <span>快递</span>
@@ -83,7 +88,7 @@ export default class out extends Component {
 
                         <li onClick={this.addAddress}>
                             <label>添加联系人</label>
-                            <img className="open" src={require('../asset/img/right_arrow.png')} />
+                            <img className={style.open} src={require('../asset/img/right_arrow.png')} />
                         </li>
                     </ul>
                 }

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import Switcher from '../public/Switcher';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import { DatePicker } from 'antd-mobile';
+import moment from 'moment';
 
-import DatePic from '../public/DatePic';
+import style from '../asset/css/Plan.less'
 
 export default class Out extends Component {
     constructor(props){
@@ -35,20 +37,48 @@ export default class Out extends Component {
     render() {
 
         return (   
-            <ul className="insurance_date">
-                <DatePic title="商业险起保日期" 
-                    theDate={(this.props.beginDate).slice(0, 10)} 
-                    minDate={this.props.lastBeginDate} 
-                    onChangeDate={this.changeBeginDate} />
+            <ul className={style.insurance_date}>
+                <li>
+                    <DatePicker 
+                          mode="date"
+                          minDate={this.props.lastBeginDate === '' ? moment().add(1, 'd') : moment(this.props.lastBeginDate)}
+                          title="商业险起保日期"
+                          value={(this.props.beginDate) === '' ? moment() : moment((this.props.beginDate))}
+                          onChange={val => CarActionCreators.changeRegisterDate(moment(val).format('YYYY-MM-DD'))}
+                        >
+                        <div>
+                            <label>商业险起保日期</label>
+                            <input type="text" placeholder="请选择" 
+                                readOnly="readonly"
+                                value={(this.props.beginDate).slice(0, 10)}
+                                />
+                        </div>
+                    </DatePicker>
+                </li>
+
+                
                 <li>
                     交强险
                     <Switcher isOn={this.props.ciFlag} onClick={InsuranceActionCreators.toggleCiFlag}/>
                 </li>
                 {this.props.ciFlag ?
-                    <DatePic title="交强险起保日期" 
-                        theDate={(this.props.traBeginDate).slice(0, 10)} 
-                        minDate={this.props.lastTraBeginDate} 
-                        onChangeDate={this.changeTraBeginDate}/>
+                    <li>
+                        <DatePicker 
+                              mode="date"
+                              minDate={this.props.lastTraBeginDate === '' ? moment().add(1, 'd') : moment(this.props.lastTraBeginDate)}
+                              title="交强险起保日期"
+                              value={(this.props.traBeginDate) === '' ? moment() : moment((this.props.traBeginDate))}
+                              onChange={val => CarActionCreators.changeRegisterDate(moment(val).format('YYYY-MM-DD'))}
+                            >
+                            <div>
+                                <label>交强险起保日期</label>
+                                <input type="text" placeholder="请选择" 
+                                    readOnly="readonly"
+                                    value={(this.props.traBeginDate).slice(0, 10)}
+                                    />
+                            </div>
+                        </DatePicker>
+                    </li>
                 : null }
             </ul>
         );

@@ -51,7 +51,7 @@ export default class Plan extends Component {
     render() {
 
         return (
-            <div className="plan">
+            <div>
                 <SchemeSwitcher schemeIndex={this.state.schemeIndex} />
                 
                 <InsuranceDate 

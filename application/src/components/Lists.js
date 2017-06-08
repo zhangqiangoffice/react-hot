@@ -19,6 +19,13 @@ export default class Lists extends Component {
         }
     };
 
+    //页面打开滑动到顶部
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isCurrent && !this.props.isCurrent) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     //展示我提交的
     showMy() {
         AppActionCreators.updateActivedListIndex(0);

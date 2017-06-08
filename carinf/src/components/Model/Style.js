@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import CarActionCreators from '../../actions/CarActionCreators';
 import {queryInsuranceDate} from '../APIUtils';
+import style from '../asset/css/Model.less'
+
 
 export default class Style extends Component {
     constructor(props) {
@@ -15,16 +17,16 @@ export default class Style extends Component {
     };
 
     render() {
-        let style = this.props.styleObj;
+        let styleObj = this.props.styleObj;
         return (
-            <li className="one_style" onClick={this.handleClick}>
-                <div className="style_title">{style.carBrand + ' ' + style.familyName}</div>
-                <div className="style_name">
+            <li className={style.one_style} onClick={this.handleClick}>
+                <div className={style.style_title}>{styleObj.carBrand + ' ' + styleObj.familyName}</div>
+                <div className={style.style_name}>
                     <div>{style.comment}</div>
-                    <ul className="style_detail">
-                        <li>排量：{style.exhaustScale}</li>
-                        <li>座位数：{style.passengers}</li>
-                        <li>购置价：{style.purchaseValence}</li>
+                    <ul className={style.style_detail}>
+                        <li>排量：{styleObj.exhaustScale}</li>
+                        <li>座位数：{styleObj.passengers}</li>
+                        <li>购置价：{styleObj.purchaseValence}</li>
                     </ul>
                 </div>
             </li>

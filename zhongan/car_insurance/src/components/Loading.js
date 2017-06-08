@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './asset/css/index.less'
 
 const Loading = ({isLoading}) => {
   if (!isLoading) {
@@ -6,7 +7,7 @@ const Loading = ({isLoading}) => {
   }
 
   return (
-    <div className="loading">
+    <div className={style.loading}>
       <img src={ctx + '/static/img/public/loading.gif'} />
     </div>
   );

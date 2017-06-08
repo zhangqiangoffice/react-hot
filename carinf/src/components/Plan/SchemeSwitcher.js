@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import InsuranceActionCreators from '../../actions/InsuranceActionCreators';
+import style from '../asset/css/Plan.less'
 
 export default class SchemeSwitcher extends Component {
 
@@ -12,12 +13,12 @@ export default class SchemeSwitcher extends Component {
     render() {
         let listShows = ["全面保护", "新车套餐", "自定义"].map((nameStr, index) => {
             return (
-                <li className={(index === this.props.schemeIndex) ? 'selected' : ''} key={index} data-index={index} onClick={this.handleClick}>{nameStr}</li>
+                <li className={(index === this.props.schemeIndex) ? style.selected : ''} key={index} data-index={index} onClick={this.handleClick}>{nameStr}</li>
             )    
         });
 
         return (
-            <ul className="switcher">
+            <ul className={style.switcher}>
                 {listShows}
             </ul>
         );

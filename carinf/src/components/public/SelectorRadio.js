@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import style from '../asset/css/SelectorRadio.less'
 
 export default class Out extends Component {
     
@@ -18,8 +19,8 @@ export default class Out extends Component {
         });
 
         return (
-            <div className="selector_radio" onClick={this.props.onClose}>
-                <ul>
+            <div className="cover" onClick={this.props.onClose}>
+                <ul className={style.selector_radio}>
                     {listShows}
                 </ul>
             </div>
